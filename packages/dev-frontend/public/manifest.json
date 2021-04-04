@@ -1,15 +1,15 @@
 {
-  "short_name": "Liquity Dev UI",
-  "name": "Liquity Developer UI",
+  "short_name": "freely.finance",
+  "name": "freely.finance - Gateway to Liquity",
   "icons": [
     {
       "src": "favicon.png",
-      "sizes": "32x32",
+      "sizes": "64x64",
       "type": "image/png"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#362C63",
   "background_color": "#ffffff"
 }

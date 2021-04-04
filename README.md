@@ -1,3 +1,7 @@
+# freely.finance
+
+Gateway to interest-free loans using decentralized borrowing protocol Liquity.
+
 # Liquity: Decentralized Borrowing Protocol
 
 [![Frontend status](https://img.shields.io/uptimerobot/status/m784948796-056b56fd51c67d682c11bb24?label=Frontend&logo=nginx&logoColor=white)](https://devui.liquity.org) ![uptime](https://img.shields.io/uptimerobot/ratio/7/m784948796-056b56fd51c67d682c11bb24) [![Discord](https://img.shields.io/discord/700620821198143498?label=join%20chat&logo=discord&logoColor=white)](https://discord.gg/2up5U32) [![Docker Pulls](https://img.shields.io/docker/pulls/liquity/dev-frontend?label=dev-frontend%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/liquity/dev-frontend)
@@ -20,10 +24,6 @@ multiple front ends, enhancing decentralization.
 ## More information
 
 Visit [liquity.org](https://www.liquity.org) to find out more and join the discussion.
-
-## About this repo
-
-This repository hosts an early preview of the Liquity codebase until we get ready to open it up completely. Development continues to take place in a private repository, from which this repository is derived using [git filter-repo](https://github.com/newren/git-filter-repo).
 
 ### Packages
 

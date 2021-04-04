@@ -9,7 +9,7 @@ import { LiquityLogo } from "./LiquityLogo";
 import { Nav } from "./Nav";
 import { SideNav } from "./SideNav";
 
-const logoHeight = "32px";
+const logoHeight = "50px";
 
 const select = ({ frontend }: LiquityStoreState) => ({
   frontend
