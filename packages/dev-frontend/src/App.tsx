@@ -6,6 +6,7 @@ import { BatchedWebSocketAugmentedWeb3Provider } from "@liquity/providers";
 import { LiquityProvider } from "./hooks/LiquityContext";
 import { WalletConnector } from "./components/WalletConnector";
 import { TransactionProvider } from "./components/Transaction";
+import { LiquityLogo } from "./components/LiquityLogo";
 import { getConfig } from "./config";
 import theme from "./theme";
 
@@ -59,6 +60,11 @@ const App = () => {
         textAlign: "center"
       }}
     >
+       <LiquityLogo height='100px' />
+       <a href="https://freely.finance">freely.finance</a>
+       
+       Gateway to interest-free loans using decentralized borrowing protocol Liquity
+       <hr/>
       <Heading sx={{ mb: 3 }}>
         Liquity is not yet deployed to {chainId === 1 ? "mainnet" : "this network"}.
       </Heading>
