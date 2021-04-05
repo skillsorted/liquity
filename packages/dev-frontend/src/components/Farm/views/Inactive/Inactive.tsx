@@ -42,6 +42,8 @@ export const Inactive: React.FC = () => {
           </Paragraph>
         </InfoMessage>
 
+        Learn more: <Link href={`https://docs.liquity.org/faq/uniswap-lp-farming`} target="_blank">Uniswap LP Farming</Link>
+
         <Flex variant="layout.actions">
           <Flex sx={{ justifyContent: "flex-start", alignItems: "center", flex: 1 }}>
             <Yield />

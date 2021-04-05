@@ -191,6 +191,10 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
             <GitHubCommit>{process.env.REACT_APP_VERSION}</GitHubCommit>
           )}
         </Box>
+        <Box sx={{ fontSize: 0 }}>
+          Frontend code:
+          <Link href={`https://github.com/skillsorted/liquity`} target="_blank">Github</Link>
+        </Box>
       </Box>
     </Card>
   );

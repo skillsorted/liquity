@@ -1,4 +1,4 @@
-import { Card, Heading, Box, Flex, Button } from "theme-ui";
+import { Card, Heading, Box, Flex, Button, Link } from "theme-ui";
 
 import { GT } from "../../strings";
 
@@ -15,7 +15,9 @@ export const NoStake: React.FC = () => {
         <InfoMessage title={`You haven't staked ${GT} yet.`}>
           Stake {GT} to earn a share of borrowing and redemption fees.
         </InfoMessage>
-
+        
+        Learn more: <Link href={`https://docs.liquity.org/faq/staking#how-does-staking-work-in-liquity`} target="_blank">How does staking work?</Link>
+        
         <Flex variant="layout.actions">
           <Button onClick={() => dispatch({ type: "startAdjusting" })}>Start staking</Button>
         </Flex>
