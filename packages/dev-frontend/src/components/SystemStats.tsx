@@ -8,6 +8,7 @@ import { useLiquity } from "../hooks/LiquityContext";
 import { COIN, GT } from "../strings";
 import { Statistic } from "./Statistic";
 import { InfoIcon } from "./InfoIcon";
+import { CoinGeckoTicker } from "./CoinGeckoTicker";
 
 const selectBalances = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
   accountBalance,
@@ -88,7 +89,6 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
   return (
     <Card {...{ variant }}>
       {showBalances && <Balances />}
-
       <Heading>Liquity statistics</Heading>
 
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
@@ -189,9 +189,24 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Frontend code:
-          <Link href={`https://github.com/skillsorted/liquity`} target="_blank">Github</Link>
+          <Link href={`https://github.com/skillsorted/liquity`} target="_blank"> Github</Link>
         </Box>
+        <Box sx={{ fontSize: 0 }}>
+          Contact Email: 
+          <Link href={`mailto:contact@freely.finance`} target="_blank"> contact@freely.finance</Link>
+        </Box>
+        <Box sx={{ fontSize: 0 }}>
+          Twitter:
+          <Link href={`https://twitter.com/FreelyFinance`} target="_blank"> @FreelyFinance</Link>
+        </Box>
+        {/* <Box sx={{ fontSize: 0 }}>
+          Discord:
+          <Link href={`https://discord.gg/PrjhsnnT46`} target="_blank"> freely.finance</Link>
+        </Box> */}
       </Box>
+
+      <CoinGeckoTicker />
+
     </Card>
   );
 };
