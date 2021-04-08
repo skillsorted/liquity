@@ -7,7 +7,6 @@ import { useLiquitySelector } from "@liquity/lib-react";
 import { useLiquity } from "../hooks/LiquityContext";
 import { COIN, GT } from "../strings";
 import { Statistic } from "./Statistic";
-import { InfoIcon } from "./InfoIcon";
 import { CoinGeckoTicker } from "./CoinGeckoTicker";
 
 const selectBalances = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
@@ -145,25 +144,16 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
       >
         {totalCollateralRatioPct.prettify()}
       </Statistic>
-      {total.collateralRatioIsBelowCritical(price) && (
-        <Box color="danger">
-          The system is in Recovery Mode
-          <InfoIcon
-            size="sm"
-            tooltip={
-              <Card variant="tooltip">
-                Recovery Mode is a special system mode triggered when the Total Collateral Ratio
-                (TCR) falls below 150%. It allows the liquidation of Troves with a Collateral Ratio
-                below the TCR (with the liquidation loss being capped at 10% of the Trove’s debt),
-                and restricts operations that would negatively impact the TCR.
-              </Card>
-            }
-          />
-        </Box>
-      )}
+      <Statistic
+        name="Recovery Mode"
+        tooltip="Recovery Mode is activated when the Total Collateral Ratio (TCR) falls below 150%. When active, your Trove can be liquidated if its collateral ratio is below the TCR. The maximum collateral you can lose from liquidation is capped at 110% of your Trove's debt. Operations are also restricted that would negatively impact the TCR."
+      >
+        {total.collateralRatioIsBelowCritical(price) ? <Box color="danger">Yes</Box> : "No"}
+      </Statistic>
+      {}
 
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
-        Frontend
+        Freely.Finance Frontend
       </Heading>
       {kickbackRatePct && (
         <Statistic
@@ -196,13 +186,13 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
           <Link href={`mailto:contact@freely.finance`} target="_blank"> contact@freely.finance</Link>
         </Box>
         <Box sx={{ fontSize: 0 }}>
+          Discord:
+          <Link href={`https://discord.gg/Pgq8fJvU`} target="_blank"> Join channel</Link>
+        </Box>
+        <Box sx={{ fontSize: 0 }}>
           Twitter:
           <Link href={`https://twitter.com/FreelyFinance`} target="_blank"> @FreelyFinance</Link>
         </Box>
-        {/* <Box sx={{ fontSize: 0 }}>
-          Discord:
-          <Link href={`https://discord.gg/PrjhsnnT46`} target="_blank"> freely.finance</Link>
-        </Box> */}
       </Box>
 
       <CoinGeckoTicker />
