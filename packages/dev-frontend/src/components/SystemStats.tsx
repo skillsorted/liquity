@@ -8,6 +8,8 @@ import { useLiquity } from "../hooks/LiquityContext";
 import { COIN, GT } from "../strings";
 import { Statistic } from "./Statistic";
 import { CoinGeckoTicker } from "./CoinGeckoTicker";
+import { ThemeManager } from "./ThemeManager";
+
 
 const selectBalances = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
   accountBalance,
@@ -30,7 +32,7 @@ const Balances: React.FC = () => {
 
 const GitHubCommit: React.FC<{ children?: string }> = ({ children }) =>
   children?.match(/[0-9a-f]{40}/) ? (
-    <Link href={`https://github.com/liquity/dev/commit/${children}`}>{children.substr(0, 7)}</Link>
+    <Link  href={`https://github.com/liquity/dev/commit/${children}`} sx={{ color: "#362c63" }}>{children.substr(0, 7)}</Link>
   ) : (
     <>unknown</>
   );
@@ -87,7 +89,7 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
 
   return (
     <Card {...{ variant }}>
-      {showBalances && <Balances />}
+        {showBalances && <Balances />}
       <Heading>Liquity statistics</Heading>
 
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
@@ -163,36 +165,38 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
           {kickbackRatePct}%
         </Statistic>
       )}
+       <Box sx={{ fontSize: 0 }}>
+          Service Status:
+          <Link href={`https://status.freely.finance/`} target="_blank" sx={{ color: "DarkGreen" }}> Operational</Link>
+        </Box>
 
       <Box sx={{ mt: 3, opacity: 0.66 }}>
-        <Box sx={{ fontSize: 0 }}>
+        <Box sx={{ fontSize: 0}}>
           Contracts version: <GitHubCommit>{contractsVersion}</GitHubCommit>
         </Box>
         <Box sx={{ fontSize: 0 }}>Deployed: {deploymentDate.toLocaleString()}</Box>
         <Box sx={{ fontSize: 0 }}>
-          Frontend version:{" "}
-          {process.env.NODE_ENV === "development" ? (
-            "development"
-          ) : (
-            <GitHubCommit>{process.env.REACT_APP_VERSION}</GitHubCommit>
-          )}
-        </Box>
-        <Box sx={{ fontSize: 0 }}>
           Frontend code:
-          <Link href={`https://github.com/skillsorted/liquity`} target="_blank"> Github</Link>
+          <Link href={`https://github.com/skillsorted/liquity`} target="_blank" sx={{ color: "#362c63" }}> Github</Link>
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Contact Email: 
-          <Link href={`mailto:contact@freely.finance`} target="_blank"> contact@freely.finance</Link>
+          <Link href={`mailto:contact@freely.finance`} target="_blank" sx={{ color: "#362c63" }}> contact@freely.finance</Link>
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Discord:
-          <Link href={`https://discord.gg/Pgq8fJvU`} target="_blank"> Join channel</Link>
+          <Link href={`https://discord.gg/Pgq8fJvU`} target="_blank" sx={{ color: "#362c63" }}> Join channel</Link>
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Twitter:
-          <Link href={`https://twitter.com/FreelyFinance`} target="_blank"> @FreelyFinance</Link>
+          <Link href={`https://twitter.com/FreelyFinance`} target="_blank" sx={{ color: "#362c63" }}> @FreelyFinance</Link>
         </Box>
+        <Box sx={{ fontSize: 0}}>
+         <Statistic  name="Theme:">
+        <ThemeManager/>
+        </Statistic>
+        </Box>
+
       </Box>
 
       <CoinGeckoTicker />

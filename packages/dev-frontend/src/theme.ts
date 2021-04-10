@@ -11,8 +11,8 @@ const baseColors = {
 };
 
 const colors = {
-  primary: baseColors.blue,
-  secondary: baseColors.purple,
+  primary: baseColors.green,
+  secondary: baseColors.blue,
   accent: baseColors.cyan,
 
   success: baseColors.green,
@@ -22,9 +22,17 @@ const colors = {
   info: baseColors.blue,
   invalid: "pink",
 
-  text: "#293147",
-  background: "white",
-  muted: "#eaebed"
+  text: "#000000",
+  background: "#fafafa",
+  muted: "#eaebed",
+  modes: {
+    dark: {
+
+      text: '#ffffff',
+      background: '#2c2c2c',
+      muted: "#5c5c5c"
+    }
+  },
 };
 
 const buttonBase: ThemeUIStyleObject = {
@@ -94,9 +102,8 @@ const infoCard: ThemeUIStyleObject = {
   ...card,
 
   padding: 3,
-
   borderColor: "rgba(122,199,240,0.4)",
-  background: "linear-gradient(200deg, #d4d9fc, #cae9f9)",
+   background: "linear-gradient(200deg, #01baef, #a392ef)",
 
   h2: {
     mb: 2,

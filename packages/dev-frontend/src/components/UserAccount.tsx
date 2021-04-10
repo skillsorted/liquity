@@ -22,7 +22,7 @@ export const UserAccount: React.FC = () => {
 
   return (
     <Box sx={{ display: ["none", "flex"] }}>
-      <Flex sx={{ alignItems: "center" }}>
+      <Flex sx={{ alignItems: "center" , color:"#362c63"}}>
         <Icon name="user-circle" size="lg" />
         <Flex sx={{ ml: 3, mr: 4, flexDirection: "column" }}>
           <Heading sx={{ fontSize: 1 }}>Connected as</Heading>
@@ -32,7 +32,7 @@ export const UserAccount: React.FC = () => {
         </Flex>
       </Flex>
 
-      <Flex sx={{ alignItems: "center" }}>
+      <Flex sx={{ alignItems: "center", color:"#362c63" }}>
         <Icon name="wallet" size="lg" />
 
         {([
