@@ -100,12 +100,6 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
       >
         {borrowingFeePct.toString(2)}
       </Statistic>
-      <Statistic
-        name="Redemption Fee"
-        tooltip="The Redemption Fee is charged as a percentage of the redeemed Ether. The Redemption Fee depends on LUSD redemption volumes and is 0.5% at minimum.        "
-      >
-        {redemptionFeePct.toString(2)}
-      </Statistic>
 
       <Statistic
         name="TVL"
