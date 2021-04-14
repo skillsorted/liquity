@@ -75,7 +75,6 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
     lusdInStabilityPool,
     total,
     borrowingRate,
-    redemptionRate,
     totalStakedLQTY,
     kickbackRate
   } = useLiquitySelector(select);
@@ -84,7 +83,6 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
     total.debt.nonZero && new Percent(lusdInStabilityPool.div(total.debt));
   const totalCollateralRatioPct = new Percent(total.collateralRatio(price));
   const borrowingFeePct = new Percent(borrowingRate);
-  const redemptionFeePct = new Percent(redemptionRate);
   const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate?.mul(100).prettify();
 
   return (
