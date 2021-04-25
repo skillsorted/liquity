@@ -2,110 +2,143 @@
 
 Gateway to interest-free loans using decentralized borrowing protocol Liquity.
 
-# Liquity System Summary
+# Liquity: Decentralized Borrowing Protocol
 
 ![Tests](https://github.com/liquity/dev/workflows/CI/badge.svg) [![Frontend status](https://img.shields.io/uptimerobot/status/m784948796-056b56fd51c67d682c11bb24?label=Testnet&logo=nginx&logoColor=white)](https://devui.liquity.org) ![uptime](https://img.shields.io/uptimerobot/ratio/7/m784948796-056b56fd51c67d682c11bb24) [![Discord](https://img.shields.io/discord/700620821198143498?label=join%20chat&logo=discord&logoColor=white)](https://discord.gg/2up5U32) [![Docker Pulls](https://img.shields.io/docker/pulls/liquity/dev-frontend?label=dev-frontend%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/liquity/dev-frontend)
 
+
+Liquity is a decentralized protocol that allows Ether holders to obtain maximum liquidity against
+their collateral without paying interest. After locking up ETH as collateral in a smart contract and
+creating an individual position called a "trove", the user can get instant liquidity by minting LUSD,
+a USD-pegged stablecoin. Each trove is required to be collateralized at a minimum of 110%. Any
+owner of LUSD can redeem their stablecoins for the underlying collateral at any time. The redemption
+mechanism along with algorithmically adjusted fees guarantee a minimum stablecoin value of USD 1.
+
+An unprecedented liquidation mechanism based on incentivized stability deposits and a redistribution
+cycle from riskier to safer troves provides stability at a much lower collateral ratio than current
+systems. Stability is maintained via economically-driven user interactions and arbitrage, rather
+than by active governance or monetary interventions.
+
+The protocol has built-in incentives that encourage both early adoption and the operation of
+multiple front ends, enhancing decentralization.
+
+## More information
+
+Visit [liquity.org](https://www.liquity.org) to find out more and join the discussion.
+
+## Liquity System Summary
+
 - [Disclaimer](#disclaimer)
-- [Liquity System Summary](#liquity-system-summary)
-  - [Liquity Overview](#liquity-overview)
-  - [Liquidation and the Stability Pool](#liquidation-and-the-stability-pool)
-    - [Liquidation gas costs](#liquidation-gas-costs)
-    - [Liquidation Logic](#liquidation-logic)
-      - [Liquidations in Normal Mode: TCR >= 150%](#liquidations-in-normal-mode-tcr--150)
-      - [Liquidations in Recovery Mode: TCR < 150%](#liquidations-in-recovery-mode-tcr--150)
-  - [Gains From Liquidations](#gains-from-liquidations)
-  - [LUSD Token Redemption](#lusd-token-redemption)
-    - [Partial redemption](#partial-redemption)
-    - [Full redemption](#full-redemption)
-    - [Redemptions create a price floor](#redemptions-create-a-price-floor)
-  - [Recovery Mode](#recovery-mode)
-  - [Project Structure](#project-structure)
-    - [Directories](#directories)
-    - [Branches](#branches)
-  - [LQTY Token Architecture](#lqty-token-architecture)
-    - [LQTY Lockup contracts and token vesting](#lqty-lockup-contracts-and-token-vesting)
-    - [Lockup Implementation and admin transfer restriction](#lockup-implementation-and-admin-transfer-restriction)
-    - [Launch sequence and vesting process](#launch-sequence-and-vesting-process)
-      - [Deploy LQTY Contracts](#deploy-lqty-contracts)
-      - [Deploy and fund Lockup Contracts](#deploy-and-fund-lockup-contracts)
-      - [Deploy Liquity Core](#deploy-liquity-core)
-      - [During one year lockup period](#during-one-year-lockup-period)
-      - [Upon end of one year lockup period](#upon-end-of-one-year-lockup-period)
-      - [Post-lockup period](#post-lockup-period)
-  - [Core System Architecture](#core-system-architecture)
-    - [Core Smart Contracts](#core-smart-contracts)
-    - [Data and Value Silo Contracts](#data-and-value-silo-contracts)
-    - [Contract Interfaces](#contract-interfaces)
-    - [PriceFeed and Oracle](#pricefeed-and-oracle)
-    - [PriceFeed Logic](#pricefeed-logic)
-    - [Testnet PriceFeed and PriceFeed tests](#testnet-pricefeed-and-pricefeed-tests)
-    - [PriceFeed limitations and known issues](#pricefeed-limitations-and-known-issues)
-    - [Keeping a sorted list of Troves ordered by ICR](#keeping-a-sorted-list-of-troves-ordered-by-icr)
-    - [Flow of Ether in Liquity](#flow-of-ether-in-liquity)
-    - [Flow of LUSD tokens in Liquity](#flow-of-lusd-tokens-in-liquity)
-    - [Flow of LQTY Tokens in Liquity](#flow-of-lqty-tokens-in-liquity)
-  - [Expected User Behaviors](#expected-user-behaviors)
-  - [Contract Ownership and Function Permissions](#contract-ownership-and-function-permissions)
-  - [Deployment to a Development Blockchain](#deployment-to-a-development-blockchain)
-  - [Running Tests](#running-tests)
-    - [Brownie Tests](#brownie-tests)
-    - [OpenEthereum](#openethereum)
-  - [System Quantities - Units and Representation](#system-quantities---units-and-representation)
-    - [Integer representations of decimals](#integer-representations-of-decimals)
-  - [Public Data](#public-data)
-  - [Public User-Facing Functions](#public-user-facing-functions)
-    - [Borrower (Trove) Operations - `BorrowerOperations.sol`](#borrower-trove-operations---borroweroperationssol)
-    - [TroveManager Functions - `TroveManager.sol`](#trovemanager-functions---trovemanagersol)
-    - [Hint Helper Functions - `HintHelpers.sol`](#hint-helper-functions---hinthelperssol)
-    - [Stability Pool Functions - `StabilityPool.sol`](#stability-pool-functions---stabilitypoolsol)
-    - [LQTY Staking Functions  `LQTYStaking.sol`](#lqty-staking-functions--lqtystakingsol)
-    - [Lockup Contract Factory `LockupContractFactory.sol`](#lockup-contract-factory-lockupcontractfactorysol)
-    - [Lockup contract - `LockupContract.sol`](#lockup-contract---lockupcontractsol)
-    - [LUSD token `LUSDToken.sol` and LQTY token `LQTYToken.sol`](#lusd-token-lusdtokensol-and-lqty-token-lqtytokensol)
-  - [Supplying Hints to Trove operations](#supplying-hints-to-trove-operations)
-    - [Hints for `redeemCollateral`](#hints-for-redeemcollateral)
-      - [First redemption hint](#first-redemption-hint)
-      - [Partial redemption hints](#partial-redemption-hints)
-  - [Gas compensation](#gas-compensation)
-    - [Gas compensation schedule](#gas-compensation-schedule)
-    - [Liquidation](#liquidation)
-    - [Gas compensation and redemptions](#gas-compensation-and-redemptions)
-    - [Gas compensation helper functions](#gas-compensation-helper-functions)
-  - [The Stability Pool](#the-stability-pool)
-    - [Mixed liquidations: offset and redistribution](#mixed-liquidations-offset-and-redistribution)
-    - [Stability Pool deposit losses and ETH gains - implementation](#stability-pool-deposit-losses-and-eth-gains---implementation)
-    - [Stability Pool example](#stability-pool-example)
-    - [Stability Pool implementation](#stability-pool-implementation)
-    - [How deposits and ETH gains are tracked](#how-deposits-and-eth-gains-are-tracked)
-  - [LQTY Issuance to Stability Providers](#lqty-issuance-to-stability-providers)
-    - [LQTY Issuance schedule](#lqty-issuance-schedule)
-    - [LQTY Issuance implementation](#lqty-issuance-implementation)
-    - [Handling the front end LQTY gain](#handling-the-front-end-lqty-gain)
-    - [LQTY reward events and payouts](#lqty-reward-events-and-payouts)
-  - [LQTY issuance to liquity providers](#lqty-issuance-to-liquity-providers)
-  - [Liquity System Fees](#liquity-system-fees)
-    - [Redemption Fee](#redemption-fee)
-    - [Issuance fee](#issuance-fee)
-    - [Fee Schedule](#fee-schedule)
-    - [Intuition behind fees](#intuition-behind-fees)
-    - [Fee decay Implementation](#fee-decay-implementation)
-    - [Staking LQTY and earning fees](#staking-lqty-and-earning-fees)
-  - [Redistributions and Corrected Stakes](#redistributions-and-corrected-stakes)
-    - [Corrected Stake Solution](#corrected-stake-solution)
-  - [Math Proofs](#math-proofs)
-  - [Definitions](#definitions)
-  - [Development](#development)
-    - [Prerequisites](#prerequisites)
-      - [Making node-gyp work](#making-node-gyp-work)
-    - [Clone & Install](#clone--install)
-    - [Top-level scripts](#top-level-scripts)
-      - [Run all tests](#run-all-tests)
-      - [Deploy contracts to a testnet](#deploy-contracts-to-a-testnet)
-      - [Start a local blockchain and deploy the contracts](#start-a-local-blockchain-and-deploy-the-contracts)
-      - [Start dev-frontend in development mode](#start-dev-frontend-in-development-mode)
-      - [Start dev-frontend in demo mode](#start-dev-frontend-in-demo-mode)
-      - [Build dev-frontend for production](#build-dev-frontend-for-production)
+- [Liquity Overview](#liquity-overview)
+- [Liquidation and the Stability Pool](#liquidation-and-the-stability-pool)
+  - [Liquidation gas costs](#liquidation-gas-costs)
+  - [Liquidation Logic](#liquidation-logic)
+    - [Liquidations in Normal Mode: TCR >= 150%](#liquidations-in-normal-mode-tcr--150)
+    - [Liquidations in Recovery Mode: TCR < 150%](#liquidations-in-recovery-mode-tcr--150)
+- [Gains From Liquidations](#gains-from-liquidations)
+- [LUSD Token Redemption](#lusd-token-redemption)
+  - [Partial redemption](#partial-redemption)
+  - [Full redemption](#full-redemption)
+  - [Redemptions create a price floor](#redemptions-create-a-price-floor)
+- [Recovery Mode](#recovery-mode)
+- [Project Structure](#project-structure)
+  - [Directories](#directories)
+  - [Branches](#branches)
+- [LQTY Token Architecture](#lqty-token-architecture)
+  - [LQTY Lockup contracts and token vesting](#lqty-lockup-contracts-and-token-vesting)
+  - [Lockup Implementation and admin transfer restriction](#lockup-implementation-and-admin-transfer-restriction)
+  - [Launch sequence and vesting process](#launch-sequence-and-vesting-process)
+    - [Deploy LQTY Contracts](#deploy-lqty-contracts)
+    - [Deploy and fund Lockup Contracts](#deploy-and-fund-lockup-contracts)
+    - [Deploy Liquity Core](#deploy-liquity-core)
+    - [During one year lockup period](#during-one-year-lockup-period)
+    - [Upon end of one year lockup period](#upon-end-of-one-year-lockup-period)
+    - [Post-lockup period](#post-lockup-period)
+- [Core System Architecture](#core-system-architecture)
+  - [Core Smart Contracts](#core-smart-contracts)
+  - [Data and Value Silo Contracts](#data-and-value-silo-contracts)
+  - [Contract Interfaces](#contract-interfaces)
+  - [PriceFeed and Oracle](#pricefeed-and-oracle)
+  - [PriceFeed Logic](#pricefeed-logic)
+  - [Testnet PriceFeed and PriceFeed tests](#testnet-pricefeed-and-pricefeed-tests)
+  - [PriceFeed limitations and known issues](#pricefeed-limitations-and-known-issues)
+  - [Keeping a sorted list of Troves ordered by ICR](#keeping-a-sorted-list-of-troves-ordered-by-icr)
+  - [Flow of Ether in Liquity](#flow-of-ether-in-liquity)
+  - [Flow of LUSD tokens in Liquity](#flow-of-lusd-tokens-in-liquity)
+  - [Flow of LQTY Tokens in Liquity](#flow-of-lqty-tokens-in-liquity)
+- [Expected User Behaviors](#expected-user-behaviors)
+- [Contract Ownership and Function Permissions](#contract-ownership-and-function-permissions)
+- [Deployment to a Development Blockchain](#deployment-to-a-development-blockchain)
+- [Running Tests](#running-tests)
+  - [Brownie Tests](#brownie-tests)
+  - [OpenEthereum](#openethereum)
+- [System Quantities - Units and Representation](#system-quantities---units-and-representation)
+  - [Integer representations of decimals](#integer-representations-of-decimals)
+- [Public Data](#public-data)
+- [Public User-Facing Functions](#public-user-facing-functions)
+  - [Borrower (Trove) Operations - `BorrowerOperations.sol`](#borrower-trove-operations---borroweroperationssol)
+  - [TroveManager Functions - `TroveManager.sol`](#trovemanager-functions---trovemanagersol)
+  - [Hint Helper Functions - `HintHelpers.sol`](#hint-helper-functions---hinthelperssol)
+  - [Stability Pool Functions - `StabilityPool.sol`](#stability-pool-functions---stabilitypoolsol)
+  - [LQTY Staking Functions  `LQTYStaking.sol`](#lqty-staking-functions--lqtystakingsol)
+  - [Lockup Contract Factory `LockupContractFactory.sol`](#lockup-contract-factory-lockupcontractfactorysol)
+  - [Lockup contract - `LockupContract.sol`](#lockup-contract---lockupcontractsol)
+  - [LUSD token `LUSDToken.sol` and LQTY token `LQTYToken.sol`](#lusd-token-lusdtokensol-and-lqty-token-lqtytokensol)
+- [Supplying Hints to Trove operations](#supplying-hints-to-trove-operations)
+  - [Hints for `redeemCollateral`](#hints-for-redeemcollateral)
+    - [First redemption hint](#first-redemption-hint)
+    - [Partial redemption hints](#partial-redemption-hints)
+- [Gas compensation](#gas-compensation)
+  - [Gas compensation schedule](#gas-compensation-schedule)
+  - [Liquidation](#liquidation)
+  - [Gas compensation and redemptions](#gas-compensation-and-redemptions)
+  - [Gas compensation helper functions](#gas-compensation-helper-functions)
+- [The Stability Pool](#the-stability-pool)
+  - [Mixed liquidations: offset and redistribution](#mixed-liquidations-offset-and-redistribution)
+  - [Stability Pool deposit losses and ETH gains - implementation](#stability-pool-deposit-losses-and-eth-gains---implementation)
+  - [Stability Pool example](#stability-pool-example)
+  - [Stability Pool implementation](#stability-pool-implementation)
+  - [How deposits and ETH gains are tracked](#how-deposits-and-eth-gains-are-tracked)
+- [LQTY Issuance to Stability Providers](#lqty-issuance-to-stability-providers)
+  - [LQTY Issuance schedule](#lqty-issuance-schedule)
+  - [LQTY Issuance implementation](#lqty-issuance-implementation)
+  - [Handling the front end LQTY gain](#handling-the-front-end-lqty-gain)
+  - [LQTY reward events and payouts](#lqty-reward-events-and-payouts)
+- [LQTY issuance to liquity providers](#lqty-issuance-to-liquity-providers)
+- [Liquity System Fees](#liquity-system-fees)
+  - [Redemption Fee](#redemption-fee)
+  - [Issuance fee](#issuance-fee)
+  - [Fee Schedule](#fee-schedule)
+  - [Intuition behind fees](#intuition-behind-fees)
+  - [Fee decay Implementation](#fee-decay-implementation)
+  - [Staking LQTY and earning fees](#staking-lqty-and-earning-fees)
+- [Redistributions and Corrected Stakes](#redistributions-and-corrected-stakes)
+  - [Corrected Stake Solution](#corrected-stake-solution)
+- [Math Proofs](#math-proofs)
+- [Definitions](#definitions)
+- [Development](#development)
+  - [Prerequisites](#prerequisites)
+    - [Making node-gyp work](#making-node-gyp-work)
+  - [Clone & Install](#clone--install)
+  - [Top-level scripts](#top-level-scripts)
+    - [Run all tests](#run-all-tests)
+    - [Deploy contracts to a testnet](#deploy-contracts-to-a-testnet)
+    - [Start a local blockchain and deploy the contracts](#start-a-local-blockchain-and-deploy-the-contracts)
+    - [Start dev-frontend in development mode](#start-dev-frontend-in-development-mode)
+    - [Start dev-frontend in demo mode](#start-dev-frontend-in-demo-mode)
+    - [Build dev-frontend for production](#build-dev-frontend-for-production)
+  - [Configuring your custom frontend](#configuring-your-custom-dev-ui)
+- [Running a frontend with Docker](#running-dev-ui-with-docker)
+  - [Prerequisites](#prerequisites-1)
+  - [Running with `docker`](#running-with-docker)
+  - [Configuring a public frontend](#configuring-a-public-dev-ui)
+    - [FRONTEND_TAG](#frontend_tag)
+    - [INFURA_API_KEY](#infura_api_key)
+  - [Setting a kickback rate](#setting-a-kickback-rate)
+  - [Setting a kickback rate with Gnosis Safe](#setting-a-kickback-rate-with-gnosis-safe)
+  - [Next steps for hosting a frontend](#next-steps-for-hosting-dev-ui)
+    - [Example 1: using static website hosting](#example-1-using-static-website-hosting)
+    - [Example 2: wrapping the frontend container in HTTPS](#example-2-wrapping-the-dev-ui-container-in-https)
 
 
 ## Liquity Overview
@@ -201,7 +234,7 @@ The partially redeemed Trove is re-inserted into the sorted list of Troves, and 
 
 ### Full redemption
 
-A Trove is defined as “fully redeemed from” when the redemption has caused (debt-50) of its debt to absorb (debt-50) LUSD. Then, its 50 LUSD Liquidation Reserve is cancelled with its remaining 50 debt: the Liquidation Reserve is burned from the gas address, and the 50 debt is zero’d.
+A Trove is defined as “fully redeemed from” when the redemption has caused (debt-200) of its debt to absorb (debt-200) LUSD. Then, its 200 LUSD Liquidation Reserve is cancelled with its remaining 200 debt: the Liquidation Reserve is burned from the gas address, and the 200 debt is zero’d.
 
 Before closing, we must handle the Trove’s **collateral surplus**: that is, the excess ETH collateral remaining after redemption, due to its initial over-collateralization.
 
@@ -334,9 +367,9 @@ The three main contracts - `BorrowerOperations.sol`, `TroveManager.sol` and `Sta
 
 ### Core Smart Contracts
 
-`BorrowerOperations.sol` - contains the basic operations by which borrowers interact with their Trove: Trove creation, ETH top-up / withdrawal, stablecoin issuance and repayment. It also sends issuance fees to the `LQTYStaking` contract. BorrowerOperations functions call in to TroveManager, telling it to update Trove state, where necessary. BorrowerOperations functions also call in to the various Pools, telling them to move Ether/Tokens between Pools or between Pool <> user, where necessary.
+`BorrowerOperations.sol` - contains the basic operations by which borrowers interact with their Trove: Trove creation, ETH top-up / withdrawal, stablecoin issuance and repayment. It also sends issuance fees to the `LQTYStaking` contract. BorrowerOperations functions call in to TroveManager, telling it to update Trove state, where necessary. BorrowerOperations functions also call in to the various Pools, telling them to move Ether/Tokens between Pools or between Pool <> user, where necessary.
 
-`TroveManager.sol` - contains functionality for liquidations and redemptions. It sends redemption fees to the `LQTYStaking` contract. Also contains the state of each Trove - i.e. a record of the Trove’s collateral and debt. TroveManager does not hold value (i.e. Ether / other tokens). TroveManager functions call in to the various Pools to tell them to move Ether/tokens between Pools, where necessary.
+`TroveManager.sol` - contains functionality for liquidations and redemptions. It sends redemption fees to the `LQTYStaking` contract. Also contains the state of each Trove - i.e. a record of the Trove’s collateral and debt. TroveManager does not hold value (i.e. Ether / other tokens). TroveManager functions call in to the various Pools to tell them to move Ether/tokens between Pools, where necessary.
 
 `LiquityBase.sol` - Both TroveManager and BorrowerOperations inherit from the parent contract LiquityBase, which contains global constants and some common functions.
 
@@ -344,9 +377,9 @@ The three main contracts - `BorrowerOperations.sol`, `TroveManager.sol` and `Sta
 
 `LUSDToken.sol` - the stablecoin token contract, which implements the ERC20 fungible token standard in conjunction with EIP-2612 and a mechanism that blocks (accidental) transfers to addresses like the StabilityPool and address(0) that are not supposed to receive funds through direct transfers. The contract mints, burns and transfers LUSD tokens.
 
-`SortedTroves.sol` - a doubly linked list that stores addresses of Trove owners, sorted by their individual collateralization ratio (ICR). It inserts and re-inserts Troves at the correct position, based on their ICR.
+`SortedTroves.sol` - a doubly linked list that stores addresses of Trove owners, sorted by their individual collateralization ratio (ICR). It inserts and re-inserts Troves at the correct position, based on their ICR.
 
-`PriceFeed.sol` - Contains functionality for obtaining the current ETH:USD price, which the system uses for calculating collateralization ratios.
+`PriceFeed.sol` - Contains functionality for obtaining the current ETH:USD price, which the system uses for calculating collateralization ratios.
 
 `HintHelpers.sol` - Helper contract, containing the read-only functionality for calculation of accurate hints to be supplied to borrower operations and redemptions.
 
@@ -354,9 +387,9 @@ The three main contracts - `BorrowerOperations.sol`, `TroveManager.sol` and `Sta
 
 Along with `StabilityPool.sol`, these contracts hold Ether and/or tokens for their respective parts of the system, and contain minimal logic:
 
-`ActivePool.sol` - holds the total Ether balance and records the total stablecoin debt of the active Troves.
+`ActivePool.sol` - holds the total Ether balance and records the total stablecoin debt of the active Troves.
 
-`DefaultPool.sol` - holds the total Ether balance and records the total stablecoin debt of the liquidated Troves that are pending redistribution to active Troves. If a Trove has pending ether/debt “rewards” in the DefaultPool, then they will be applied to the Trove when it next undergoes a borrower operation, a redemption, or a liquidation.
+`DefaultPool.sol` - holds the total Ether balance and records the total stablecoin debt of the liquidated Troves that are pending redistribution to active Troves. If a Trove has pending ether/debt “rewards” in the DefaultPool, then they will be applied to the Trove when it next undergoes a borrower operation, a redemption, or a liquidation.
 
 `CollSurplusPool.sol` - holds the ETH surplus from Troves that have been fully redeemed from as well as from Troves with an ICR > MCR that were liquidated in Recovery Mode. Sends the surplus back to the owning borrower, when told to do so by `BorrowerOperations.sol`.
 
@@ -744,9 +777,9 @@ The number of Troves to consider for redemption can be capped by passing a non-z
 
 ### Stability Pool Functions - `StabilityPool.sol`
 
-`provideToSP(uint _amount, address _frontEndTag)`: allows stablecoin holders to deposit `_amount` of LUSD to the Stability Pool. It sends `_amount` of LUSD from their address to the Pool, and tops up their LUSD deposit by `_amount` and their tagged front end’s stake by `_amount`. If the depositor already has a non-zero deposit, it sends their accumulated ETH and LQTY gains to their address, and pays out their front end’s LQTY gain to their front end.
+`provideToSP(uint _amount, address _frontEndTag)`: allows stablecoin holders to deposit `_amount` of LUSD to the Stability Pool. It sends `_amount` of LUSD from their address to the Pool, and tops up their LUSD deposit by `_amount` and their tagged front end’s stake by `_amount`. If the depositor already has a non-zero deposit, it sends their accumulated ETH and LQTY gains to their address, and pays out their front end’s LQTY gain to their front end.
 
-`withdrawFromSP(uint _amount)`: allows a stablecoin holder to withdraw `_amount` of LUSD from the Stability Pool, up to the value of their remaining Stability deposit. It decreases their LUSD balance by `_amount` and decreases their front end’s stake by `_amount`. It sends the depositor’s accumulated ETH and LQTY gains to their address, and pays out their front end’s LQTY gain to their front end. If the user makes a partial withdrawal, their deposit remainder will earn further gains. To prevent potential loss evasion by depositors, withdrawals from the Stability Pool are suspended when there are liquidable Troves with ICR < 110% in the system.
+`withdrawFromSP(uint _amount)`: allows a stablecoin holder to withdraw `_amount` of LUSD from the Stability Pool, up to the value of their remaining Stability deposit. It decreases their LUSD balance by `_amount` and decreases their front end’s stake by `_amount`. It sends the depositor’s accumulated ETH and LQTY gains to their address, and pays out their front end’s LQTY gain to their front end. If the user makes a partial withdrawal, their deposit remainder will earn further gains. To prevent potential loss evasion by depositors, withdrawals from the Stability Pool are suspended when there are liquidable Troves with ICR < 110% in the system.
 
 `withdrawETHGainToTrove(address _hint)`: sends the user's entire accumulated ETH gain to the user's active Trove, and updates their Stability deposit with its accumulated loss from debt absorptions. Sends the depositor's LQTY gain to the depositor, and sends the tagged front end's LQTY gain to the front end.
 
@@ -825,6 +858,67 @@ Gas cost of steps 2-4 will be free, and step 5 will be `O(1)`.
 
 Hints allow cheaper Trove operations for the user, at the expense of a slightly longer time to completion, due to the need to await the result of the two read calls in steps 1 and 2 - which may be sent as JSON-RPC requests to Infura, unless the Frontend Operator is running a full Ethereum node.
 
+### Example Borrower Operations with Hints
+
+#### Opening a trove
+```
+  const toWei = web3.utils.toWei
+  const toBN = web3.utils.toBN
+
+  const LUSDAmount = toBN(toWei('2500')) // borrower wants to withdraw 2500 LUSD
+  const ETHColl = toBN(toWei('5')) // borrower wants to lock 5 ETH collateral
+
+  // Call deployed TroveManager contract to read the liquidation reserve and latest borrowing fee
+  const liquidationReserve = await troveManager.LUSD_GAS_COMPENSATION()
+  const expectedFee = await troveManager.getBorrowingFeeWithDecay(LUSDAmount)
+  
+  // Total debt of the new trove = LUSD amount drawn, plus fee, plus the liquidation reserve
+  const expectedDebt = LUSDAmount.add(expectedFee).add(liquidationReserve)
+
+  // Get the nominal NICR of the new trove
+  const _1e20 = toBN(toWei('100'))
+  let NICR = ETHColl.mul(_1e20).div(expectedDebt)
+
+  // Get an approximate address hint from the deployed HintHelper contract. Use (15 * number of troves) trials 
+  // to get an approx. hint that is close to the right position.
+  let numTroves = await sortedTroves.getSize()
+  let numTrials = numTroves.mul(toBN('15'))
+  let { 0: approxHint } = await hintHelpers.getApproxHint(NICR, numTrials, 42)  // random seed of 42
+
+  // Use the approximate hint to get the exact upper and lower hints from the deployed SortedTroves contract
+  let { 0: upperHint, 1: lowerHint } = await sortedTroves.findInsertPosition(NICR, approxHint, approxHint)
+
+  // Finally, call openTrove with the exact upperHint and lowerHint
+  const maxFee = '5'.concat('0'.repeat(16)) // Slippage protection: 5%
+  await borrowerOperations.openTrove(maxFee, LUSDAmount, upperHint, lowerHint, { value: ETHColl })
+```
+
+#### Adjusting a Trove
+```
+  const collIncrease = toBN(toWei('1'))  // borrower wants to add 1 ETH
+  const LUSDRepayment = toBN(toWei('230')) // borrower wants to repay 230 LUSD
+
+  // Get trove's current debt and coll
+  const {0: debt, 1: coll} = await troveManager.getEntireDebtAndColl(borrower)
+  
+  const newDebt = debt.sub(LUSDRepayment)
+  const newColl = coll.add(collIncrease)
+
+  NICR = newColl.mul(_1e20).div(newDebt)
+
+  // Get an approximate address hint from the deployed HintHelper contract. Use (15 * number of troves) trials 
+  // to get an approx. hint that is close to the right position.
+  numTroves = await sortedTroves.getSize()
+  numTrials = numTroves.mul(toBN('15'))
+  ({0: approxHint} = await hintHelpers.getApproxHint(NICR, numTrials, 42))
+
+  // Use the approximate hint to get the exact upper and lower hints from the deployed SortedTroves contract
+  ({ 0: upperHint, 1: lowerHint } = await sortedTroves.findInsertPosition(NICR, approxHint, approxHint))
+
+  // Call adjustTrove with the exact upperHint and lowerHint
+  await borrowerOperations.adjustTrove(maxFee, 0, LUSDRepayment, false, upperHint, lowerHint, {value: collIncrease})
+```
+
 ### Hints for `redeemCollateral`
 
 `TroveManager::redeemCollateral` as a special case requires additional hints:
@@ -852,6 +946,36 @@ However, if between the off-chain hint computation and on-chain execution a diff
 To mitigate this, another hint needs to be provided: `_partialRedemptionHintNICR`, the expected nominal ICR of the final partially-redeemed-from Trove. The on-chain redemption function checks whether, after redemption, the nominal ICR of this Trove would equal the nominal ICR hint.
 
 If not, the redemption sequence doesn’t perform the final partial redemption, and terminates early. This ensures that the transaction doesn’t revert, and most of the requested LUSD redemption can be fulfilled.
+
+#### Example Redemption with hints
+```
+ // Get the redemptions hints from the deployed HintHelpers contract
+  const redemptionhint = await hintHelpers.getRedemptionHints(LUSDAmount, price, 50)
+
+  const { 0: firstRedemptionHint, 1: partialRedemptionNewICR, 2: truncatedLUSDAmount } = redemptionhint
+
+  // Get the approximate partial redemption hint
+  const { hintAddress: approxPartialRedemptionHint } = await contracts.hintHelpers.getApproxHint(partialRedemptionNewICR, numTrials, 42)
+  
+  /* Use the approximate partial redemption hint to get the exact partial redemption hint from the 
+  * deployed SortedTroves contract
+  */
+  const exactPartialRedemptionHint = (await sortedTroves.findInsertPosition(partialRedemptionNewICR,
+    approxPartialRedemptionHint,
+    approxPartialRedemptionHint))
+
+  /* Finally, perform the on-chain redemption, passing the truncated LUSD amount, the correct hints, and the expected
+  * ICR of the final partially redeemed trove in the sequence. 
+  */
+  await troveManager.redeemCollateral(truncatedLUSDAmount,
+    firstRedemptionHint,
+    exactPartialRedemptionHint[0],
+    exactPartialRedemptionHint[1],
+    partialRedemptionNewICR,
+    0, maxFee,
+    { from: redeemer },
+  )
+```
 
 ## Gas compensation
 
@@ -1168,7 +1292,7 @@ However: the ICR of a Trove is always calculated as the ratio of its total colla
 
 **This causes a problem: redistributions proportional to initial collateral can break trove ordering.**
 
-Consider the case where new Trove is created after all active Troves have received a redistribution from a liquidation. This “fresh” Trove has then experienced fewer rewards than the older Troves, and thus, it receives a disproportionate share of subsequent rewards, relative to its total collateral.
+Consider the case where new Trove is created after all active Troves have received a redistribution from a liquidation. This “fresh” Trove has then experienced fewer rewards than the older Troves, and thus, it receives a disproportionate share of subsequent rewards, relative to its total collateral.
 
 The fresh trove would earns rewards based on its **entire** collateral, whereas old Troves would earn rewards based only on **some portion** of their collateral - since a part of their collateral is pending, and not included in the Trove’s `coll` property.
 
@@ -1375,22 +1499,49 @@ yarn stop-dev-chain
 yarn start-dev-frontend
 ```
 
-This will start Dev UI in development mode on http://localhost:3000. The app will automatically be reloaded if you change a source file inside `packages/dev-frontend`.
+This will start dev-frontend in development mode on http://localhost:3000. The app will automatically be reloaded if you change a source file under `packages/dev-frontend`.
 
-If you make changes to a different package, it is recommended to rebuild the entire project with `yarn prepare` in the root directory of the repo.
+If you make changes to a different package under `packages`, it is recommended to rebuild the entire project with `yarn prepare` in the root directory of the repo. This makes sure that a change in one package doesn't break another.
 
-### Build optimized Dev UI for production
+To stop the dev-frontend running in this mode, bring up the terminal in which you've started the command and press Ctrl+C.
+
+#### Start dev-frontend in demo mode
+
+This will automatically start the local blockchain, so you need to make sure that's not already running before you run the following command.
 
 ```
-cd packages/dev-frontend
+yarn start-demo
+```
+
+This spawns a modified version of dev-frontend that ignores MetaMask, and directly uses the local blockchain node. Every time the page is reloaded (at http://localhost:3000), a new random account is created with a balance of 100 ETH. Additionally, transactions are automatically signed, so you no longer need to accept wallet confirmations. This lets you play around with Liquity more freely.
+
+When you no longer need the demo mode, press Ctrl+C in the terminal then run:
+
+```
+yarn stop-demo
+```
+
+#### Build dev-frontend for production
+
+In a freshly cloned & installed monorepo, or if you have only modified code inside the dev-frontend package:
+
+```
 yarn build
 ```
 
+If you have changed something in one or more packages apart from dev-frontend, it's best to use:
+
+```
+yarn rebuild
+```
+
+This combines the top-level `prepare` and `build` scripts.
+
 You'll find the output in `packages/dev-frontend/build`.
 
-### Configuring your custom Dev UI
+### Configuring your custom frontend
 
-Your custom built Dev UI can be configured by putting a file named `config.json` inside the same directory as `index.html` built in the previous step. The format of this file is:
+Your custom built frontend can be configured by putting a file named `config.json` inside the same directory as `index.html` built in the previous step. The format of this file is:
 
 ```
 {
@@ -1398,3 +1549,113 @@ Your custom built Dev UI can be configured by putting a file named `config.json`
   "infuraApiKey": "158b6511a5c74d1ac028a8a2afe8f626"
 }
 ```
+
+## Running a frontend with Docker
+
+The quickest way to get a frontend up and running is to use the [prebuilt image](https://hub.docker.com/r/liquity/dev-frontend) available on Docker Hub.
+
+### Prerequisites
+
+You will need to have [Docker](https://docs.docker.com/get-docker/) installed.
+
+### Running with `docker`
+
+```
+docker pull liquity/dev-frontend
+docker run --name liquity -d --rm -p 3000:80 liquity/dev-frontend
+```
+
+This will start serving your frontend using HTTP on port 3000. If everything went well, you should be able to open http://localhost:3000/ in your browser. To use a different port, just replace 3000 with your desired port number.
+
+To stop the service:
+
+```
+docker kill liquity
+```
+
+### Configuring a public frontend
+
+If you're planning to publicly host a frontend, you might need to pass the Docker container some extra configuration in the form of environment variables.
+
+#### FRONTEND_TAG
+
+If you want to receive a share of the LQTY rewards earned by users of your frontend, set this variable to the Ethereum address you want the LQTY to be sent to.
+
+#### INFURA_API_KEY
+
+This is an optional parameter. If you'd like your frontend to use Infura's [WebSocket endpoint](https://infura.io/docs/ethereum#section/Websockets) for receiving blockchain events, set this variable to an Infura Project ID.
+
+### Setting a kickback rate
+
+The kickback rate is the portion of LQTY you pass on to users of your frontend. For example with a kickback rate of 80%, you receive 20% while users get the other 80. Before you can start to receive a share of LQTY rewards, you'll need to set this parameter by making a transaction on-chain.
+
+It is highly recommended that you do this while running a frontend locally, before you start hosting it publicly:
+
+```
+docker run --name liquity -d --rm -p 3000:80 \
+  -e FRONTEND_TAG=0x2781fD154358b009abf6280db4Ec066FCC6cb435 \
+  -e INFURA_API_KEY=158b6511a5c74d1ac028a8a2afe8f626 \
+  liquity/dev-frontend
+```
+
+Remember to replace the environment variables in the above example. After executing this command, open http://localhost:3000/ in a browser with MetaMask installed, then switch MetaMask to the account whose address you specified as FRONTEND_TAG to begin setting the kickback rate.
+
+### Setting a kickback rate with Gnosis Safe
+
+If you are using Gnosis safe, you have to set the kickback rate mannually through contract interaction. On the dashboard of Gnosis safe, click on "New transaction" and pick "Contraction interaction." Then, follow the [instructions](https://help.gnosis-safe.io/en/articles/3738081-contract-interactions): 
+- First, set the contract address as ```0x66017D22b0f8556afDd19FC67041899Eb65a21bb ```; 
+- Second, for method, choose "registerFrontEnd" from the list; 
+- Finally, type in the unit256 _Kickbackrate_. The kickback rate should be an integer representing an 18-digit decimal. So for a kickback rate of 99% (0.99), the value is: ```990000000000000000```. The number is 18 digits long.
+
+### Next steps for hosting a frontend
+
+Now that you've set a kickback rate, you'll need to decide how you want to host your frontend. There are way too many options to list here, so these are going to be just a few examples.
+
+#### Example 1: using static website hosting
+
+A frontend doesn't require any database or server-side computation, so the easiest way to host it is to use a service that lets you upload a folder of static files (HTML, CSS, JS, etc).
+
+To obtain the files you need to upload, you need to extract them from a frontend Docker container. If you were following the guide for setting a kickback rate and haven't stopped the container yet, then you already have one! Otherwise, you can create it with a command like this (remember to use your own `FRONTEND_TAG` and `INFURA_API_KEY`):
+
+```
+docker run --name liquity -d --rm \
+  -e FRONTEND_TAG=0x2781fD154358b009abf6280db4Ec066FCC6cb435 \
+  -e INFURA_API_KEY=158b6511a5c74d1ac028a8a2afe8f626 \
+  liquity/dev-frontend
+```
+
+While the container is running, use `docker cp` to extract the frontend's files to a folder of your choosing. For example to extract them to a new folder named "devui" inside the current folder, run:
+
+```
+docker cp liquity:/usr/share/nginx/html ./devui
+```
+
+Upload the contents of this folder to your chosen hosting service (or serve them using your own infrastructure), and you're set!
+
+#### Example 2: wrapping the frontend container in HTTPS
+
+If you have command line access to a server with Docker installed, hosting a frontend from a Docker container is a viable option.
+
+The frontend Docker container simply serves files using plain HTTP, which is susceptible to man-in-the-middle attacks. Therefore it is highly recommended to wrap it in HTTPS using a reverse proxy. You can find an example docker-compose config [here](packages/dev-frontend/docker-compose-example/docker-compose.yml) that secures the frontend using [SWAG (Secure Web Application Gateway)](https://github.com/linuxserver/docker-swag) and uses [watchtower](https://github.com/containrrr/watchtower) for automatically updating the frontend image to the latest version on Docker Hub.
+
+Remember to customize both [docker-compose.yml](packages/dev-frontend/docker-compose-example/docker-compose.yml) and the [site config](packages/dev-frontend/docker-compose-example/config/nginx/site-confs/liquity.example.com).
+
+
+
+## Disclaimer
+
+The content of this readme document (“Readme”) is of purely informational nature. In particular, none of the content of the Readme shall be understood as advice provided by Liquity AG, any Liquity Project Team member or other contributor to the Readme, nor does any of these persons warrant the actuality and accuracy of the Readme.
+
+Please read this Disclaimer carefully before accessing, interacting with, or using the Liquity Protocol software, consisting of the Liquity Protocol technology stack (in particular its smart contracts) as well as any other Liquity technology such as e.g., the launch kit for frontend operators (together the “Liquity Protocol Software”). 
+
+While Liquity AG developed the Liquity Protocol Software, the Liquity Protocol Software runs in a fully decentralized and autonomous manner on the Ethereum network. Liquity AG is not involved in the operation of the Liquity Protocol Software nor has it any control over transactions made using its smart contracts. Further, Liquity AG does neither enter into any relationship with users of the Liquity Protocol Software and/or frontend operators, nor does it operate an own frontend. Any and all functionalities of the Liquity Protocol Software, including the LUSD and the LQTY, are of purely technical nature and there is no claim towards any private individual or legal entity in this regard.
+
+LIQUITY AG IS NOT LIABLE TO ANY USER FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE, IN CONNECTION WITH THE USE OR INABILITY TO USE THE LIQUITY PROTOCOL SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF ETH, LUSD OR LQTY, NON-ALLOCATION OF TECHNICAL FEES TO LQTY HOLDERS, LOSS OF DATA, BUSINESS INTERRUPTION, DATA BEING RENDERED INACCURATE OR OTHER LOSSES SUSTAINED BY A USER OR THIRD PARTIES AS A RESULT OF THE LIQUITY PROTOCOL SOFTWARE AND/OR ANY ACTIVITY OF A FRONTEND OPERATOR OR A FAILURE OF THE LIQUITY PROTOCOL SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE).
+
+The Liquity Protocol Software has been developed and published under the GNU GPL v3 open-source license, which forms an integral part of this disclaimer. 
+
+THE LIQUITY PROTOCOL SOFTWARE HAS BEEN PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. THE LIQUITY PROTOCOL SOFTWARE IS HIGHLY EXPERIMENTAL AND ANY REAL ETH AND/OR LUSD AND/OR LQTY SENT, STAKED OR DEPOSITED TO THE LIQUITY PROTOCOL SOFTWARE ARE AT RISK OF BEING LOST INDEFINITELY, WITHOUT ANY KIND OF CONSIDERATION.
+
+There are no official frontend operators, and the use of any frontend is made by users at their own risk. To assess the trustworthiness of a frontend operator lies in the sole responsibility of the users and must be made carefully.
+
+User is solely responsible for complying with applicable law when interacting (in particular, when using ETH, LUSD, LQTY or other Token) with the Liquity Protocol Software whatsoever. 
