@@ -4,11 +4,16 @@ import { AbstractConnector } from "@web3-react/abstract-connector";
 import { Button, Text, Flex, Link, Box } from "theme-ui";
 
 import { injectedConnector } from "../connectors/injectedConnector";
+import { walletconnect  } from "../connectors/walletConnectConnector"
+import { walletlink } from "../connectors/walletLinkConnector"
 import { useAuthorizedConnection } from "../hooks/useAuthorizedConnection";
 
 import { RetryDialog } from "./RetryDialog";
 import { ConnectionConfirmationDialog } from "./ConnectionConfirmationDialog";
 import { MetaMaskIcon } from "./MetaMaskIcon";
+import { WalletLinkIcon } from "./WalletLinkIcon";
+import { WalletConnectIcon } from "./WalletConnectIcon";
+
 import { Icon } from "./Icon";
 import { Modal } from "./Modal";
 
@@ -117,17 +122,21 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children, load
 
   return (
     <>
-      <Flex sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}>
-        <Button
+      <Flex sx={{ height: "100vh", justifyContent: "center", alignItems: "center", display:"grid", flexDirection:"column" }}>
+        Connect to a wallet
+        <Button sx={{margin:"2vh" , display: "inline", width: "185px"}}
           onClick={() => {
             dispatch({ type: "startActivating", connector: injectedConnector });
             activate(injectedConnector);
           }}
+          
         >
-          {isMetaMask ? (
+
+          
+          {isMetaMask  ? (
             <>
               <MetaMaskIcon />
-              <Box sx={{ ml: 2 }}>Connect to MetaMask</Box>
+              <Box sx={{ ml: 2 }}>MetaMask</Box>
             </>
           ) : (
             <>
@@ -136,12 +145,36 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children, load
             </>
           )}
         </Button>
+
+          <Button sx={{margin:"2vh",  display: "inline", height: "85px"}}
+            onClick={() => {
+              dispatch({ type: "startActivating", connector: walletconnect });
+              activate(walletconnect);
+            }}
+            >             
+            {/* <Icon name="plug" size="lg" /> */}
+            <WalletConnectIcon />
+            <Box sx={{ ml: 2 }}>WalletConnect</Box>
+          
+          </Button>
+
+          <Button sx={{margin:"2vh",  display: "inline" , width: "185px"}}
+            onClick={() => {
+              dispatch({ type: "startActivating", connector: walletlink });
+              activate(walletlink);
+            }}
+            >             
+            {/* <Icon name="plug" size="lg" /> */}
+            <WalletLinkIcon />
+            <Box sx={{ ml: 2 }}>WalletLink</Box>
+          
+          </Button>
       </Flex>
 
       {connectionState.type === "failed" && (
         <Modal>
           <RetryDialog
-            title={isMetaMask ? "Failed to connect to MetaMask" : "Failed to connect wallet"}
+            title={isMetaMask && connectionState.connector == injectedConnector ? "Failed to connect to MetaMask" : "Failed to connect wallet"}
             onCancel={() => dispatch({ type: "cancel" })}
             onRetry={() => {
               dispatch({ type: "retry" });
@@ -162,14 +195,14 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children, load
         <Modal>
           <ConnectionConfirmationDialog
             title={
-              isMetaMask ? "Confirm connection in MetaMask" : "Confirm connection in your wallet"
+              isMetaMask  && connectionState.connector == injectedConnector? "Confirm connection in MetaMask" : "Confirm connection in your wallet"
             }
-            icon={isMetaMask ? <MetaMaskIcon /> : <Icon name="wallet" size="lg" />}
+            icon={isMetaMask   && connectionState.connector == injectedConnector ? <MetaMaskIcon /> : <Icon name="wallet" size="lg" />}
             onCancel={() => dispatch({ type: "cancel" })}
           >
             <Text sx={{ textAlign: "center" }}>
               Confirm the request that&apos;s just appeared.
-              {isMetaMask ? (
+              {isMetaMask   && connectionState.connector == injectedConnector ? (
                 <> If you can&apos;t see a request, open your MetaMask extension via your browser.</>
               ) : (
                 <> If you can&apos;t see a request, you might have to open your wallet.</>
