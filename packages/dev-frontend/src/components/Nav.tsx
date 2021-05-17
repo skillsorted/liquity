@@ -8,6 +8,7 @@ export const Nav: React.FC = () => {
         <Link to="/">Dashboard</Link>
         <Link to="/farm" >Farm</Link>
         <Link to="/stats">Stats</Link>
+        <Link to="/analysts">Analysts View</Link>
       </Flex>
       <Flex sx={{ justifyContent: "flex-end", mr: 3, flex: 1 }}>
         <Link sx={{ fontSize: 1 }} to="/risky-troves">

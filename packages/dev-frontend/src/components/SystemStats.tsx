@@ -177,7 +177,7 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Discord:
-          <Link href={`https://discord.gg/Pgq8fJvU`} target="_blank" sx={{ color: "#362c63" }}> Join channel</Link>
+          <Link href={`https://discord.gg/PrjhsnnT46`} target="_blank" sx={{ color: "#362c63" }}> Join channel</Link>
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Twitter:

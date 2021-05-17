@@ -28,6 +28,7 @@
     "@web3-react/types": "6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.0",
     "@web3-react/walletlink-connector": "^6.2.0",
+    "@widgetbot/react-embed": "^1.4.0",
     "cross-env": "7.0.3",
     "dotenv-webpack": "^7.0.2",
     "ethers": "5.0.32",
