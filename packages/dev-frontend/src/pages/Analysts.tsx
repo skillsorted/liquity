@@ -20,9 +20,9 @@ export const Analysts: React.FC = () => (
     <li>Conduct your own due diligence </li>
     </ul>
     
-    <Link href={`https://discord.gg/PrjhsnnT46`} target="_blank" > Join Discord Server </Link>
+    <Link href={`https://discord.gg/PrjhsnnT46`} target="_blank" > For full analysts view click here to Join Freely Discord Server </Link>
     
-
+    
     <div  dangerouslySetInnerHTML={{ __html: "<iframe src='https://emerald.widgetbot.io/channels/829018895540551690/840663847983513692/' frameborder='0' onload='this.width=screen.width;this.height=600;' />"}}/>
     
 

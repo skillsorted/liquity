@@ -6,9 +6,10 @@ export const Nav: React.FC = () => {
     <Box as="nav" sx={{ display: ["none", "flex"], alignItems: "center", flex: 1 }}>
       <Flex>
         <Link to="/">Dashboard</Link>
-        <Link to="/farm" >Farm</Link>
+        {/* <Link to="/farm" >Farm</Link> */}
         <Link to="/stats">Stats</Link>
         <Link to="/analysts">Analysts View</Link>
+        <Link to="/buy">Buy/Swap</Link>
       </Flex>
       <Flex sx={{ justifyContent: "flex-end", mr: 3, flex: 1 }}>
         <Link sx={{ fontSize: 1 }} to="/risky-troves">
