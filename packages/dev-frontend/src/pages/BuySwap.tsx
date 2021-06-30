@@ -27,7 +27,7 @@ export const BuySwap: React.FC = () => (
             Swap via Uniswap
         </Heading>
         <Box sx={{ p: [2, 0.5]}}>
-          <div className={styles.uniswap} dangerouslySetInnerHTML={{ __html: "<iframe src='https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x6dea81c8171d0ba574754ef6f8b412f2ed88c54d' height='580px' width='100%' style='border: 0; margin: 0 auto; display: block; max-width: 660px; min-width: 300px;' id='freely.finance'/>"}}/>
+          <div className={styles.uniswap} dangerouslySetInnerHTML={{ __html: "<iframe src='https://app.uniswap.org/#/swap?inputCurrency=0x5f98805A4E8be255a32880FDeC7F6728C6568bA0&outputCurrency=ETH' height='580px' width='100%' style='border: 0; margin: 0 auto; display: block; max-width: 660px; min-width: 300px;' id='freely.finance'/>"}}/>
         </Box>
       </Card>
     </Container>
