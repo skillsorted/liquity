@@ -7,7 +7,7 @@ import { useLiquity } from "../hooks/LiquityContext";
 import { Icon } from "../components/Icon";
 
 const uniLink = (lusdAddress: string) =>
-  `https://app.uniswap.org/#/swap?inputCurrency=${lusdAddress}&outputCurrency=ETH`;
+  `https://freely.finance/#/buy`;
 
 export const RedemptionPage: React.FC = () => {
   const {
