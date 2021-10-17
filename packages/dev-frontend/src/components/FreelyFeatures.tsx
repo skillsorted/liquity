@@ -15,7 +15,7 @@ export const FreelyFeatures: React.FC<FreelyFeaturesProps> = ({moreDetails}) => 
     <Container className="u-align-center u-clearfix u-gradient u-section-2" id="carousel_7ff5">
       <div className="u-clearfix u-sheet u-sheet-1">
       <h2 className="u-custom-font u-text u-text-custom-color-1 u-text-default u-text-1"><b>
-            <span style={{fontSize:"2.25rem"}}>Borrow or Earn using ​decentralized protocol Liquity <img src="icons/32-lqty-icon.svg" alt="lqty" style={{"verticalAlign": "-0.20em"}}/></span>
+            <span style={{fontSize:"2.25rem"}}>Borrow or Earn using Liquity <img src="icons/32-lqty-icon.svg" alt="lqty" style={{"verticalAlign": "-0.20em"}}/> - a ​decentralized protocol</span>
 </b>
         </h2>
         <p className="u-custom-font u-text u-text-custom-color-1 u-text-default u-text-2"><b> Liquity protocol is controlled by nobody.&nbsp; <br/>All operations are algorithmic and fully automated&nbsp;using ​Ethereum smart contracts&nbsp;</b>

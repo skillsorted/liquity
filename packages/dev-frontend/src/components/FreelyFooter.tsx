@@ -23,7 +23,7 @@ export const FreelyFooter: React.FC = () => {
         <div className="u-container-layout u-container-layout-1">
           <h6 className="u-custom-font u-text u-text-default u-text-1"><b>Tools</b>
           </h6>
-          <a href="https://status.freely.finance/" target="_blank" className="u-align-left u-btn u-button-style u-none u-text-hover-custom-color-3 u-text-palette-1-base u-btn-1"> Services Status&nbsp; </a>
+          <a href="https://status.freely.finance/" target="_blank" className="u-align-left u-btn u-button-style u-none u-text-hover-custom-color-3 u-text-palette-1-base u-btn-1"> Service Status&nbsp; </a>
           <a href="https://dune.xyz/freelyfinance/LiquityStats" target="_blank" className="u-align-left u-btn u-button-style u-none u-text-hover-custom-color-3 u-text-palette-1-base u-btn-2">Liquity Stats</a>
         </div>
       </div>
@@ -31,7 +31,7 @@ export const FreelyFooter: React.FC = () => {
         <div className="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
           <h6 className="u-custom-font u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-2"><b>Docs</b>
           </h6>
-          <a href="https://docs.liquity.org/" target="_blank" className="u-align-left u-btn u-button-style u-none u-text-hover-custom-color-3 u-text-palette-1-base u-btn-3">Liquity Prorocol Docs</a>
+          <a href="https://docs.liquity.org/" target="_blank" className="u-align-left u-btn u-button-style u-none u-text-hover-custom-color-3 u-text-palette-1-base u-btn-3">Liquity Protocol Docs</a>
         </div>
       </div>
       <div className="u-align-left u-container-style u-layout-cell u-size-20 u-layout-cell-3">
