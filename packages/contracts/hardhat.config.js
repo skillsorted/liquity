@@ -1,6 +1,6 @@
 require("@nomiclabs/hardhat-truffle5");
 require("@nomiclabs/hardhat-ethers");
-// require("@nomiclabs/hardhat-etherscan");
+require("@nomiclabs/hardhat-etherscan");
 require("solidity-coverage");
 require("hardhat-gas-reporter");
 
@@ -66,8 +66,9 @@ module.exports = {
         hardhat: {
             accounts: accountsList,
             gas: 10000000,  // tx gas limit
-            blockGasLimit: 12500000, 
+            blockGasLimit: 15000000, 
             gasPrice: 20000000000,
+            hardfork: "london"
         },
         mainnet: {
             url: alchemyUrl(),

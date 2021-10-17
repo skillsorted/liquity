@@ -3,3 +3,1048 @@
 html {
   height: 100%;
 }
+
+.u-section-1 .u-sheet-1 {
+  min-height: 100vh;
+}
+
+.u-section-1 .u-text-1 {
+  font-family: "Baloo Paaji 2";
+  font-size: 3.75rem;
+  font-weight: 700;
+  line-height: 1;
+  background-image: none;
+  margin: 60px 0 0;
+}
+
+.u-section-1 .u-image-1 {
+  width: 454px;
+  height: 218px;
+  animation-duration: 1000ms;
+  margin: 11px auto 0;
+}
+
+.u-section-1 .u-list-1 {
+  width: 720px;
+  margin: 38px auto 60px;
+}
+
+.u-section-1 .u-repeater-1 {
+  grid-gap: 5px 5px;
+  grid-template-columns: calc(33.3333% - 3.33333px) calc(33.3333% - 3.33333px) calc(33.3333% - 3.33333px);
+  min-height: 210px;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding: 10px;
+}
+
+.u-section-1 .u-btn-1 {
+  /* background-image: linear-gradient(#5ecdf5, #002a4e); */
+  margin: 19px auto 0;
+}
+
+.u-section-1 .u-container-layout-2 {
+  padding: 10px;
+}
+
+.u-section-1 .u-btn-2 {
+  /* background-image: linear-gradient(#5ecdf5, #002a4e); */
+  margin: 19px auto 0;
+}
+
+.u-section-1 .u-container-layout-3 {
+  padding: 10px;
+}
+
+.u-section-1 .u-btn-3 {
+  /* background-image: linear-gradient(#5ecdf5, #002a4e); */
+  margin: 19px auto 0;
+}
+
+.u-section-1 .u-container-layout-4 {
+  padding: 10px;
+}
+
+.u-section-1 .u-container-layout-5 {
+  padding: 10px;
+}
+
+.u-section-1 .u-btn-4 {
+  border-style: none !important;
+  background-image: linear-gradient(#5ecdf5, #002a4e);
+  background-color: linear-gradient(#5ecdf5, #002a4e);
+  margin: 19px auto 0;
+  color: #ffffff !important;
+}
+
+.u-section-1 .u-btn-4:active {
+  outline: none !important;
+  border: none !important;
+  color: #eae8e9 !important;
+  }
+
+.u-section-1 .u-btn-4:focus {
+  outline: none !important;
+  border: none !important;
+  color: #eae8e9 !important;
+  }
+
+.u-section-1 .u-btn-4:hover {
+  color: #eae8e9 !important;
+}
+
+.u-section-1 .u-btn-4:active {
+  color: #eae8e9 !important;
+}
+
+
+.u-section-1 .u-container-layout-6 {
+  padding: 10px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-image-1 {
+    width: 281px;
+    height: 134px;
+  }
+
+  .u-section-1 .u-repeater-1 {
+    min-height: 174px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    border-style: none;
+  }
+
+  .u-section-1 .u-btn-2 {
+    border-style: none;
+  }
+
+  .u-section-1 .u-btn-3 {
+    border-style: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-text-1 {
+    width: auto;
+  }
+
+  .u-section-1 .u-image-1 {
+    height: 135px;
+  }
+
+  .u-section-1 .u-list-1 {
+    margin-right: initial;
+    margin-left: initial;
+    width: auto;
+  }
+
+  .u-section-1 .u-repeater-1 {
+    grid-template-columns: calc(33.3333% - 6.66667px) calc(33.3333% - 6.66667px) calc(33.3333% - 6.66667px);
+    min-height: 154px;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-bottom: 0;
+  }
+
+  .u-section-1 .u-container-layout-2 {
+    padding-bottom: 0;
+  }
+
+  .u-section-1 .u-container-layout-3 {
+    padding-bottom: 0;
+  }
+
+  .u-section-1 .u-container-layout-5 {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-repeater-1 {
+    min-height: 182px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-text-1 {
+    font-size: 2.25rem;
+  }
+
+  .u-section-1 .u-image-1 {
+    width: 222px;
+    height: 107px;
+  }
+
+  .u-section-1 .u-repeater-1 {
+    grid-template-columns: 100%;
+    min-height: 391px;
+  }
+}
+.u-section-2 {
+  background-image: linear-gradient(#fafafa, #4bade9);
+}
+
+.u-section-2 .u-sheet-1 {
+  min-height: 858px;
+}
+
+.u-section-2 .u-text-1 {
+  font-size: 3rem;
+  font-family: "Baloo Paaji 2";
+  font-weight: normal;
+  margin: 61px auto 0;
+}
+
+.u-section-2 .u-text-2 {
+  font-family: "Baloo Paaji 2";
+  font-size: 1.25rem;
+  margin: 20px auto 0;
+}
+
+.u-section-2 .u-tabs-1 {
+  min-height: 480px;
+  width: 1140px;
+  margin: 41px 0 60px;
+}
+
+.u-section-2 .u-tab-link-1 {
+  font-size: 1.5rem;
+  background-image: none;
+  font-weight: 700;
+  font-family: "Baloo Paaji 2";
+  padding: 10px 25px;
+}
+
+.u-section-2 .u-tab-link-2 {
+  font-size: 1.5rem;
+  background-image: none;
+  font-weight: 700;
+  font-family: "Baloo Paaji 2";
+  padding: 10px 25px;
+}
+
+.u-section-2 .u-tab-pane-1 {
+  background-image: none;
+}
+
+.u-section-2 .u-container-layout-1 {
+  padding: 30px;
+}
+
+.u-section-2 .u-list-1 {
+  width: 1140px;
+  margin: 0 -30px;
+}
+
+.u-section-2 .u-repeater-1 {
+  grid-template-columns: calc(33.3333% - 2.66667px) calc(33.3333% - 2.66667px) calc(33.3333% - 2.66667px);
+  grid-gap: 4px 4px;
+  min-height: 331px;
+}
+
+.u-section-2 .u-list-item-1 {
+  background-image: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.u-section-2 .u-container-layout-2 {
+  padding: 30px;
+}
+
+.u-section-2 .u-icon-1 {
+  height: 64px;
+  width: 64px;
+  background-image: none;
+  margin: 0 auto;
+}
+
+.u-section-2 .u-text-3 {
+  font-family: "Baloo Paaji 2";
+  font-size: 1.25rem;
+  margin: 20px auto 0;
+}
+
+.u-section-2 .u-text-4 {
+  margin: 26px 0 0;
+}
+
+.u-section-2 .u-btn-1 {
+  background-image: linear-gradient(#5ecdf5, #002a4e);
+  margin: 64px auto 0;
+  padding: 4px 10px 4px 9px;
+}
+
+.u-section-2 .u-list-item-2 {
+  background-image: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.u-section-2 .u-container-layout-3 {
+  padding: 30px;
+}
+
+.u-section-2 .u-icon-2 {
+  height: 64px;
+  width: 64px;
+  background-image: none;
+  color: rgb(17, 17, 17) !important;
+  margin: 0 auto;
+}
+
+.u-section-2 .u-text-5 {
+  font-family: "Baloo Paaji 2";
+  margin: 20px auto 0;
+}
+
+.u-section-2 .u-text-6 {
+  margin: 26px 0 0;
+}
+
+.u-section-2 .u-btn-2 {
+  background-image: linear-gradient(#5ecdf5, #002a4e);
+  margin: 64px auto 0;
+  padding: 4px 10px 4px 9px;
+}
+
+.u-section-2 .u-list-item-3 {
+  background-image: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.u-section-2 .u-container-layout-4 {
+  padding: 30px;
+}
+
+.u-section-2 .u-icon-3 {
+  height: 64px;
+  width: 64px;
+  background-image: none;
+  color: rgb(17, 17, 17) !important;
+  margin: 0 auto;
+}
+
+.u-section-2 .u-text-7 {
+  font-family: "Baloo Paaji 2";
+  font-size: 1.25rem;
+  margin: 20px auto 0;
+}
+
+.u-section-2 .u-text-8 {
+  margin: 26px 0 0;
+}
+
+.u-section-2 .u-btn-3 {
+  background-image: linear-gradient(#5ecdf5, #002a4e);
+  margin: 64px auto 0;
+  padding: 4px 10px 4px 9px;
+}
+
+.u-section-2 .u-tab-pane-2 {
+  background-image: none;
+}
+
+.u-section-2 .u-container-layout-5 {
+  padding: 30px;
+}
+
+.u-section-2 .u-list-2 {
+  width: 1140px;
+  margin: 0 -30px;
+}
+
+.u-section-2 .u-repeater-2 {
+  grid-template-columns: calc(33.3333% - 2.66667px) calc(33.3333% - 2.66667px) calc(33.3333% - 2.66667px);
+  grid-gap: 4px 4px;
+  min-height: 331px;
+}
+
+.u-section-2 .u-list-item-4 {
+  background-image: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.u-section-2 .u-container-layout-6 {
+  padding: 30px;
+}
+
+.u-section-2 .u-icon-4 {
+  height: 64px;
+  width: 64px;
+  background-image: none;
+  color: rgb(17, 17, 17) !important;
+  margin: 0 auto;
+}
+
+.u-section-2 .u-text-9 {
+  font-family: "Baloo Paaji 2";
+  margin: 20px auto 0;
+}
+
+.u-section-2 .u-text-10 {
+  margin: 26px 0 0;
+}
+
+.u-section-2 .u-btn-4 {
+  background-image: linear-gradient(#5ecdf5, #002a4e);
+  margin: 64px auto 0;
+  padding: 4px 10px 4px 9px;
+}
+
+.u-section-2 .u-list-item-5 {
+  background-image: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.u-section-2 .u-container-layout-7 {
+  padding: 30px;
+}
+
+.u-section-2 .u-icon-5 {
+  height: 64px;
+  width: 64px;
+  background-image: none;
+  color: rgb(17, 17, 17) !important;
+  margin: 0 auto;
+}
+
+.u-section-2 .u-text-11 {
+  font-family: "Baloo Paaji 2";
+  font-size: 1.25rem;
+  margin: 20px auto 0;
+}
+
+.u-section-2 .u-text-12 {
+  margin: 26px 0 0;
+}
+
+.u-section-2 .u-btn-5 {
+  background-image: linear-gradient(#5ecdf5, #002a4e);
+  margin: 64px auto 0;
+  padding: 4px 10px 4px 9px;
+}
+
+.u-section-2 .u-list-item-6 {
+  background-image: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.u-section-2 .u-container-layout-8 {
+  padding: 30px;
+}
+
+.u-section-2 .u-icon-6 {
+  height: 64px;
+  width: 64px;
+  background-image: none;
+  color: rgb(17, 17, 17) !important;
+  margin: 0 auto;
+}
+
+.u-section-2 .u-text-13 {
+  font-family: "Baloo Paaji 2";
+  font-size: 1.25rem;
+  margin: 20px auto 0;
+}
+
+.u-section-2 .u-text-14 {
+  margin: 26px 0 0;
+}
+
+.u-section-2 .u-btn-6 {
+  background-image: linear-gradient(#5ecdf5, #002a4e);
+  margin: 64px auto 0;
+  padding: 4px 10px 4px 9px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-2 .u-tabs-1 {
+    height: auto;
+    width: 940px;
+  }
+
+  .u-section-2 .u-list-1 {
+    width: 880px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .u-section-2 .u-repeater-1 {
+    grid-template-columns: repeat(3, calc(33.333333333333336% - 2.66667px));
+    min-height: 256px;
+  }
+
+  .u-section-2 .u-list-2 {
+    width: 880px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .u-section-2 .u-repeater-2 {
+    grid-template-columns: repeat(3, calc(33.333333333333336% - 2.66667px));
+    min-height: 256px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-2 .u-tabs-1 {
+    width: 720px;
+  }
+
+  .u-section-2 .u-list-1 {
+    margin-right: initial;
+    margin-left: initial;
+    width: auto;
+  }
+
+  .u-section-2 .u-repeater-1 {
+    grid-template-columns: repeat(2, calc(50% - 2.0000025px));
+    min-height: 576px;
+  }
+
+  .u-section-2 .u-list-2 {
+    margin-right: initial;
+    margin-left: initial;
+    width: auto;
+  }
+
+  .u-section-2 .u-repeater-2 {
+    grid-template-columns: repeat(2, calc(50% - 2.0000025px));
+    min-height: 576px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-2 .u-tabs-1 {
+    min-height: 691px;
+    width: 540px;
+  }
+
+  .u-section-2 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-2 .u-repeater-1 {
+    grid-template-columns: 100%;
+  }
+
+  .u-section-2 .u-container-layout-2 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-2 .u-container-layout-3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-2 .u-container-layout-4 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-2 .u-container-layout-5 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-2 .u-repeater-2 {
+    grid-template-columns: 100%;
+  }
+
+  .u-section-2 .u-container-layout-6 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-2 .u-container-layout-7 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-2 .u-container-layout-8 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-2 .u-text-1 {
+    font-size: 1.5rem;
+  }
+
+  .u-section-2 .u-tabs-1 {
+    min-height: 763px;
+    width: 340px;
+  }
+}.u-section-3 {
+  background-image: linear-gradient(#4bade9, #002a4e);
+}
+
+.u-section-3 .u-sheet-1 {
+  min-height: 501px;
+}
+
+.u-section-3 .u-text-1 {
+  font-size: 3rem;
+  background-image: none;
+  text-transform: none;
+  font-weight: 700;
+  font-family: "Baloo Paaji 2";
+  margin: 60px auto 0;
+}
+
+.u-section-3 .u-accordion-1 {
+  margin-bottom: 60px;
+  margin-top: 75px;
+}
+
+.u-section-3 .u-accordion-link-1 {
+  background-image: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 15px 30px;
+}
+
+.u-section-3 .u-icon-1 {
+  height: 25px;
+  width: 25px;
+  background-image: none;
+  color: rgb(128, 128, 128) !important;
+}
+
+.u-section-3 .u-accordion-pane-1 {
+  min-height: 150px;
+  background-image: none;
+}
+
+.u-section-3 .u-container-layout-1 {
+  padding: 20px 30px;
+}
+
+.u-section-3 .u-text-2 {
+  animation-duration: 1000ms;
+}
+
+.u-section-3 .u-accordion-link-2 {
+  background-image: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 15px 30px;
+}
+
+.u-section-3 .u-icon-2 {
+  height: 25px;
+  width: 25px;
+  background-image: none;
+  color: rgb(128, 128, 128) !important;
+}
+
+.u-section-3 .u-accordion-pane-2 {
+  min-height: 150px;
+  background-image: none;
+}
+
+.u-section-3 .u-container-layout-2 {
+  padding: 20px 30px;
+}
+
+.u-section-3 .u-accordion-link-3 {
+  background-image: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 15px 30px;
+}
+
+.u-section-3 .u-icon-3 {
+  height: 25px;
+  width: 25px;
+  background-image: none;
+  color: rgb(128, 128, 128) !important;
+}
+
+.u-section-3 .u-accordion-pane-3 {
+  min-height: 150px;
+  background-image: none;
+}
+
+.u-section-3 .u-container-layout-3 {
+  padding: 20px 30px;
+}
+
+.u-section-3 .u-accordion-link-4 {
+  background-image: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 15px 30px;
+}
+
+.u-section-3 .u-icon-4 {
+  height: 25px;
+  width: 25px;
+  background-image: none;
+  color: rgb(128, 128, 128);
+}
+
+.u-section-3 .u-accordion-pane-4 {
+  min-height: 150px;
+  background-image: none;
+}
+
+.u-section-3 .u-container-layout-4 {
+  padding: 20px 30px;
+}
+
+.u-section-3 .u-accordion-link-5 {
+  background-image: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 15px 30px;
+}
+
+.u-section-3 .u-icon-5 {
+  height: 25px;
+  width: 25px;
+  background-image: none;
+  color: rgb(128, 128, 128);
+}
+
+.u-section-3 .u-accordion-pane-5 {
+  min-height: 150px;
+  background-image: none;
+}
+
+.u-section-3 .u-container-layout-5 {
+  padding: 20px 30px;
+}
+
+.u-section-3 .u-accordion-link-6 {
+  background-image: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 15px 30px;
+}
+
+.u-section-3 .u-icon-6 {
+  height: 25px;
+  width: 25px;
+  background-image: none;
+  color: rgb(128, 128, 128);
+}
+
+.u-section-3 .u-accordion-pane-6 {
+  min-height: 150px;
+  background-image: none;
+}
+
+.u-section-3 .u-container-layout-6 {
+  padding: 20px 30px;
+}
+
+.u-section-3 .u-accordion-link-7 {
+  background-image: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 15px 30px;
+}
+
+.u-section-3 .u-icon-7 {
+  height: 25px;
+  width: 25px;
+  background-image: none;
+  color: rgb(128, 128, 128);
+}
+
+.u-section-3 .u-accordion-pane-7 {
+  min-height: 150px;
+  background-image: none;
+}
+
+.u-section-3 .u-container-layout-7 {
+  padding: 20px 30px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-3 .u-text-1 {
+    width: 565px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-3 .u-text-1 {
+    width: 540px;
+  }
+
+  .u-section-3 .u-accordion-1 {
+    margin-top: 100px;
+  }
+
+  .u-section-3 .u-container-layout-4 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-3 .u-container-layout-5 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-3 .u-container-layout-6 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-3 .u-container-layout-7 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-3 .u-text-1 {
+    font-size: 1.5rem;
+    width: 340px;
+  }
+}
+
+
+@font-face {
+  font-family: 'Neo Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Neo Sans Arabic'), url('https://fonts.cdnfonts.com/s/29926/Neo Sans Arabic Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Neo Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Neo Sans Arabic'), url('https://fonts.cdnfonts.com/s/29926/NeoSansArabic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Neo Sans Arabic';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Neo Sans Arabic'), url('https://fonts.cdnfonts.com/s/29926/NeoSansArabicLight.woff') format('woff');
+}
+@font-face {
+  font-family: 'Neo Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Neo Sans Arabic'), url('https://fonts.cdnfonts.com/s/29926/NeoSansArabicMedium.woff') format('woff');
+}
+@font-face {
+  font-family: 'Neo Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Neo Sans Arabic'), url('https://fonts.cdnfonts.com/s/29926/NeoSansArabicBold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Neo Sans Arabic';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Neo Sans Arabic'), url('https://fonts.cdnfonts.com/s/29926/NeoSansArabicBlack.woff') format('woff');
+}
+@font-face {
+  font-family: 'Neo Sans Arabic';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Neo Sans Arabic'), url('https://fonts.cdnfonts.com/s/29926/NeoSansArabicUltra.woff') format('woff');
+}
+@font-face {
+  font-family: 'Neo Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Neo Sans'), url('https://fonts.cdnfonts.com/s/29926/Neo_Sans_Medium.woff') format('woff');
+}
+
+
+
+
+/* gurmukhi */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dMIFFzbz-QHZUdV9_UGWZuUHaaHi6WZ3S_Yg.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0A01-0A75, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dMIFFzbz-QHZUdV9_UGWZuUFqaHi6WZ3S_Yg.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dMIFFzbz-QHZUdV9_UGWZuUFuaHi6WZ3S_Yg.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dMIFFzbz-QHZUdV9_UGWZuUFWaHi6WZ3Q.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* gurmukhi */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWKa5CyC0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0A01-0A75, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWKa5Cwy0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWKa5Cw20al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWKa5CwO0al6Fa9A.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* gurmukhi */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWIq-CyC0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0A01-0A75, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWIq-Cwy0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWIq-Cw20al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWIq-CwO0al6Fa9A.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* gurmukhi */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWO6_CyC0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0A01-0A75, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWO6_Cwy0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWO6_Cw20al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWO6_CwO0al6Fa9A.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* gurmukhi */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 800;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWPK8CyC0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0A01-0A75, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 800;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWPK8Cwy0al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 800;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWPK8Cw20al6Fa9DnrQ.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Baloo Paaji 2';
+  font-style: normal;
+  font-weight: 800;
+  src: url(https://fonts.gstatic.com/s/baloopaaji2/v4/i7dRIFFzbz-QHZUdV9_UGWZuWPK8CwO0al6Fa9A.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+
+
+
+
+
+
+
+
+    
+
+
+/*end-variables sitestylecss*/
+
+ /*begin-variables base-font-size*/ 
+ html { font-size: 16px; }
+ /*end-variables base-font-size*/

@@ -1,12 +1,15 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { AbstractConnector } from "@web3-react/abstract-connector";
-import { Button, Text, Flex, Link, Box } from "theme-ui";
+import { Button, Text, Flex, Link, Box, Container , useColorMode} from "theme-ui";
 
 import { injectedConnector } from "../connectors/injectedConnector";
 import { walletconnect  } from "../connectors/walletConnectConnector"
 import { walletlink } from "../connectors/walletLinkConnector"
 import { useAuthorizedConnection } from "../hooks/useAuthorizedConnection";
+import { FreelyFeatures } from "../components/FreelyFeatures";
+import { FreelyFooter } from "../components/FreelyFooter";
+import { FreelyFaqs } from "./FreelyFaqs";
 
 import { RetryDialog } from "./RetryDialog";
 import { ConnectionConfirmationDialog } from "./ConnectionConfirmationDialog";
@@ -16,6 +19,8 @@ import { WalletConnectIcon } from "./WalletConnectIcon";
 
 import { Icon } from "./Icon";
 import { Modal } from "./Modal";
+
+const scrollToRef = (ref:any) => window.scrollTo(0, ref.current.offsetTop)   
 
 interface MaybeHasMetaMask {
   ethereum?: {
@@ -36,6 +41,8 @@ type ConnectionAction =
   | { type: "finishActivating" | "retry" | "cancel" | "deactivate" };
 
 const connectionReducer: React.Reducer<ConnectionState, ConnectionAction> = (state, action) => {
+
+
   switch (action.type) {
     case "startActivating":
       return {
@@ -96,6 +103,13 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children, load
   const triedAuthorizedConnection = useAuthorizedConnection();
   const [connectionState, dispatch] = useReducer(connectionReducer, { type: "inactive" });
   const isMetaMask = detectMetaMask();
+  const [colorMode] = useColorMode()
+
+
+const refFeatures = useRef(null)
+const refFaqs = useRef(null)
+
+const executeScroll = () => scrollToRef(refFeatures)
 
   useEffect(() => {
     if (error) {
@@ -119,46 +133,87 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children, load
   if (connectionState.type === "active") {
     return <>{children}</>;
   }
+   
 
   return (
-    <>
-      <Flex sx={{ height: "100vh", justifyContent: "center", alignItems: "center", display:"grid", flexDirection:"column" }}>
-        Connect to a wallet
-        <Button sx={{margin:"2vh" , display: "inline", width: "185px"}}
-          onClick={() => {
-            dispatch({ type: "startActivating", connector: injectedConnector });
-            activate(injectedConnector);
-          }}
-          
-        >
 
-          
-          {isMetaMask  ? (
-            <>
-              <MetaMaskIcon />
-              <Box sx={{ ml: 2 }}>MetaMask</Box>
-            </>
+    <>
+        <Container className="skrollable u-align-center  u-clearfix u-section-1" id="carousel_6a7c">
+      <div className="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        {colorMode === 'dark'? (
+
+          <h1 className="u-align-center u-custom-font u-text u-title u-text-1">
+            <span style={{fontSize: "3rem"}}> 
+              Why queue at the&nbsp;b​🏦nk!&nbsp;<br/>When you have&nbsp;
+            </span>
+            <br/>
+          </h1>
+          )
+          : (
+
+          <h1 className="u-align-center u-custom-font u-text u-text-custom-color-1 u-title u-text-1">
+              <span style={{fontSize: "3rem"}}> 
+                Why queue at the&nbsp;b​🏦nk!&nbsp;<br/>When you have&nbsp;
+              </span>
+              <br/>
+          </h1>
+          )}
+          <br/>
+
+        {colorMode === 'dark'?(
+          <img className="u-align-center u-image u-image-default u-image-1 animated flipInX-played" src="freely_finance_dark.png" alt="" data-image-width="2410" data-image-height="1160" data-animation-name="flipIn" data-animation-duration="1000" data-animation-delay="250" data-animation-direction="X" style={{willChange: "transform", animationDuration: "1000ms"}}/>
+        ):(
+          <img className="u-align-center u-image u-image-default u-image-1 animated flipInX-played" src="freely_finance.png" alt="" data-image-width="2410" data-image-height="1160" data-animation-name="flipIn" data-animation-duration="1000" data-animation-delay="250" data-animation-direction="X" style={{willChange: "transform", animationDuration: "1000ms"}}/>
+        )}
+        <div className="u-align-center u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-layout-grid u-list u-list-1">
+
+          <div className="u-repeater u-repeater-1">
+            
+              {isMetaMask ? (
+            <div className="u-container-style u-list-item u-repeater-item">
+              <div className="u-container-layout u-similar-container u-container-layout-1">
+                <Button sx={{ width: "210px"}} className ="u-align-center u-btn u-button-style u-btn-1"
+                  onClick={() => {
+                    dispatch({ type: "startActivating", connector: injectedConnector });
+                    activate(injectedConnector);
+                  }}>
+
+                  <MetaMaskIcon />
+                  <Box sx={{ ml: 2 }}>MetaMask</Box>
+                </Button>
+              </div>
+            </div>
           ) : (
-            <>
-              <Icon name="plug" size="lg" />
-              <Box sx={{ ml: 2 }}>Connect wallet</Box>
+            <> 
+            <div className="u-container-style u-list-item u-repeater-item">
+                          <div className="u-container-layout u-similar-container u-container-layout-1">
+              <Button sx={{ width: "210px"}} className ="u-align-center u-btn u-button-style u-btn-1" disabled>
+                <MetaMaskIcon />
+                <Box sx={{ ml: 2 }}>MetaMask</Box>
+              </Button>
+              </div>
+            </div>         
             </>
           )}
-        </Button>
 
-          <Button sx={{margin:"2vh",  display: "inline", height: "85px"}}
+            <div className="u-container-style u-list-item u-repeater-item">
+              <div className="u-container-layout u-similar-container u-container-layout-2">
+              <Button  className ="u-align-center u-btn u-button-style u-btn-2"
             onClick={() => {
               dispatch({ type: "startActivating", connector: walletconnect });
               activate(walletconnect);
             }}
             >             
-            {/* <Icon name="plug" size="lg" /> */}
             <WalletConnectIcon />
             <Box sx={{ ml: 2 }}>WalletConnect</Box>
           
           </Button>
+              </div>
+            </div>
+            <div className="u-container-style u-list-item u-repeater-item">
+              <div className="u-container-layout u-similar-container u-container-layout-3">
 
-          <Button sx={{margin:"2vh",  display: "inline" , width: "185px"}}
+              <Button sx={{ width: "210px"}} className ="u-align-center u-btn u-button-style u-btn-3"
             onClick={() => {
               dispatch({ type: "startActivating", connector: walletlink });
               activate(walletlink);
@@ -169,7 +224,34 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children, load
             <Box sx={{ ml: 2 }}>WalletLink</Box>
           
           </Button>
-      </Flex>
+              </div>
+
+            </div>
+
+            <div className="u-container-style u-list-item u-repeater-item">
+              <div className="u-container-layout u-similar-container u-container-layout-4"></div>
+            </div>
+            <div className="u-container-style u-list-item u-repeater-item">
+              <div className="u-container-layout u-similar-container u-container-layout-5">
+                <button  data-page-id="662130265" className="u-align-center u-border-none u-btn u-btn-round u-button-style u-custom-item u-gradient u-none u-radius-6 u-text-white u-btn-4"  onClick={executeScroll}>Learn More</button>
+              </div>
+            </div>
+            <div  className="u-container-style u-list-item u-repeater-item">
+              <div className="u-container-layout u-similar-container u-container-layout-6"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </Container>
+    <div  ref={refFeatures}>
+      <FreelyFeatures moreDetails={refFaqs}/>
+    </div>
+    <div  ref={refFaqs}>
+      <FreelyFaqs/>
+    </div>
+
+    <FreelyFooter/>
 
       {connectionState.type === "failed" && (
         <Modal>

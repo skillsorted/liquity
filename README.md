@@ -4,7 +4,7 @@ Gateway to interest-free loans using decentralized borrowing protocol Liquity.
 
 # Liquity: Decentralized Borrowing Protocol
 
-![Tests](https://github.com/liquity/dev/workflows/CI/badge.svg) [![Frontend status](https://img.shields.io/uptimerobot/status/m784948796-056b56fd51c67d682c11bb24?label=Testnet&logo=nginx&logoColor=white)](https://devui.liquity.org) ![uptime](https://img.shields.io/uptimerobot/ratio/7/m784948796-056b56fd51c67d682c11bb24) [![Discord](https://img.shields.io/discord/700620821198143498?label=join%20chat&logo=discord&logoColor=white)](https://discord.gg/2up5U32) [![Docker Pulls](https://img.shields.io/docker/pulls/liquity/dev-frontend?label=dev-frontend%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/liquity/dev-frontend)
+![Tests](https://github.com/liquity/dev/workflows/CI/badge.svg) [![Frontend status](https://img.shields.io/uptimerobot/status/m784948796-056b56fd51c67d682c11bb24?label=Testnet&logo=nginx&logoColor=white)](https://devui.liquity.org) ![uptime](https://img.shields.io/uptimerobot/ratio/7/m784948796-056b56fd51c67d682c11bb24) [![Discord](https://img.shields.io/discord/700620821198143498?label=join%20chat&logo=discord&logoColor=white)](https://discord.gg/2up5U32) [![Docker Pulls](https://img.shields.io/docker/pulls/liquity/dev-frontend?label=dev-frontend%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/liquity/dev-frontend) [![codecov](https://codecov.io/gh/liquity/dev/branch/add_codecov/graph/badge.svg)](https://codecov.io/gh/liquity/dev)
 
 
 Liquity is a decentralized protocol that allows Ether holders to obtain maximum liquidity against
@@ -72,6 +72,7 @@ Visit [liquity.org](https://www.liquity.org) to find out more and join the discu
 - [Running Tests](#running-tests)
   - [Brownie Tests](#brownie-tests)
   - [OpenEthereum](#openethereum)
+  - [Coverage](#coverage)
 - [System Quantities - Units and Representation](#system-quantities---units-and-representation)
   - [Integer representations of decimals](#integer-representations-of-decimals)
 - [Public Data](#public-data)
@@ -139,7 +140,8 @@ Visit [liquity.org](https://www.liquity.org) to find out more and join the discu
   - [Next steps for hosting a frontend](#next-steps-for-hosting-dev-ui)
     - [Example 1: using static website hosting](#example-1-using-static-website-hosting)
     - [Example 2: wrapping the frontend container in HTTPS](#example-2-wrapping-the-dev-ui-container-in-https)
-
+- [Known Issues](#known-issues)
+- [Disclaimer](#disclaimer)
 
 ## Liquity Overview
 
@@ -693,6 +695,20 @@ To stop the Openethereum node, you can do it with:
 yarn stop-dev-chain
 ```
 
+### Coverage
+
+To check test coverage you can run:
+```
+yarn coverage
+```
+
+You can see the coverage status at mainnet deployment [here](https://codecov.io/gh/liquity/dev/tree/8f52f2906f99414c0b1c3a84c95c74c319b7a8c6).
+
+![Impacted file tree graph](https://codecov.io/gh/liquity/dev/pull/707/graphs/tree.svg?width=650&height=150&src=pr&token=7AJPQ3TW0O&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=liquity)
+
+There’s also a [pull request](https://github.com/liquity/dev/pull/515) to increase the coverage, but it hasn’t been merged yet because it modifies some smart contracts (mostly removing unnecessary checks).
+
+
 ## System Quantities - Units and Representation
 
 ### Integer representations of decimals
@@ -991,7 +1007,7 @@ When a liquidation transaction liquidates multiple Troves, each Trove contribute
 
 Gas compensation per liquidated Trove is given by the formula:
 
-Gas compensation = `50 LUSD + 0.5% of trove’s collateral (ETH)`
+Gas compensation = `200 LUSD + 0.5% of trove’s collateral (ETH)`
 
 The intentions behind this formula are:
 - To ensure that smaller Troves are liquidated promptly in normal times, at least
@@ -999,21 +1015,21 @@ The intentions behind this formula are:
 
 ### Gas compensation schedule
 
-When a borrower opens a Trove, an additional 50 LUSD debt is issued, and 50 LUSD is minted and sent to a dedicated contract (`GasPool`) for gas compensation - the "gas pool".
+When a borrower opens a Trove, an additional 200 LUSD debt is issued, and 200 LUSD is minted and sent to a dedicated contract (`GasPool`) for gas compensation - the "gas pool".
 
-When a borrower closes their active Trove, this gas compensation is refunded: 50 LUSD is burned from the gas pool's balance, and the corresponding 50 LUSD debt on the Trove is cancelled.
+When a borrower closes their active Trove, this gas compensation is refunded: 200 LUSD is burned from the gas pool's balance, and the corresponding 200 LUSD debt on the Trove is cancelled.
 
-The purpose of the 50 LUSD Liquidation Reserve is to provide a minimum level of gas compensation, regardless of the Trove's collateral size or the current ETH price.
+The purpose of the 200 LUSD Liquidation Reserve is to provide a minimum level of gas compensation, regardless of the Trove's collateral size or the current ETH price.
 
 ### Liquidation
 
-When a Trove is liquidated, 0.5% of its collateral is sent to the liquidator, along with the 50 LUSD Liquidation Reserve. Thus, a liquidator always receives `{50 LUSD + 0.5% collateral}` per Trove that they liquidate. The collateral remainder of the Trove is then either offset, redistributed or a combination of both, depending on the amount of LUSD in the Stability Pool.
+When a Trove is liquidated, 0.5% of its collateral is sent to the liquidator, along with the 200 LUSD Liquidation Reserve. Thus, a liquidator always receives `{200 LUSD + 0.5% collateral}` per Trove that they liquidate. The collateral remainder of the Trove is then either offset, redistributed or a combination of both, depending on the amount of LUSD in the Stability Pool.
 
 ### Gas compensation and redemptions
 
-When a Trove is redeemed from, the redemption is made only against (debt - 50), not the entire debt.
+When a Trove is redeemed from, the redemption is made only against (debt - 200), not the entire debt.
 
-But if the redemption causes an amount (debt - 50) to be cancelled, the Trove is then closed: the 50 LUSD Liquidation Reserve is cancelled with its remaining 50 debt. That is, the gas compensation is burned from the gas pool, and the 50 debt is zero’d. The ETH collateral surplus from the Trove remains in the system, to be later claimed by its owner.
+But if the redemption causes an amount (debt - 200) to be cancelled, the Trove is then closed: the 200 LUSD Liquidation Reserve is cancelled with its remaining 200 debt. That is, the gas compensation is burned from the gas pool, and the 200 debt is zero’d. The ETH collateral surplus from the Trove remains in the system, to be later claimed by its owner.
 
 ### Gas compensation helper functions
 
@@ -1452,14 +1468,13 @@ You can optionally specify an explicit gas price too:
 yarn deploy --network ropsten --gas-price 20
 ```
 
-After a successful deployment, the addresses of the newly deployed contracts will be written to a version-controlled JSON file under `packages/lib/deployments/default`.
+After a successful deployment, the addresses of the newly deployed contracts will be written to a version-controlled JSON file under `packages/lib-ethers/deployments/default`.
 
 To publish a new deployment, you must execute the above command for all of the following combinations:
 
 | Network | Channel  |
 | ------- | -------- |
 | ropsten | default  |
-| ropsten | internal |
 | kovan   | default  |
 | rinkeby | default  |
 | goerli  | default  |
@@ -1640,6 +1655,17 @@ The frontend Docker container simply serves files using plain HTTP, which is sus
 
 Remember to customize both [docker-compose.yml](packages/dev-frontend/docker-compose-example/docker-compose.yml) and the [site config](packages/dev-frontend/docker-compose-example/config/nginx/site-confs/liquity.example.com).
 
+## Known Issues
+
+### Temporary and slightly inaccurate TCR calculation within `batchLiquidateTroves` in Recovery Mode. 
+
+When liquidating a trove with `ICR > 110%`, a collateral surplus remains claimable by the borrower. This collateral surplus should be excluded from subsequent TCR calculations, but within the liquidation sequence in `batchLiquidateTroves` in Recovery Mode, it is not. This results in a slight distortion to the TCR value used at each step of the liquidation sequence going forward. This distortion only persists for the duration the `batchLiquidateTroves` function call, and the TCR is again calculated correctly after the liquidation sequence ends. In most cases there is no impact at all, and when there is, the effect tends to be minor. The issue is not present at all in Normal Mode. 
+
+There is a theoretical and extremely rare case where it incorrectly causes a loss for Stability Depositors instead of a gain. It relies on the stars aligning: the system must be in Recovery Mode, the TCR must be very close to the 150% boundary, a large trove must be liquidated, and the ETH price must drop by >10% at exactly the right moment. No profitable exploit is possible. For more details, please see [this security advisory](https://github.com/liquity/dev/security/advisories/GHSA-xh2p-7p87-fhgh).
+
+### SortedTroves edge cases - top and bottom of the sorted list
+
+When the trove is at one end of the `SortedTroves` list and adjusted such that its ICR moves further away from its neighbor, `findInsertPosition` returns unhelpful positional hints, which if used can cause the `adjustTrove` transaction to run out of gas. This is due to the fact that one of the returned addresses is in fact the address of the trove to move - however, at re-insertion, it has already been removed from the list. As such the insertion logic defaults to `0x0` for that hint address, causing the system to search for the trove starting at the opposite end of the list. A workaround is possible, and this has been corrected in the SDK used by front ends.
 
 
 ## Disclaimer
