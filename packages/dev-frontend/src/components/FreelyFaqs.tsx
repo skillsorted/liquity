@@ -11,7 +11,7 @@ export const FreelyFaqs: React.FC = () => {
         <div className="u-accordion u-collapsed-by-default u-expanded-width u-faq u-spacing-10 u-accordion-1">
         <div className="u-accordion-item">
             <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
-              <span className="u-accordion-link-text">Do i need to share my granddad's details? Like pants size or dog's name to borrow or earn?<br/>
+              <span className="u-accordion-link-text">Do I need to share my granddad's details? Like pants size or dog's name to borrow or earn?<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
             </a>
@@ -20,13 +20,13 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    Your high street bank might ask for that level of details, we don't! All you need is Ethereum Wallet with ETH to borrow and LUSD or LQTY to earn.</span>
+                    Your high street bank might ask for that level of details, we don't! All you need is Ethereum Wallet with ETH to borrow LUSD. To earn, you need LUSD or LQTY in the Wallet.</span>
                   </p>
                   <br/>
 
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    Welcome to the Decentralized Finance (DeFi).</span>
+                    Welcome to the Decentralized Finance (DeFi)!!</span>
                   </p>
                 </div>
               </div>
@@ -47,7 +47,7 @@ export const FreelyFaqs: React.FC = () => {
                   </p>
                   <p>
                     <span style={{"fontSize": "1.125rem"}}>
-                      <span className="u-text-body-alt-color">Users can</span>
+                      <span className="u-text-body-alt-color">Users can:</span>
                     </span>
                   </p>
                   <p>
@@ -97,7 +97,7 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    Liquity is a decentralized borrowing protocol aimed to offer interest-free loans against ETH locked up as collateral. You can also earn by depositing LUSD into the stability pool or Staking LQTY</span>
+                    Liquity is a decentralized borrowing protocol aimed to offer interest-free loans against ETH locked up as collateral. You can also earn by depositing LUSD into the stability pool or Staking LQTY.</span>
                   </p>
 
                   <br/>
@@ -133,7 +133,7 @@ export const FreelyFaqs: React.FC = () => {
 
           <div className="u-accordion-item">
             <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
-              <span className="u-accordion-link-text">How can i borrow?&nbsp;<br/>
+              <span className="u-accordion-link-text">How can I borrow?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
             </a>
@@ -165,19 +165,19 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                     Liquidation: Trove drop below 110% collateral ratio will be defaulted or liquidated. Trove’s debt is removed and consumed by Stability Pool, whereas it’s collateral is shared among Stability Providers.             
+                     Liquidation: Trove that drops below 110% collateral ratio will be defaulted or liquidated. Trove’s debt is removed and consumed by Stability Pool, whereas its collateral is shared among Stability Providers.             
                     </span>
                   </p>
                   <br/>
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                     Redemption: Trove is redeemed against, that means someone took your ETH but also repaid an equal amount of your debt and thereby closed your Trove. The rest of your ETH can still be claimed.              
+                     Redemption: Trove might be redeemed against that means someone secured your ETH but also repaid an equal amount of your debt, thereby closing your trove. Nevertheless, the rest of your ETH can still be claimed.              
                     </span>
                   </p>
                   <br/>
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    PRO TIP1: To avoid Liquidation or Redemption we recommended to keep collateral ratio above 250%
+                    PRO TIP1: To reduce the risk of Liquidation or Redemption, we recommended to keep collateral ratio above 250%.
                     </span>
                   </p>
                   <br/>
@@ -198,7 +198,7 @@ export const FreelyFaqs: React.FC = () => {
                   PRO TIP3: 
                   </span>
                     <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
-                       <a href="https://docs.liquity.org/faq/borrowing" target="_blank"> Learn more about Liquity Protocol</a></span>
+                       <a href="https://docs.liquity.org/faq/borrowing" target="_blank"> Learn more about Liquity Protocol.</a></span>
                   </p>
                 </div>
               </div>
@@ -390,7 +390,7 @@ export const FreelyFaqs: React.FC = () => {
 
           <div className="u-accordion-item">
             <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
-              <span className="u-accordion-link-text">What if the APR ?&nbsp;<br/>
+              <span className="u-accordion-link-text">Any estimate of the LQTY return on the LUSD deposited to the Stability Pool?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
             </a>
@@ -405,7 +405,7 @@ export const FreelyFaqs: React.FC = () => {
                 <br/>
                 <p>
                     <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
-                       <a href="https://dune.xyz/freelyfinance/LiquityStats" target="_blank">Check historical stats here</a></span>
+                       <a href="https://dune.xyz/freelyfinance/LiquityStats" target="_blank">You can also check the historical stats here.</a></span>
                   </p>
                 </div>
               </div>
@@ -423,12 +423,12 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    A stable coin issued by Liquity protocol to pledge loans in Stability Pool. Learn more about LUSD here. .</span>
+                    A stable coin issued by Liquity protocol to pledge loans in Stability Pool.</span>
                   </p>
                   <br/>
                   <p>
                     <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
-                       <a href="https://docs.liquity.org/" target="_blank">* Learn more about Liquity Protocol</a></span>
+                       <a href="https://docs.liquity.org/" target="_blank">* Learn more about LUSD</a></span>
                   </p>
                 </div>
               </div>
