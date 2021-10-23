@@ -135,7 +135,7 @@ export const FreelyFaqs: React.FC = () => {
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
                       No, Protocol is developed by an awesome</span>
                       <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
-                       <a href="https://www.liquity.org/team" target="_blank"> Liquity.org team</a></span>
+                       <a href="https://www.liquity.org/team" target="_blank"> Liquity.org team.</a></span>
                   </p>
 
                   <br/>
@@ -216,7 +216,7 @@ export const FreelyFaqs: React.FC = () => {
                   <ul>
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    <b>TIP 1:</b> To reduce the risk of Liquidation or Redemption, we recommended to keep collateral ratio above 250%.
+                    <b>TIP 1:</b> To reduce the risk of Liquidation or Redemption, we recommend to keep collateral ratio above 250%.
                     </span>
                   </p>
                   </ul>
@@ -229,7 +229,7 @@ export const FreelyFaqs: React.FC = () => {
                   Get cover for protocol contract bugs, economic attacks, oracle failures or governance attacks 
                   </span>
                     <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
-                       <a href="https://app.nexusmutual.io/cover/buy/get-quote?address=0xA39739EF8b0231DbFA0DcdA07d7e29faAbCf4bb2" target="_blank"> via NexusMutual</a></span>
+                       <a href="https://app.nexusmutual.io/cover/buy/get-quote?address=0xA39739EF8b0231DbFA0DcdA07d7e29faAbCf4bb2" target="_blank"> via NexusMutual.</a></span>
                   </p>
                   </ul>
                   {/* <br/> */}
