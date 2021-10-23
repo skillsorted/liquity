@@ -20,7 +20,7 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    Your high street bank might ask for that level of details, we don't! All you need is Ethereum Wallet with ETH to borrow LUSD. To earn, you need LUSD or LQTY in the Wallet.</span>
+                    Your high street bank might ask for that level of details, we don't! All you need is Ethereum Wallet with ETH to borrow LUSD. To earn, you need LUSD or LQTY.</span>
                   </p>
                   <br/>
 
@@ -50,37 +50,49 @@ export const FreelyFaqs: React.FC = () => {
                       <span className="u-text-body-alt-color">Users can:</span>
                     </span>
                   </p>
+                  <ul>
                   <p>
                     <span style={{"fontSize": "1.125rem"}}>
                       <span className="u-text-body-alt-color">* Deposit ETH to Borrow LUSD</span>
                     </span>
                   </p>
+                  </ul>
+                  <ul>
                   <p>
                     <span style={{"fontSize": "1.125rem"}}>
                       <span className="u-text-body-alt-color">* Deposit LUSD to earn ETH and LQTY rewards</span>
                     </span>
                   </p>
+                  </ul>
+                  <ul>
                   <p>
                     <span style={{"fontSize": "1.125rem"}}>
                       <span className="u-text-body-alt-color">* Stake LQTY to earn a share of borrowing and redemption fees</span>
                     </span>
                   </p>
+                  </ul>
+                  <ul>
                   <p>
                     <span style={{"fontSize": "1.125rem"}}>
                       <span className="u-text-body-alt-color">* Manage and repay your loans</span>
                     </span>
                   </p>
+                  </ul>
+                  <ul>
                   <p>
                     <span style={{"fontSize": "1.125rem"}}>
                       <span className="u-text-body-alt-color">* View protocol stats</span>
                     </span>
                   </p>
+                  </ul>
+                  <ul>
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>&nbsp;and much more...</span>
                     <span className="u-text-custom-color-1">
                       <br/>
                     </span>
                   </p>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -109,6 +121,29 @@ export const FreelyFaqs: React.FC = () => {
               </div>
             </div>
           </div>
+
+          <div className="u-accordion-item">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+              <span className="u-accordion-link-text">Is the Liquity protocol developed by Freely team?<br/>
+              </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
+	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
+            </a>
+            <div className="u-accordion-pane u-container-style u-accordion-pane-1" id="accordion-f600" aria-labelledby="link-accordion-f600">
+              <div className="u-container-layout u-container-layout-1">
+                <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
+                  <p>
+                    <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                      No, Protocol is developed by an awesome</span>
+                      <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
+                       <a href="https://www.liquity.org/team" target="_blank"> Liquity.org team</a></span>
+                  </p>
+
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
           <div className="u-accordion-item">
             <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
@@ -165,41 +200,80 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                     Liquidation: Trove that drops below 110% collateral ratio will be defaulted or liquidated. Trove’s debt is removed and consumed by Stability Pool, whereas its collateral is shared among Stability Providers.             
+                    <b>Liquidation:</b> Trove that drops below 110% collateral ratio will be defaulted or liquidated. Trove’s debt is removed and consumed by Stability Pool, whereas its collateral is shared among Stability Providers.             
                     </span>
                   </p>
                   <br/>
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                     Redemption: Trove might be redeemed against that means someone secured your ETH but also repaid an equal amount of your debt, thereby closing your trove. Nevertheless, the rest of your ETH can still be claimed.              
+                    <b>Redemption:</b> Trove might be redeemed against that means someone secured your ETH but also repaid an equal amount of your debt, thereby closing your trove. Nevertheless, the rest of your ETH can still be claimed.              
                     </span>
                   </p>
                   <br/>
+                  <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                  <b>PRO TIPS: </b>
+                  </span> 
+                  <ul>
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    PRO TIP1: To reduce the risk of Liquidation or Redemption, we recommended to keep collateral ratio above 250%.
+                    <b>TIP 1:</b> To reduce the risk of Liquidation or Redemption, we recommended to keep collateral ratio above 250%.
                     </span>
                   </p>
-                  <br/>
-                  <p>
-                    <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    PRO TIP2:
-                    </span>
-                    <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
-                       <a href="https://discord.gg/PrjhsnnT46" target="_blank"> Join our Discord. </a></span>
-                       <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    Independent Analysts in our discord share very useful information which might help to manage risks better.
-                    </span>
-                  </p>
-
-                  <br/>
+                  </ul>
+                  {/* <br/> */}
+                  
+                  <ul>
                   <p>
                   <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                  PRO TIP3: 
+                  <b>TIP 2: </b> 
+                  Get cover for protocol contract bugs, economic attacks, oracle failures or governance attacks 
                   </span>
                     <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
-                       <a href="https://docs.liquity.org/faq/borrowing" target="_blank"> Learn more about Liquity Protocol.</a></span>
+                       <a href="https://app.nexusmutual.io/cover/buy/get-quote?address=0xA39739EF8b0231DbFA0DcdA07d7e29faAbCf4bb2" target="_blank"> via NexusMutual</a></span>
                   </p>
+                  </ul>
+                  {/* <br/> */}
+                  <ul>
+                  <p>
+                  <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                  <b>TIP 3:</b> Learn more about 
+                  </span>
+
+                    <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
+                       <a href="https://docs.liquity.org/faq/borrowing" target="_blank"> Liquity Protocol </a></span>
+                  <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                    and read
+                  </span>
+                  <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
+                       <a href="https://www.liquity.org/disclaimer-protocol" target="_blank"> Liquity Protocol Disclaimer.</a></span>
+ 
+                  </p>
+                  </ul>
+                  <ul>
+                  <p>
+                    <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                    <b>TIP 4: </b>
+                    </span>
+                    <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
+                       <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                         Independent Analysts in our discord channels frequently share very useful information which might help to manage risks better.
+                    </span>
+                    <a href="https://discord.gg/PrjhsnnT46" target="_blank"> Join our Discord. </a></span>
+
+                  </p>
+
+                  <p>
+                    <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                    <b>TIP 5: </b>
+                    </span>
+                    <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
+                       <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                       This is not a financial advice, feel free to Do Your Own Research (DYOR) and ask questions. 
+                    </span>
+                    </span>
+
+                  </p>
+                  </ul>
                 </div>
               </div>
             </div>

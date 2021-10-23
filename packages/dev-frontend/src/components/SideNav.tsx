@@ -44,6 +44,8 @@ export const SideNav: React.FC = () => {
           <Link to="/buy">Buy/Swap</Link>
           <Link to="/risky-troves">Risky Troves</Link>
           <Link to="/redemption">Redemption</Link>
+          <Link to="/faqs">FAQs</Link>
+
         </Box>
       </Flex>
     </Container>

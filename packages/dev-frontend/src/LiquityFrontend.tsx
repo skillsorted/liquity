@@ -24,6 +24,7 @@ import { TroveViewProvider } from "./components/Trove/context/TroveViewProvider"
 import { StabilityViewProvider } from "./components/Stability/context/StabilityViewProvider";
 import { StakingViewProvider } from "./components/Staking/context/StakingViewProvider";
 import { FarmViewProvider } from "./components/Farm/context/FarmViewProvider";
+import { FaqsPage } from "./pages/FaqsPage";
 
 type LiquityFrontendProps = {
   loader?: React.ReactNode;
@@ -85,6 +86,9 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                       </Route>
                       <Route path="/redemption">
                         <RedemptionPage />
+                      </Route>
+                      <Route path="/faqs">
+                        <FaqsPage />
                       </Route>
                     </Switch>
                   </Container>
