@@ -44,7 +44,7 @@ export const BProtocolPage: React.FC = () => (
                         height="500px"
                         width="100%"
                         frameBorder="0" 
-                      src={"/b-protocol?hideNav=true"}
+                      src={"#/b-protocol?hideNav=true"}
                      
                         ></iframe>
   </Container>
