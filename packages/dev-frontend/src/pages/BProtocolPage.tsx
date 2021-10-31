@@ -42,7 +42,7 @@ export const BProtocolPage: React.FC = () => (
     </Container>
     <Card>
 
-    <div  dangerouslySetInnerHTML={{ __html: "<iframe height='550px' width='100%' frameBorder='0' src='https://freely.finance/b-protocol?hideNav=true' onload='this.height=550;'/>"}}/>
+    <div  dangerouslySetInnerHTML={{ __html: "<iframe height='550px' width='100%' frameBorder='0' src='/b-protocol/?hideNav=true' onload='this.height=550;'/>"}}/>
     </Card>
 
     {/* <iframe title="b-protocol"
