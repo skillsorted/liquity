@@ -40,10 +40,11 @@ export const SideNav: React.FC = () => {
           <Link to="/">Dashboard</Link>
           {/* <Link to="/farm">Farm</Link> */}
           <Link to="/stats">Stats</Link>
-          <Link to="/analysts">Analysts View</Link>
+          <Link to="/analysts">Analysts</Link>
           <Link to="/buy">Buy/Swap</Link>
           <Link to="/risky-troves">Risky Troves</Link>
           <Link to="/redemption">Redemption</Link>
+          {/* <Link to="/b-protocol">B-Protocol</Link> */}
           <Link to="/faqs">FAQs</Link>
 
         </Box>

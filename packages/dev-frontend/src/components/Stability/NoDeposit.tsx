@@ -22,7 +22,7 @@ export const NoDeposit: React.FC = props => {
       </Heading>
       <Box sx={{ p: [2, 3] }}>
         <InfoMessage title="You have no LUSD in the Stability Pool.">
-          You can earn ETH and LQTY rewards by depositing LUSD.
+          You can earn <b>ETH</b> and <b>LQTY</b> rewards by depositing LUSD.
         </InfoMessage>
         
         Learn more: <Link href={`https://docs.liquity.org/faq/stability-pool-and-liquidations#what-is-the-stability-pool`} target="_blank">What is the Stability Pool?</Link>

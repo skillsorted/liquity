@@ -41,6 +41,7 @@
   },
   "scripts": {
     "build": "run-s build:*",
+    "buildWithB": "run-s build:* && cp -R ../dev/packages/dev-frontend/build packages/dev-frontend/build && mv packages/dev-frontend/build/build packages/dev-frontend/build/b-protocol",
     "build:dev-frontend": "yarn workspace @liquity/dev-frontend build",
     "build:subgraph": "yarn workspace @liquity/subgraph build",
     "deploy": "yarn workspace @liquity/lib-ethers hardhat deploy",

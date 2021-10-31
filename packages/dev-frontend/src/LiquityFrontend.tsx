@@ -25,6 +25,7 @@ import { StabilityViewProvider } from "./components/Stability/context/StabilityV
 import { StakingViewProvider } from "./components/Staking/context/StakingViewProvider";
 import { FarmViewProvider } from "./components/Farm/context/FarmViewProvider";
 import { FaqsPage } from "./pages/FaqsPage";
+import { BProtocolPage } from "./pages/BProtocolPage";
 
 type LiquityFrontendProps = {
   loader?: React.ReactNode;
@@ -71,6 +72,9 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                       </Route>
                       <Route path="/farm">
                         <Farm />
+                      </Route>
+                      <Route path="/b-protocol">
+                        <BProtocolPage/>
                       </Route>
                       <Route path="/stats" >
                         <Stats />

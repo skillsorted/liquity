@@ -490,6 +490,20 @@ const theme: Theme = {
       letterSpacing: "2px",
       width: ["100%", "auto"],
       mt: [3, "auto"]
+    },
+    bprotocol:{
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 2,
+        // letterSpacing: "2px",\
+         color: "primary",
+         paddingLeft: "12px",
+         paddingRight: "12px",
+         paddingTop: "8px",
+         paddingBottom: "8px",
+         borderRadius: "4px",
+         border:"solid 1px",
+        ":hover": { backgroundColor: "secondary", color: "white"  },
     }
   }
 };
