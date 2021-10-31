@@ -12,6 +12,7 @@ export const BProtocolPage: React.FC = () => (
 
 
     <Container>
+    <br/>
     <Link href="#/"> &#8592; Back</Link>
 
       <Card>
@@ -39,14 +40,18 @@ export const BProtocolPage: React.FC = () => (
       
 
     </Container>
-    <br/>
-    <iframe title="b-protocol"
+    <Card>
+
+    <div  dangerouslySetInnerHTML={{ __html: "<iframe height='550px' width='100%' frameBorder='0' src='https://freely.finance/b-protocol?hideNav=true' onload='this.height=550;'/>"}}/>
+    </Card>
+
+    {/* <iframe title="b-protocol"
                         height="500px"
                         width="100%"
                         frameBorder="0" 
-                      src={"https://freely.finance/b-protocol?hideNav=true"}
+                      src={"https://freely.finance/b-protocol?hideNav=true/"}
                      
-                        ></iframe>
+                        ></iframe> */}
   </Container>
 
 );
