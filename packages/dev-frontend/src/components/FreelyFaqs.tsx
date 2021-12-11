@@ -10,7 +10,7 @@ export const FreelyFaqs: React.FC = () => {
         <h2 className="u-custom-font u-text u-text-custom-color-1 u-text-default u-text-1">Frequently Asked Questions</h2>
         <div className="u-accordion u-collapsed-by-default u-expanded-width u-faq u-spacing-10 u-accordion-1">
         <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">Do I need to share my granddad's details? Like pants size or dog's name to borrow or earn?<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -34,7 +34,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">What is Freely.Finance?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -99,7 +99,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">What is Liquity protocol?<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -123,7 +123,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">Is the Liquity protocol developed by Freely team?<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -146,7 +146,7 @@ export const FreelyFaqs: React.FC = () => {
 
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">What about my privacy?<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -167,7 +167,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">How can I borrow?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -190,7 +190,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">What are my risks when borrowing?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -280,7 +280,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">Can I use any other assets besides ETH?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -298,7 +298,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">How much ETH is required as collateral?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -322,7 +322,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">How much can I borrow?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -341,7 +341,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">What is a Trove?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -373,7 +373,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">Can I open more than one Trove on the same ETH address?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -391,7 +391,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">How can I close my Trove?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -409,7 +409,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">Is there any deadline for paying back?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -427,7 +427,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">How can I earn?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -463,7 +463,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">Any estimate of the LQTY return on the LUSD deposited to the Stability Pool?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -487,7 +487,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">What is LUSD?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -510,7 +510,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">I am new to Decentralized Finance (DeFi), can you help?<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
@@ -538,7 +538,7 @@ export const FreelyFaqs: React.FC = () => {
           </div>
 
           <div className="u-accordion-item">
-            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-10 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
+            <a className="u-accordion-link u-active-custom-color-1 u-button-style u-custom-color-1 u-hover-custom-color-5 u-radius-4 u-accordion-link-1" id="link-accordion-f600" aria-controls="accordion-f600" aria-selected="false">
               <span className="u-accordion-link-text">I want to learn more?&nbsp;<br/>
               </span><span className="u-accordion-link-icon u-icon u-icon-circle u-radius-50 u-text-white u-icon-4"><svg className="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" ><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#svg-0bec"></use></svg><svg className="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-0bec"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
 	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>

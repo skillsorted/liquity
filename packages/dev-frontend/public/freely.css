@@ -19045,6 +19045,10 @@ a.pswp__share--download:hover {
 }
 .u-accordion-pane.u-accordion-active {
   display: flex;
+  margin-top: -3px;
+  border-radius: 0px 0px 4px 4px;
+  background-color: #0f395e;
+  font-family: "Baloo Paaji 2";
 }
 .u-accordion.u-spacing-0 .u-accordion-item:not(:last-child) .u-accordion-link:not(.active),
 .u-accordion:not([class*="u-spacing-"]) .u-accordion-item:not(:last-child) .u-accordion-link:not(.active) {
