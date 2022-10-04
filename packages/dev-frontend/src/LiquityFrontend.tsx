@@ -13,19 +13,19 @@ import { SystemStatsPopup } from "./components/SystemStatsPopup";
 import { Header } from "./components/Header";
 
 import { PageSwitcher } from "./pages/PageSwitcher";
-import { Farm } from "./pages/Farm";
 import { Stats } from "./pages/Stats";
 import { Analysts } from "./pages/Analysts";
 import { BuySwap } from "./pages/BuySwap";
 import { RiskyTrovesPage } from "./pages/RiskyTrovesPage";
-import { RedemptionPage } from "./pages/RedemptionPage";
+import { Bonds } from "./pages/Bonds";
 
 import { TroveViewProvider } from "./components/Trove/context/TroveViewProvider";
 import { StabilityViewProvider } from "./components/Stability/context/StabilityViewProvider";
 import { StakingViewProvider } from "./components/Staking/context/StakingViewProvider";
-import { FarmViewProvider } from "./components/Farm/context/FarmViewProvider";
 import { FaqsPage } from "./pages/FaqsPage";
 import { BProtocolPage } from "./pages/BProtocolPage";
+import "tippy.js/dist/tippy.css"; // Tooltip default style
+import { BondsProvider } from "./components/Bonds/context/BondsProvider";
 
 type LiquityFrontendProps = {
   loader?: React.ReactNode;
@@ -50,7 +50,7 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
         <TroveViewProvider>
           <StabilityViewProvider>
             <StakingViewProvider>
-              <FarmViewProvider>
+              <BondsProvider>
                 <Flex sx={{ flexDirection: "column", minHeight: "100%" }}>
                   <Header>
                     <UserAccount />
@@ -70,11 +70,11 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                       <Route path="/" exact>
                         <PageSwitcher />
                       </Route>
-                      <Route path="/farm">
-                        <Farm />
+                      <Route path="/bonds">
+                        <Bonds />
                       </Route>
                       <Route path="/b-protocol">
-                        <BProtocolPage/>
+                        <BProtocolPage />
                       </Route>
                       <Route path="/stats" >
                         <Stats />
@@ -88,21 +88,18 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                       <Route path="/risky-troves">
                         <RiskyTrovesPage />
                       </Route>
-                      <Route path="/redemption">
-                        <RedemptionPage />
-                      </Route>
                       <Route path="/faqs">
                         <FaqsPage />
                       </Route>
                     </Switch>
                   </Container>
                 </Flex>
-              </FarmViewProvider>
+              </BondsProvider>
             </StakingViewProvider>
           </StabilityViewProvider>
         </TroveViewProvider>
       </Router>
       <TransactionMonitor />
-    </LiquityStoreProvider>
+    </LiquityStoreProvider >
   );
 };

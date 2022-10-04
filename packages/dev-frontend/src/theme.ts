@@ -103,7 +103,7 @@ const infoCard: ThemeUIStyleObject = {
 
   padding: 3,
   borderColor: "rgba(122,199,240,0.4)",
-   background: "linear-gradient(200deg, #01baef, #a392ef)",
+  background: "linear-gradient(200deg, #01baef, #a392ef)",
 
   h2: {
     mb: 2,
@@ -252,6 +252,10 @@ const theme: Theme = {
       ...iconButton,
       color: "text",
       ":enabled:hover": { color: "success" }
+    },
+
+    close: {
+      cursor: "pointer"
     }
   },
 
@@ -300,16 +304,6 @@ const theme: Theme = {
     },
 
     tooltip: {
-      padding: 2,
-
-      border: 1,
-      borderColor: "muted",
-      borderRadius: "4px",
-      bg: "background",
-      boxShadow: 2,
-
-      fontSize: 1,
-      color: "text",
       fontWeight: "body",
       zIndex: 1
     }
@@ -318,6 +312,15 @@ const theme: Theme = {
   forms: {
     label: {
       ...formBase
+    },
+
+    radioLabel: {
+      mr: 4,
+      width: "unset",
+
+      svg: {
+        mr: 1
+      }
     },
 
     unit: {
@@ -343,7 +346,6 @@ const theme: Theme = {
       alignItems: "stretch",
 
       position: ["fixed", "relative"],
-      width: "100vw",
       top: 0,
       zIndex: 1,
 
@@ -368,7 +370,7 @@ const theme: Theme = {
 
     main: {
       width: "100%",
-      maxWidth: "912px",
+      maxWidth: "1280px",
       mx: "auto",
       mt: ["40px", 0],
       mb: ["40px", "40px"],
@@ -477,6 +479,10 @@ const theme: Theme = {
       ":hover": { color: "accent" },
       textDecoration: "none",
       fontWeight: "bold"
+    },
+
+    progress: {
+      color: colors.success
     }
   },
 
@@ -491,19 +497,19 @@ const theme: Theme = {
       width: ["100%", "auto"],
       mt: [3, "auto"]
     },
-    bprotocol:{
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: 2,
-        // letterSpacing: "2px",\
-         color: "primary",
-         paddingLeft: "12px",
-         paddingRight: "12px",
-         paddingTop: "8px",
-         paddingBottom: "8px",
-         borderRadius: "4px",
-         border:"solid 1px",
-        ":hover": { backgroundColor: "secondary", color: "white"  },
+    bprotocol: {
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: 2,
+      // letterSpacing: "2px",\
+      color: "primary",
+      paddingLeft: "12px",
+      paddingRight: "12px",
+      paddingTop: "8px",
+      paddingBottom: "8px",
+      borderRadius: "4px",
+      border: "solid 1px",
+      ":hover": { backgroundColor: "secondary", color: "white" },
     }
   }
 };
