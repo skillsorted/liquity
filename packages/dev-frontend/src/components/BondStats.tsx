@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Heading, Text, Flex } from "theme-ui";
+import { Card, Heading, Text, Flex, Link, Box, Image } from "theme-ui";
 import { Decimal } from "@liquity/lib-base";
 import * as l from "../components/Bonds/lexicon";
 import { Statistic } from "./Statistic";
@@ -33,6 +33,32 @@ export const BondStats: React.FC<BondStatsProps> = () => {
   return (
     <Card variant="info">
       <Heading sx={{ fontweight: "bold" }}>LUSD bonds</Heading>
+      <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
+        Bonds Marketplaces
+      </Heading>
+      <Box sx={{ fontSize: 1 }}>
+
+        <Link href={`https://x2y2.io/collection/lusd-chicken-bonds-nfts/items`} target="_blank" sx={{ color: "DarkGreen" }}>
+          <Image
+            sx={{
+              height: 30,
+              // border: "1px solid DarkGreen",
+              // borderRadius: "14%",
+              // borderColor: "DarkGreen"
+            }}
+            src='./bonds/x2y2.svg'
+          /> </Link>
+        <Link href={`https://looksrare.org/collections/0xa8384862219188a8f03c144953Cf21fc124029Ee?queryID=4bfdaf7d6164a7bd1ce0768b467d7850`} target="_blank" sx={{ color: "DarkGreen" }}>
+          <Image
+            sx={{
+              height: 30,
+              // border: "1px solid DarkGreen",
+              // borderRadius: "14%",
+              // borderColor: "DarkGreen"
+            }}
+            src='./bonds/looksrare-black.svg'
+          /></Link>
+      </Box>
 
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
         bLUSD
@@ -46,8 +72,8 @@ export const BondStats: React.FC<BondStatsProps> = () => {
             protocolInfo.fairPrice.lower.eq(Decimal.INFINITY)
               ? "N/A"
               : `${protocolInfo.fairPrice.lower.prettify(
-                  2
-                )} - ${protocolInfo.fairPrice.upper.prettify(2)}`
+                2
+              )} - ${protocolInfo.fairPrice.upper.prettify(2)}`
           }
           unit="LUSD"
         />
