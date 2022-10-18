@@ -36,6 +36,11 @@ type BondsInformation = {
   bLusdAmmLusdBalance: Decimal;
 };
 
+type BondsByIdInformation = {
+  bondsById: Bond[];
+  totalSupply: Decimal;
+};
+
 type BondContracts = {
   lusdToken: LUSDToken | undefined;
   bLusdToken: BLUSDToken | undefined;
@@ -44,6 +49,7 @@ type BondContracts = {
   bLusdAmm: CurveCryptoSwap2ETH | undefined;
   hasFoundContracts: boolean;
   getLatestData: (account: string, api: BondsApi) => Promise<BondsInformation | undefined>;
+  getBondsById: (fromId: number, toId: number, api: BondsApi) => Promise<BondsByIdInformation | undefined>;
 };
 
 export const useBondContracts = (): BondContracts => {
@@ -162,6 +168,52 @@ export const useBondContracts = (): BondContracts => {
     [chickenBondManager, bondNft, bLusdToken, lusdToken, bLusdAmm, isMainnet]
   );
 
+  const getBondsById = useCallback(
+    async (fromId, toId, api: BondsApi) => {
+      if (
+        lusdToken === undefined ||
+        bondNft === undefined ||
+        chickenBondManager === undefined ||
+        bLusdToken === undefined ||
+        bLusdAmm === undefined
+      ) {
+        return;
+      }
+
+      const protocolInfo = await api.getProtocolInfo(
+        bLusdToken,
+        bLusdAmm,
+        chickenBondManager,
+        isMainnet,
+      );
+
+      const supply = await api.getTokenTotalSupply(bondNft);
+      const supplyNumber = Number(supply.toString()) * 1000000000000000000;
+
+      if (toId > supplyNumber) {
+        toId = supplyNumber
+      }
+
+      const bondsById = await api.getAllBonds(
+        fromId,
+        toId,
+        bondNft,
+        chickenBondManager,
+        protocolInfo.marketPrice,
+        protocolInfo.alphaAccrualFactor,
+        protocolInfo.marketPricePremium,
+        protocolInfo.claimBondFee,
+        protocolInfo.floorPrice,
+        bLusdToken,
+      );
+      return {
+        bondsById,
+        totalSupply: supply.mul(1000000000000000000),
+      };
+    },
+    [chickenBondManager, bondNft, bLusdToken, lusdToken, bLusdAmm, isMainnet]
+  );
+
   return {
     lusdToken,
     bLusdToken,
@@ -169,6 +221,7 @@ export const useBondContracts = (): BondContracts => {
     chickenBondManager,
     bLusdAmm,
     getLatestData,
-    hasFoundContracts
+    hasFoundContracts,
+    getBondsById
   };
 };

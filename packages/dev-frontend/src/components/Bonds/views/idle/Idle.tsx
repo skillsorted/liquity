@@ -8,13 +8,15 @@ import { InfoIcon } from "../../../InfoIcon";
 import { BLusdAmmTokenIndex, SwapPressedPayload } from "../../context/transitions";
 import { useLiquity } from "../../../../hooks/LiquityContext";
 import { useBondAddresses } from "../../context/BondAddressesContext";
+import { useHistory } from "react-router-dom";
+
 
 const MAINNET_CHAIN_ID = 1;
 
 export const Idle: React.FC = () => {
   const { liquity } = useLiquity();
   const { LUSD_OVERRIDE_ADDRESS } = useBondAddresses();
-
+  const history = useHistory();
   const {
     dispatchEvent,
     bonds,
@@ -37,7 +39,7 @@ export const Idle: React.FC = () => {
 
   const hasBonds = bonds !== undefined && bonds.length > 0;
 
-  const showLusdFaucet = LUSD_OVERRIDE_ADDRESS !== null && lusdBalance?.eq(0);
+  const showLusdFaucet = LUSD_OVERRIDE_ADDRESS !== null && lusdBalance ?.eq(0);
 
   const handleAddLiquidityPressed = () => dispatchEvent("ADD_LIQUIDITY_PRESSED");
   const handleManageLiquidityPressed = () => dispatchEvent("MANAGE_LIQUIDITY_PRESSED");
@@ -48,19 +50,23 @@ export const Idle: React.FC = () => {
   const handleSellBLusdPressed = () =>
     dispatchEvent("SWAP_PRESSED", { inputToken: BLusdAmmTokenIndex.BLUSD } as SwapPressedPayload);
 
+  const handleExplorePressed = () =>
+    dispatchEvent("SWAP_PRESSED", { inputToken: BLusdAmmTokenIndex.BLUSD } as SwapPressedPayload);
+
+
   return (
     <>
       <Flex variant="layout.actions" sx={{ mt: 4, mb: 3 }}>
         {chain !== MAINNET_CHAIN_ID &&
-          (lpTokenBalance?.nonZero ? (
+          (lpTokenBalance ?.nonZero ? (
             <Button variant="outline" onClick={handleManageLiquidityPressed}>
               Manage liquidity
             </Button>
           ) : (
-            <Button variant="outline" onClick={handleAddLiquidityPressed}>
-              Add liquidity
+              <Button variant="outline" onClick={handleAddLiquidityPressed}>
+                Add liquidity
             </Button>
-          ))}
+            ))}
 
         <Button variant="outline" onClick={handleBuyBLusdPressed}>
           Buy bLUSD
@@ -81,6 +87,11 @@ export const Idle: React.FC = () => {
             Create another bond
           </Button>
         )}
+
+        <Button variant="primary" onClick={() => history.push('/bonds/explore')}>
+          Explore Bonds
+        </Button>
+
       </Flex>
 
       {!hasBonds && (

@@ -18,6 +18,7 @@ import { Analysts } from "./pages/Analysts";
 import { BuySwap } from "./pages/BuySwap";
 import { RiskyTrovesPage } from "./pages/RiskyTrovesPage";
 import { Bonds } from "./pages/Bonds";
+import { BondsMarket } from "./pages/BondsMarket";
 
 import { TroveViewProvider } from "./components/Trove/context/TroveViewProvider";
 import { StabilityViewProvider } from "./components/Stability/context/StabilityViewProvider";
@@ -26,6 +27,8 @@ import { FaqsPage } from "./pages/FaqsPage";
 import { BProtocolPage } from "./pages/BProtocolPage";
 import "tippy.js/dist/tippy.css"; // Tooltip default style
 import { BondsProvider } from "./components/Bonds/context/BondsProvider";
+import { BondsMarketProvider } from "./components/Bonds/context/BondsMarketProvider";
+
 
 type LiquityFrontendProps = {
   loader?: React.ReactNode;
@@ -51,49 +54,54 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
           <StabilityViewProvider>
             <StakingViewProvider>
               <BondsProvider>
-                <Flex sx={{ flexDirection: "column", minHeight: "100%" }}>
-                  <Header>
-                    <UserAccount />
-                    <SystemStatsPopup />
-                  </Header>
+                <BondsMarketProvider>
+                  <Flex sx={{ flexDirection: "column", minHeight: "100%" }}>
+                    <Header>
+                      <UserAccount />
+                      <SystemStatsPopup />
+                    </Header>
 
-                  <Container
-                    variant="main"
-                    sx={{
-                      display: "flex",
-                      flexGrow: 1,
-                      flexDirection: "column",
-                      alignItems: "center"
-                    }}
-                  >
-                    <Switch>
-                      <Route path="/" exact>
-                        <PageSwitcher />
-                      </Route>
-                      <Route path="/bonds">
-                        <Bonds />
-                      </Route>
-                      <Route path="/b-protocol">
-                        <BProtocolPage />
-                      </Route>
-                      <Route path="/stats" >
-                        <Stats />
-                      </Route>
-                      <Route path="/analysts" >
-                        <Analysts />
-                      </Route>
-                      <Route path="/buy">
-                        <BuySwap />
-                      </Route>
-                      <Route path="/risky-troves">
-                        <RiskyTrovesPage />
-                      </Route>
-                      <Route path="/faqs">
-                        <FaqsPage />
-                      </Route>
-                    </Switch>
-                  </Container>
-                </Flex>
+                    <Container
+                      variant="main"
+                      sx={{
+                        display: "flex",
+                        flexGrow: 1,
+                        flexDirection: "column",
+                        alignItems: "center"
+                      }}
+                    >
+                      <Switch>
+                        <Route path="/" exact>
+                          <PageSwitcher />
+                        </Route>
+                        <Route path="/bonds/explore">
+                          <BondsMarket />
+                        </Route>
+                        <Route path="/bonds">
+                          <Bonds />
+                        </Route>
+                        <Route path="/b-protocol">
+                          <BProtocolPage />
+                        </Route>
+                        <Route path="/stats" >
+                          <Stats />
+                        </Route>
+                        <Route path="/analysts" >
+                          <Analysts />
+                        </Route>
+                        <Route path="/buy">
+                          <BuySwap />
+                        </Route>
+                        <Route path="/risky-troves">
+                          <RiskyTrovesPage />
+                        </Route>
+                        <Route path="/faqs">
+                          <FaqsPage />
+                        </Route>
+                      </Switch>
+                    </Container>
+                  </Flex>
+                </BondsMarketProvider>
               </BondsProvider>
             </StakingViewProvider>
           </StabilityViewProvider>

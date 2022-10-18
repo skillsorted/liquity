@@ -2,17 +2,17 @@ import React, { useState, useCallback, useEffect, useRef, useMemo } from "react"
 import { BondViewContext } from "./BondViewContext";
 import type {
   Stats,
-  BondView,
-  BondEvent,
-  Payload,
-  Bond,
-  BondTransactionStatuses,
-  CreateBondPayload,
-  ProtocolInfo,
-  OptimisticBond,
-  SwapPayload,
-  ApprovePressedPayload,
-  ManageLiquidityPayload
+    BondView,
+    BondEvent,
+    Payload,
+    Bond,
+    BondTransactionStatuses,
+    CreateBondPayload,
+    ProtocolInfo,
+    OptimisticBond,
+    SwapPayload,
+    ApprovePressedPayload,
+    ManageLiquidityPayload
 } from "./transitions";
 import { BLusdAmmTokenIndex } from "./transitions";
 import { transitions } from "./transitions";
@@ -26,7 +26,7 @@ import { useWeb3React } from "@web3-react/core";
 import { useBondAddresses } from "./BondAddressesContext";
 
 // Refresh backend values every 15 seconds
-const SYNCHRONIZE_INTERVAL_MS = 15 * 1000;
+const SYNCHRONIZE_INTERVAL_MS = 30 * 1000;
 
 const isValidEvent = (view: BondView, event: BondEvent): boolean => {
   return transitions[view][event] !== undefined;
@@ -209,7 +209,7 @@ export const BondViewProvider: React.FC = props => {
           lpTokenBalance,
           lpTokenSupply,
           bLusdAmmBLusdBalance,
-          bLusdAmmLusdBalance
+          bLusdAmmLusdBalance,
         } = latest;
 
         setProtocolInfo(protocolInfo);
@@ -312,10 +312,10 @@ export const BondViewProvider: React.FC = props => {
     async (inputToken: BLusdAmmTokenIndex, inputAmount: Decimal) =>
       contracts.bLusdAmm
         ? (isMainnet ? api.getExpectedSwapOutputMainnet : api.getExpectedSwapOutput)(
-            inputToken,
-            inputAmount,
-            contracts.bLusdAmm
-          )
+          inputToken,
+          inputAmount,
+          contracts.bLusdAmm
+        )
         : Decimal.ZERO,
     [contracts.bLusdAmm, isMainnet]
   );
@@ -379,7 +379,7 @@ export const BondViewProvider: React.FC = props => {
     [contracts.bLusdAmm]
   );
 
-  const selectedBond = useMemo(() => bonds?.find(bond => bond.id === selectedBondId), [
+  const selectedBond = useMemo(() => bonds ?.find(bond => bond.id === selectedBondId), [
     bonds,
     selectedBondId
   ]);
