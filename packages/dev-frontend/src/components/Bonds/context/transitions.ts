@@ -110,7 +110,8 @@ export const transitions: BondEventTransitions = {
 
 export enum BLusdAmmTokenIndex {
   BLUSD,
-  LUSD
+  LUSD,
+  BLUSD_LUSD_LP
 }
 
 export type CreateBondPayload = { deposit: Decimal };
@@ -120,7 +121,7 @@ export type SelectBondPayload = { bondId: string };
 export type PagePayload = { pageStartingIndex: number };
 
 export type SwapPressedPayload = {
-  inputToken: BLusdAmmTokenIndex;
+  inputToken: BLusdAmmTokenIndex.BLUSD | BLusdAmmTokenIndex.LUSD;
 };
 
 export type SwapPayload = {
@@ -128,9 +129,21 @@ export type SwapPayload = {
   minOutputAmount: Decimal;
 };
 
+export type Address = string | null;
+
+export type Addresses = {
+  BLUSD_AMM_ADDRESS: Address;
+  BLUSD_AMM_STAKING_ADDRESS: Address;
+  BLUSD_TOKEN_ADDRESS: Address;
+  BOND_NFT_ADDRESS: Address;
+  CHICKEN_BOND_MANAGER_ADDRESS: Address;
+  LUSD_OVERRIDE_ADDRESS: Address;
+  BLUSD_LP_ZAP_ADDRESS: Address;
+};
+
 // This payload is only dispatched by "Manage liquidity"
 export type ApprovePressedPayload = {
-  tokensNeedingApproval: BLusdAmmTokenIndex[];
+  tokensNeedingApproval: Map<BLusdAmmTokenIndex, Address>;
 };
 
 export type AddLiquidityPayload = {
@@ -138,6 +151,7 @@ export type AddLiquidityPayload = {
   bLusdAmount: Decimal;
   lusdAmount: Decimal;
   minLpTokens: Decimal;
+  shouldStakeInGauge: boolean;
 };
 
 export type RemoveLiquidityPayload = {
@@ -154,10 +168,22 @@ export type RemoveLiquidityOneCoinPayload = {
   minAmount: Decimal;
 };
 
+export type StakeLiquidityPayload = {
+  action: "stakeLiquidity";
+  stakeAmount: Decimal;
+};
+
+export type UnstakeLiquidityPayload = {
+  action: "unstakeLiquidity";
+  unstakeAmount: Decimal;
+};
+
 export type ManageLiquidityPayload =
   | AddLiquidityPayload
   | RemoveLiquidityPayload
-  | RemoveLiquidityOneCoinPayload;
+  | RemoveLiquidityOneCoinPayload
+  | StakeLiquidityPayload
+  | UnstakeLiquidityPayload;
 
 export type Payload =
   | CreateBondPayload
@@ -234,6 +260,7 @@ export type BondTransaction =
   | "CANCEL"
   | "CLAIM"
   | "APPROVE_AMM"
+  | "APPROVE_SPENDER"
   | "SWAP"
   | "MANAGE_LIQUIDITY";
 

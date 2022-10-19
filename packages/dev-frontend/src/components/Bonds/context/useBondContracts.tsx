@@ -1,12 +1,17 @@
 import type { Decimal } from "@liquity/lib-base";
 import {
+  BLUSDLPZap,
+  BLUSDLPZap__factory,
   BLUSDToken,
   BondNFT,
   ChickenBondManager,
   ERC20Faucet,
   ERC20Faucet__factory
 } from "@liquity/chicken-bonds/lusd/types";
-import type { CurveCryptoSwap2ETH } from "@liquity/chicken-bonds/lusd/types/external";
+import {
+  CurveCryptoSwap2ETH,
+  CurveLiquidityGaugeV5__factory
+} from "@liquity/chicken-bonds/lusd/types/external";
 import { CurveCryptoSwap2ETH__factory } from "@liquity/chicken-bonds/lusd/types/external";
 import {
   BLUSDToken__factory,
@@ -21,8 +26,13 @@ import { useCallback } from "react";
 import type { BondsApi } from "./api";
 import type { Bond, ProtocolInfo, Stats } from "./transitions";
 import { BLusdAmmTokenIndex } from "./transitions";
+import type { Addresses } from "./transitions";
 import { useWeb3React } from "@web3-react/core";
 import { useBondAddresses } from "./BondAddressesContext";
+import type { CurveLiquidityGaugeV5 } from "@liquity/chicken-bonds/lusd/types/external/CurveLiquidityGaugeV5";
+import {
+  decimalify,
+} from "../utils"
 
 type BondsInformation = {
   protocolInfo: ProtocolInfo;
@@ -31,6 +41,7 @@ type BondsInformation = {
   bLusdBalance: Decimal;
   lusdBalance: Decimal;
   lpTokenBalance: Decimal;
+  stakedLpTokenBalance: Decimal;
   lpTokenSupply: Decimal;
   bLusdAmmBLusdBalance: Decimal;
   bLusdAmmLusdBalance: Decimal;
@@ -42,11 +53,14 @@ type BondsByIdInformation = {
 };
 
 type BondContracts = {
+  addresses: Addresses;
   lusdToken: LUSDToken | undefined;
   bLusdToken: BLUSDToken | undefined;
   bondNft: BondNFT | undefined;
   chickenBondManager: ChickenBondManager | undefined;
   bLusdAmm: CurveCryptoSwap2ETH | undefined;
+  bLusdAmmZapper: BLUSDLPZap | undefined;
+  bLusdGauge: CurveLiquidityGaugeV5 | undefined;
   hasFoundContracts: boolean;
   getLatestData: (account: string, api: BondsApi) => Promise<BondsInformation | undefined>;
   getBondsById: (fromId: number, toId: number, api: BondsApi) => Promise<BondsByIdInformation | undefined>;
@@ -57,13 +71,17 @@ export const useBondContracts = (): BondContracts => {
   const { chainId } = useWeb3React();
   const isMainnet = chainId === 1;
 
+  const addresses = useBondAddresses();
+
   const {
     BLUSD_AMM_ADDRESS,
     BLUSD_TOKEN_ADDRESS,
     BOND_NFT_ADDRESS,
     CHICKEN_BOND_MANAGER_ADDRESS,
-    LUSD_OVERRIDE_ADDRESS
-  } = useBondAddresses();
+    LUSD_OVERRIDE_ADDRESS,
+    BLUSD_LP_ZAP_ADDRESS,
+    BLUSD_AMM_STAKING_ADDRESS
+  } = addresses;
 
   const [lusdTokenDefault, lusdTokenDefaultStatus] = useContract<LUSDToken>(
     liquity.connection.addresses.lusdToken,
@@ -96,13 +114,25 @@ export const useBondContracts = (): BondContracts => {
     CurveCryptoSwap2ETH__factory.abi
   );
 
+  const [bLusdAmmZapper, bLusAmmZapperStatus] = useContract<BLUSDLPZap>(
+    BLUSD_LP_ZAP_ADDRESS,
+    BLUSDLPZap__factory.abi
+  );
+
+  const [bLusdGauge, bLusdGaugeStatus] = useContract<CurveLiquidityGaugeV5>(
+    BLUSD_AMM_STAKING_ADDRESS,
+    CurveLiquidityGaugeV5__factory.abi
+  );
+
   const hasFoundContracts =
     [
       lusdTokenStatus,
       bondNftStatus,
       chickenBondManagerStatus,
       bLusdTokenStatus,
-      bLusdAmmStatus
+      bLusdAmmStatus,
+      bLusAmmZapperStatus,
+      bLusdGaugeStatus
     ].find(status => status === "FAILED") === undefined;
 
   const getLatestData = useCallback(
@@ -112,7 +142,8 @@ export const useBondContracts = (): BondContracts => {
         bondNft === undefined ||
         chickenBondManager === undefined ||
         bLusdToken === undefined ||
-        bLusdAmm === undefined
+        bLusdAmm === undefined ||
+        BLUSD_AMM_STAKING_ADDRESS === null
       ) {
         return;
       }
@@ -136,19 +167,21 @@ export const useBondContracts = (): BondContracts => {
       );
       const stats = await api.getStats(chickenBondManager);
 
-      // TODO cache LP token? Or add to addresses.json?
       const lpToken = await api.getLpToken(bLusdAmm);
+      const lpStakingContract = await api.erc20From(BLUSD_AMM_STAKING_ADDRESS, bLusdAmm.provider);
 
       const [
         bLusdBalance,
         lusdBalance,
         lpTokenBalance,
+        stakedLpTokenBalance,
         lpTokenSupply,
         bLusdAmmCoinBalances
       ] = await Promise.all([
         api.getTokenBalance(account, bLusdToken),
         api.getTokenBalance(account, lusdToken),
         api.getTokenBalance(account, lpToken),
+        api.getTokenBalance(account, lpStakingContract),
         api.getTokenTotalSupply(lpToken),
         api.getCoinBalances(bLusdAmm)
       ]);
@@ -160,12 +193,21 @@ export const useBondContracts = (): BondContracts => {
         bLusdBalance,
         lusdBalance,
         lpTokenBalance,
+        stakedLpTokenBalance,
         lpTokenSupply,
         bLusdAmmBLusdBalance: bLusdAmmCoinBalances[BLusdAmmTokenIndex.BLUSD],
         bLusdAmmLusdBalance: bLusdAmmCoinBalances[BLusdAmmTokenIndex.LUSD]
       };
     },
-    [chickenBondManager, bondNft, bLusdToken, lusdToken, bLusdAmm, isMainnet]
+    [
+      chickenBondManager,
+      bondNft,
+      bLusdToken,
+      lusdToken,
+      bLusdAmm,
+      isMainnet,
+      BLUSD_AMM_STAKING_ADDRESS
+    ]
   );
 
   const getBondsById = useCallback(
@@ -187,8 +229,8 @@ export const useBondContracts = (): BondContracts => {
         isMainnet,
       );
 
-      const supply = await api.getTokenTotalSupply(bondNft);
-      const supplyNumber = Number(supply.toString()) * 1000000000000000000;
+      const supply = (await bondNft.totalSupply());
+      const supplyNumber = supply.toNumber() * 1000000000000000000;
 
       if (toId > supplyNumber) {
         toId = supplyNumber
@@ -208,18 +250,21 @@ export const useBondContracts = (): BondContracts => {
       );
       return {
         bondsById,
-        totalSupply: supply.mul(1000000000000000000),
+        totalSupply: decimalify(supply).mul(1000000000000000000),
       };
     },
     [chickenBondManager, bondNft, bLusdToken, lusdToken, bLusdAmm, isMainnet]
   );
 
   return {
+    addresses,
     lusdToken,
     bLusdToken,
     bondNft,
     chickenBondManager,
     bLusdAmm,
+    bLusdAmmZapper,
+    bLusdGauge,
     getLatestData,
     hasFoundContracts,
     getBondsById

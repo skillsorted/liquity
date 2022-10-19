@@ -11,8 +11,6 @@ import { useBondAddresses } from "../../context/BondAddressesContext";
 import { useHistory } from "react-router-dom";
 
 
-const MAINNET_CHAIN_ID = 1;
-
 export const Idle: React.FC = () => {
   const { liquity } = useLiquity();
   const { LUSD_OVERRIDE_ADDRESS } = useBondAddresses();
@@ -23,6 +21,7 @@ export const Idle: React.FC = () => {
     getLusdFromFaucet,
     lusdBalance,
     lpTokenBalance,
+    stakedLpTokenBalance,
     hasLoaded
   } = useBondView();
   const [chain, setChain] = useState<number>();
@@ -57,16 +56,15 @@ export const Idle: React.FC = () => {
   return (
     <>
       <Flex variant="layout.actions" sx={{ mt: 4, mb: 3 }}>
-        {chain !== MAINNET_CHAIN_ID &&
-          (lpTokenBalance ?.nonZero ? (
-            <Button variant="outline" onClick={handleManageLiquidityPressed}>
-              Manage liquidity
-            </Button>
-          ) : (
-              <Button variant="outline" onClick={handleAddLiquidityPressed}>
-                Add liquidity
-            </Button>
-            ))}
+        {lpTokenBalance ?.nonZero || stakedLpTokenBalance ?.nonZero ? (
+          <Button variant="outline" onClick={handleManageLiquidityPressed}>
+            Manage liquidity
+          </Button>
+        ) : (
+            <Button variant="outline" onClick={handleAddLiquidityPressed}>
+              Add liquidity
+          </Button>
+          )}
 
         <Button variant="outline" onClick={handleBuyBLusdPressed}>
           Buy bLUSD
