@@ -109,5 +109,6 @@
     "prettier": "^2.1.2",
     "semantic-release": "^17.4.2",
     "semantic-release-monorepo": "^7.0.4"
-  }
+  },
+  "version": "0.0.0"
 }
