@@ -74,6 +74,13 @@ export const FreelyFaqs: React.FC = () => {
                   <ul>
                   <p>
                     <span style={{"fontSize": "1.125rem"}}>
+                      <span className="u-text-body-alt-color">* Create and manage LUSD bonds</span>
+                    </span>
+                  </p>
+                  </ul>
+                  <ul>
+                  <p>
+                    <span style={{"fontSize": "1.125rem"}}>
                       <span className="u-text-body-alt-color">* Manage and repay your loans</span>
                     </span>
                   </p>
@@ -109,7 +116,7 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    Liquity is a decentralized borrowing protocol aimed to offer interest-free loans against ETH locked up as collateral. You can also earn by depositing LUSD into the stability pool or Staking LQTY.</span>
+                    Liquity is a decentralized borrowing protocol aimed to offer interest-free loans against ETH locked up as collateral. You can also earn by depositing LUSD into the stability pool, Staking LQTY or Bonding LUSD.</span>
                   </p>
 
                   <br/>
@@ -451,11 +458,20 @@ export const FreelyFaqs: React.FC = () => {
                     * Staking LQTY to earn a share of borrowing and redemption fees.
                     </span>
                   </p>
-
+                  <br/>
+                  <p>
+                    <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
+                    * Bond  LUSD to get bLUSD and benefit from an enhanced yield. 
+                    </span>
+                  </p>
                   <br/>
                   <p>
                     <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
                        <a href="https://docs.liquity.org/faq/lqty-distribution-and-rewards" target="_blank">Learn more about Liquity Rewards and Staking</a></span>
+                  </p>
+                  <p>
+                    <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
+                       <a href="https://liquity.gitbook.io/chicken-bonds/faq/general" target="_blank">Learn more about Bonds</a></span>
                   </p>
                 </div>
               </div>
