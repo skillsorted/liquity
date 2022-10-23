@@ -15,7 +15,7 @@ export const FreelyFeatures: React.FC<FreelyFeaturesProps> = ({ moreDetails }) =
     <Container className="u-align-center u-clearfix u-gradient u-section-2" id="carousel_7ff5">
       <div className="u-clearfix u-sheet u-sheet-1">
         <h2 className="u-custom-font u-text u-text-custom-color-1 u-text-default u-text-1"><b>
-          <span style={{ fontSize: "2.25rem" }}>Borrow or Earn using Liquity <img src="icons/32-lqty-icon.svg" alt="lqty" style={{ "verticalAlign": "-0.20em" }} /> - a ​decentralized protocol</span>
+          <span style={{ fontSize: "2.25rem" }}>Earn or Borrow using Liquity <img src="icons/32-lqty-icon.svg" alt="lqty" style={{ "verticalAlign": "-0.20em" }} /> - a ​decentralized protocol</span>
         </b>
         </h2>
         <p className="u-custom-font u-text u-text-custom-color-1 u-text-default u-text-2"><b> Liquity protocol is controlled by nobody.&nbsp; <br />All operations are algorithmic and fully automated&nbsp;using ​Ethereum smart contracts.&nbsp;</b>
@@ -23,14 +23,14 @@ export const FreelyFeatures: React.FC<FreelyFeaturesProps> = ({ moreDetails }) =
         <div className="u-tab-links-align-justify u-tabs u-tabs-1">
           <ul className="u-tab-list u-unstyled" role="tablist">
             <li className="u-tab-item" role="presentation">
-              <a className="active u-active-custom-color-1 u-border-1 u-border-active-grey-75 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-custom-font u-hover-custom-color-3 u-radius-4 u-tab-link u-text-active-white u-text-body-color u-text-hover-black u-tab-link-1" style={{ textDecoration: "underline" }} id="link-tab-0da5" href="#tab-0da5" role="tab" aria-controls="tab-0da5" aria-selected="true">Freely Borrow&nbsp;</a>
+              <a className="active u-active-custom-color-1 u-border-1 u-border-active-grey-75 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-custom-font u-hover-custom-color-3 u-radius-4 u-tab-link u-text-active-white u-text-body-color u-text-hover-black u-tab-link-2" style={{ textDecoration: "underline" }} id="link-tab-14b7" href="#tab-14b7" role="tab" aria-controls="tab-14b7" aria-selected="true">Freely Earn</a>
             </li>
             <li className="u-tab-item" role="presentation">
-              <a className="u-active-custom-color-1 u-border-1 u-border-active-grey-75 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-custom-font u-hover-custom-color-3 u-radius-4 u-tab-link u-text-active-white u-text-body-color u-text-hover-black u-tab-link-2" style={{ textDecoration: "underline" }} id="link-tab-14b7" href="#tab-14b7" role="tab" aria-controls="tab-14b7" aria-selected="false">Freely Earn</a>
+              <a className="u-active-custom-color-1 u-border-1 u-border-active-grey-75 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-custom-font u-hover-custom-color-3 u-radius-4 u-tab-link u-text-active-white u-text-body-color u-text-hover-black u-tab-link-1" style={{ textDecoration: "underline" }} id="link-tab-0da5" href="#tab-0da5" role="tab" aria-controls="tab-0da5" aria-selected="false">Freely Borrow</a>
             </li>
           </ul>
           <div className="u-tab-content">
-            <div className="u-align-left u-container-style u-custom-color-1 u-shape-rectangle u-tab-active u-tab-pane u-tab-pane-1" id="tab-0da5" role="tabpanel" aria-labelledby="link-tab-0da5">
+            <div className="u-align-left u-container-style u-custom-color-1 u-shape-rectangle  u-tab-pane u-tab-pane-1" id="tab-0da5" role="tabpanel" aria-labelledby="link-tab-0da5">
               <div className="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-container-layout-1">
                 <div className="u-align-center u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-layout-grid u-list u-list-1">
                   <div className="u-repeater u-repeater-1">
@@ -92,7 +92,7 @@ export const FreelyFeatures: React.FC<FreelyFeaturesProps> = ({ moreDetails }) =
                 </div>
               </div>
             </div>
-            <div className="u-align-left u-container-style u-custom-color-1 u-shape-rectangle u-tab-pane u-tab-pane-2" id="tab-14b7" role="tabpanel" aria-labelledby="link-tab-14b7">
+            <div className="u-align-left u-container-style u-custom-color-1 u-shape-rectangle u-tab-active u-tab-pane u-tab-pane-2" id="tab-14b7" role="tabpanel" aria-labelledby="link-tab-14b7">
               <div className="u-container-layout u-valign-top u-container-layout-5">
                 <div className="u-align-center u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-layout-grid u-list u-list-2">
                   <div className="u-repeater u-repeater-2">
