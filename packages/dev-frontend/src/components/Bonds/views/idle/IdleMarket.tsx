@@ -21,13 +21,13 @@ export const IdleMarket: React.FC = () => {
     totalSupply,
   } = useBondMarketView();
 
-  const [chain, setChain] = useState<number>();
+  // const [chain, setChain] = useState<number>();
   // console.log("dleMarket" + bonds)
 
   // if (!hasLoaded) return null;
 
-  const hasBonds = bonds !== undefined && bonds.length > 0;
-  const [loading, setLoading] = useState(true);
+  // const hasBonds = bonds !== undefined && bonds.length > 0;
+  // const [loading, setLoading] = useState(true);
 
   const [reload, setReload] = useState({});
   const forceReload = useCallback(() => setReload({}), []);
@@ -59,6 +59,16 @@ export const IdleMarket: React.FC = () => {
       dispatchEvent("SWITCH_PAGE_PRESSED", { pageStartingIndex: (page * pageSize) + 1 } as PagePayload);
     }
   }
+
+  const handleReload = () => {
+    // console.log("handleReload")
+    forceReload();
+    dispatchEvent("SWITCH_PAGE_PRESSED", { pageStartingIndex: (page * pageSize) + 1 } as PagePayload);
+  }
+
+  // useEffect(() => {
+  //   forceReload();
+  // }, [forceReload, numberOfTroves]);
 
 
 
@@ -93,16 +103,17 @@ export const IdleMarket: React.FC = () => {
                 >
                   <Icon name="chevron-right" size="lg" />
                 </Button>
+
+
+                <Button
+                  variant="titleIcon"
+                  onClick={handleReload}
+                >
+                  <Icon name="redo" size="lg" />
+                </Button>
               </>
             )}
 
-            <Button
-              variant="titleIcon"
-              sx={{ opacity: loading ? 0 : 1, ml: [0, 3] }}
-              onClick={forceReload}
-            >
-              <Icon name="redo" size="lg" />
-            </Button>
           </Flex>
         </Heading>
         <Box sx={{ p: [2, 3] }}>
