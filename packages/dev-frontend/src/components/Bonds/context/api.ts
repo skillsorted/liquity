@@ -29,7 +29,15 @@ import type {
 } from "@liquity/chicken-bonds/lusd/types/ChickenBondManager";
 import { Decimal } from "@liquity/lib-base";
 import type { LUSDToken } from "@liquity/lib-ethers/dist/types";
-import type { ProtocolInfo, Bond, BondStatus, Stats, ClaimedBonds, Maybe } from "./transitions";
+import type {
+  ProtocolInfo,
+  Bond,
+  BondStatus,
+  Stats,
+  ClaimedBonds,
+  Maybe,
+  BLusdLpRewards
+} from "./transitions";
 import {
   numberify,
   decimalify,
@@ -64,6 +72,13 @@ const BOND_STATUS: BondStatus[] = ["NON_EXISTENT", "PENDING", "CANCELLED", "CLAI
 const LUSD_3CRV_POOL_ADDRESS = "0xEd279fDD11cA84bEef15AF5D39BB4d4bEE23F0cA";
 const LUSD_TOKEN_ADDRESS = "0x5f98805A4E8be255a32880FDeC7F6728C6568bA0";
 const CURVE_REGISTRY_SWAPS_ADDRESS = "0x81C46fECa27B31F3ADC2b91eE4be9717d1cd3DD7";
+const BLUSD_LUSD_3CRV_POOL_ADDRESS = "0x74ED5d42203806c8CDCf2F04Ca5F60DC777b901c";
+const CRV_TOKEN_ADDRESS = "0xD533a949740bb3306d119CC777fa900bA034cd52";
+
+const TOKEN_ADDRESS_NAME_MAP: Record<string, string> = {
+  [LUSD_TOKEN_ADDRESS]: "LUSD",
+  [CRV_TOKEN_ADDRESS]: "CRV"
+};
 
 const LQTY_ISSUANCE_GAS_HEADROOM = BigNumber.from(50000);
 
@@ -124,10 +139,13 @@ const getRoute = (inputToken: BLusdAmmTokenIndex): [RouteAddresses, RouteSwaps] 
 type CachedYearnApys = {
   lusd3Crv: Decimal | undefined;
   stabilityPool: Decimal | undefined;
+  bLusdLusd3Crv: Decimal | undefined;
 };
-let cachedYearnApys: CachedYearnApys = {
+
+let cachedApys: CachedYearnApys = {
   lusd3Crv: undefined,
-  stabilityPool: undefined
+  stabilityPool: undefined,
+  bLusdLusd3Crv: undefined
 };
 
 type YearnVault = Partial<{
@@ -139,9 +157,50 @@ type YearnVault = Partial<{
   };
 }>;
 
+type CurvePoolData = Partial<{
+  data: {
+    poolData: Array<{ id: string; gaugeRewards: Array<{ apy: number }> }>;
+  };
+}>;
+
+type CurvePoolDetails = Partial<{
+  data: {
+    poolDetails: Array<{ poolAddress: string; apy: number }>;
+  };
+}>;
+
+const CURVE_POOL_ID = "factory-crypto-134";
+
+const cacheCurveLpApy = async (): Promise<void> => {
+  try {
+    const curvePoolDataResponse = (await (
+      await window.fetch("https://api.curve.fi/api/getPools/ethereum/factory-crypto")
+    ).json()) as CurvePoolData;
+
+    const curvePoolDetailsResponse = (await await (
+      await window.fetch("https://api.curve.fi/api/getFactoryAPYs?version=crypto")
+    ).json()) as CurvePoolDetails;
+
+    const poolData = curvePoolDataResponse.data?.poolData.find(pool => pool.id === CURVE_POOL_ID);
+    const rewardsApr = poolData?.gaugeRewards.reduce((total, current) => total + current.apy, 0);
+    const baseApr = curvePoolDetailsResponse?.data?.poolDetails?.find(
+      pool => pool.poolAddress === BLUSD_LUSD_3CRV_POOL_ADDRESS
+    )?.apy;
+
+    if (rewardsApr === undefined && baseApr === undefined) return;
+
+    const apr = (rewardsApr ?? 0) + (baseApr ?? 0);
+
+    cachedApys.bLusdLusd3Crv = Decimal.from(apr);
+  } catch (error: unknown) {
+    console.log("cacheCurveLpApy failed");
+    console.error(error);
+  }
+};
+
 const cacheYearnVaultApys = async (): Promise<void> => {
   try {
-    if (cachedYearnApys.lusd3Crv !== undefined) return;
+    if (cachedApys.lusd3Crv !== undefined) return;
 
     const yearnResponse = (await (
       await window.fetch("https://api.yearn.finance/v1/chains/1/vaults/all")
@@ -162,9 +221,10 @@ const cacheYearnVaultApys = async (): Promise<void> => {
       return;
     }
 
-    cachedYearnApys.lusd3Crv = Decimal.from(lusd3CrvVault.apy.net_apy);
-    cachedYearnApys.stabilityPool = Decimal.from(stabilityPoolVault.apy.net_apy);
+    cachedApys.lusd3Crv = Decimal.from(lusd3CrvVault.apy.net_apy);
+    cachedApys.stabilityPool = Decimal.from(stabilityPoolVault.apy.net_apy);
   } catch (error: unknown) {
+    console.log("cacheYearnVaultApys failed");
     console.error(error);
   }
 };
@@ -508,12 +568,17 @@ const getProtocolInfo = async (
     total: decimalify(pending.add(reserve).add(permanent))
   };
 
-  if (cachedYearnApys.lusd3Crv === undefined || cachedYearnApys.stabilityPool === undefined) {
+  if (cachedApys.lusd3Crv === undefined || cachedApys.stabilityPool === undefined) {
     await cacheYearnVaultApys();
+  }
+
+  if (cachedApys.bLusdLusd3Crv === undefined) {
+    await cacheCurveLpApy();
   }
 
   let yieldAmplification: Maybe<Decimal> = undefined;
   let bLusdApr: Maybe<Decimal> = undefined;
+  let bLusdLpApr: Maybe<Decimal> = cachedApys.bLusdLusd3Crv;
 
   const protocolOwnedLusdInStabilityPool = decimalify(await chickenBondManager.getOwnedLUSDInSP());
   const protocolLusdInStabilityPool = treasury.pending.add(protocolOwnedLusdInStabilityPool);
@@ -525,24 +590,22 @@ const getProtocolInfo = async (
   };
 
   if (
-    cachedYearnApys.lusd3Crv !== undefined &&
-    cachedYearnApys.stabilityPool !== undefined &&
+    cachedApys.lusd3Crv !== undefined &&
+    cachedApys.stabilityPool !== undefined &&
     treasury.reserve.gt(0)
   ) {
-    const protocolStabilityPoolYield = cachedYearnApys.stabilityPool.mul(
-      protocolLusdInStabilityPool
-    );
-    const protocolCurveYield = cachedYearnApys.lusd3Crv.mul(protocolLusdInCurve);
+    const protocolStabilityPoolYield = cachedApys.stabilityPool.mul(protocolLusdInStabilityPool);
+    const protocolCurveYield = cachedApys.lusd3Crv.mul(protocolLusdInCurve);
     bLusdApr = protocolStabilityPoolYield.add(protocolCurveYield).div(treasury.reserve);
-    yieldAmplification = bLusdApr.div(cachedYearnApys.stabilityPool);
+    yieldAmplification = bLusdApr.div(cachedApys.stabilityPool);
 
     fairPrice.lower = protocolLusdInStabilityPool
       .sub(treasury.pending)
-      .add(protocolLusdInCurve.mul(cachedYearnApys.lusd3Crv.div(cachedYearnApys.stabilityPool)))
+      .add(protocolLusdInCurve.mul(cachedApys.lusd3Crv.div(cachedApys.stabilityPool)))
       .div(bLusdSupply);
 
     fairPrice.upper = protocolLusdInStabilityPool
-      .add(protocolLusdInCurve.mul(cachedYearnApys.lusd3Crv.div(cachedYearnApys.stabilityPool)))
+      .add(protocolLusdInCurve.mul(cachedApys.lusd3Crv.div(cachedApys.stabilityPool)))
       .div(bLusdSupply);
   }
 
@@ -583,7 +646,8 @@ const getProtocolInfo = async (
     rebondDays,
     simulatedMarketPrice,
     yieldAmplification,
-    bLusdApr
+    bLusdApr,
+    bLusdLpApr
   };
 };
 
@@ -752,7 +816,13 @@ const claimBond = async (
       throw new Error("claimBond() failed: a dependency is null");
     console.log("claimBond() started", bondId);
 
-    const receipt = await (await chickenBondManager.chickenIn(bondId)).wait();
+    const gasEstimate = await chickenBondManager.estimateGas.chickenIn(bondId);
+
+    const receipt = await (
+      await chickenBondManager.chickenIn(bondId, {
+        gasLimit: gasEstimate.add(LQTY_ISSUANCE_GAS_HEADROOM)
+      })
+    ).wait();
 
     const bondClaimedEvent = receipt.events ?.find(
       e => e.event === "BondClaimed"
@@ -1171,6 +1241,38 @@ const unstakeLiquidity = async (
   return withdrawEvent.args;
 };
 
+const claimLpRewards = async (bLusdGauge: CurveLiquidityGaugeV5 | undefined): Promise<void> => {
+  if (bLusdGauge === undefined) {
+    throw new Error("claimLpRewards() failed: a dependency is null");
+  }
+
+  const receipt = await (await bLusdGauge["claim_rewards()"]()).wait();
+
+  if (!receipt.status) {
+    throw new Error("claimLpRewards() failed: no transaction receipt status received.");
+  }
+};
+
+const getLpRewards = async (
+  account: string,
+  bLusdGauge: CurveLiquidityGaugeV5
+): Promise<BLusdLpRewards> => {
+  let rewards: BLusdLpRewards = [];
+
+  const totalRewardTokens = (await bLusdGauge.reward_count()).toNumber();
+
+  for (let tokenIndex = 0; tokenIndex < totalRewardTokens; tokenIndex++) {
+    const tokenAddress = await bLusdGauge.reward_tokens(tokenIndex);
+    const tokenRewards = decimalify(await bLusdGauge.claimable_reward(account, tokenAddress));
+    const tokenName =
+      TOKEN_ADDRESS_NAME_MAP[tokenAddress] ||
+      `${tokenAddress.slice(0, 5)}..${tokenAddress.slice(tokenAddress.length - 3)}`;
+
+    rewards.push({ name: tokenName, address: tokenAddress, amount: tokenRewards });
+  }
+  return rewards;
+};
+
 export const api = {
   getAccountBonds,
   getStats,
@@ -1200,7 +1302,9 @@ export const api = {
   removeLiquidityOneCoin,
   getAllBonds,
   stakeLiquidity,
-  unstakeLiquidity
+  unstakeLiquidity,
+  getLpRewards,
+  claimLpRewards
 };
 
 export type BondsApi = typeof api;
