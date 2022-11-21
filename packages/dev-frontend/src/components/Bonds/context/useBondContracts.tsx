@@ -157,16 +157,7 @@ export const useBondContracts = (): BondContracts => {
         isMainnet
       );
 
-      const bonds = await api.getAccountBonds(
-        account,
-        bondNft,
-        chickenBondManager,
-        protocolInfo.marketPrice,
-        protocolInfo.alphaAccrualFactor,
-        protocolInfo.marketPricePremium,
-        protocolInfo.claimBondFee,
-        protocolInfo.floorPrice
-      );
+      const bonds = await api.getAccountBonds(account, bondNft, chickenBondManager, protocolInfo);
       const stats = await api.getStats(chickenBondManager);
 
       const lpToken = await api.getLpToken(bLusdAmm);
@@ -247,12 +238,8 @@ export const useBondContracts = (): BondContracts => {
         toId,
         bondNft,
         chickenBondManager,
-        protocolInfo.marketPrice,
-        protocolInfo.alphaAccrualFactor,
-        protocolInfo.marketPricePremium,
-        protocolInfo.claimBondFee,
-        protocolInfo.floorPrice,
         bLusdToken,
+        protocolInfo,
       );
       return {
         bondsById,
