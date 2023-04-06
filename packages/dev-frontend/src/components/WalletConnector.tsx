@@ -14,6 +14,7 @@ import { FreelyFaqs } from "./FreelyFaqs";
 import { RetryDialog } from "./RetryDialog";
 import { ConnectionConfirmationDialog } from "./ConnectionConfirmationDialog";
 import { MetaMaskIcon } from "./MetaMaskIcon";
+import { TallyHoIcon } from "./TallyHoIcon";
 import { WalletLinkIcon } from "./WalletLinkIcon";
 import { WalletConnectIcon } from "./WalletConnectIcon";
 
@@ -25,6 +26,12 @@ const scrollToRef = (ref:any) => window.scrollTo(0, ref.current.offsetTop)
 interface MaybeHasMetaMask {
   ethereum?: {
     isMetaMask?: boolean;
+  };
+}
+
+interface MaybeHasTallyHo {
+  ethereum?: {
+    isTally?: boolean;
   };
 }
 
@@ -93,6 +100,7 @@ const connectionReducer: React.Reducer<ConnectionState, ConnectionAction> = (sta
 };
 
 const detectMetaMask = () => (window as MaybeHasMetaMask).ethereum?.isMetaMask ?? false;
+const detectTallyHo = () => (window as MaybeHasTallyHo).ethereum?.isTally ?? false;
 
 type WalletConnectorProps = {
   loader?: React.ReactNode;
@@ -103,6 +111,7 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children, load
   const triedAuthorizedConnection = useAuthorizedConnection();
   const [connectionState, dispatch] = useReducer(connectionReducer, { type: "inactive" });
   const isMetaMask = detectMetaMask();
+  const isTallyHo = detectTallyHo();
   const [colorMode] = useColorMode()
 
 
@@ -196,6 +205,33 @@ const executeScroll = () => scrollToRef(refFeatures)
             </>
           )}
 
+        {isTallyHo ? (
+          <div className="u-container-style u-list-item u-repeater-item">
+            <div className="u-container-layout u-similar-container u-container-layout-1">
+              <Button sx={{ width: "210px"}} className ="u-align-center u-btn u-button-style u-btn-1"
+                onClick={() => {
+                  dispatch({ type: "startActivating", connector: injectedConnector });
+                  activate(injectedConnector);
+                }}>
+
+                <TallyHoIcon />
+                <Box sx={{ ml: 2 }}>Tally Ho</Box>
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <> 
+          <div className="u-container-style u-list-item u-repeater-item">
+                        <div className="u-container-layout u-similar-container u-container-layout-1">
+            <Button sx={{ width: "210px"}} className ="u-align-center u-btn u-button-style u-btn-1" disabled>
+              <TallyHoIcon />
+              <Box sx={{ ml: 2 }}>Tally Ho</Box>
+            </Button>
+            </div>
+          </div>         
+          </>
+        )}
+
             <div className="u-container-style u-list-item u-repeater-item">
               <div className="u-container-layout u-similar-container u-container-layout-2">
               <Button  className ="u-align-center u-btn u-button-style u-btn-2"
@@ -256,7 +292,7 @@ const executeScroll = () => scrollToRef(refFeatures)
       {connectionState.type === "failed" && (
         <Modal>
           <RetryDialog
-            title={isMetaMask && connectionState.connector == injectedConnector ? "Failed to connect to MetaMask" : "Failed to connect wallet"}
+            title={isMetaMask && connectionState.connector == injectedConnector ? "Failed to connect to MetaMask" : isTallyHo && connectionState.connector == injectedConnector ? "Failed to connect to Tally Ho" : "Failed to connect to wallet"}
             onCancel={() => dispatch({ type: "cancel" })}
             onRetry={() => {
               dispatch({ type: "retry" });
@@ -277,15 +313,17 @@ const executeScroll = () => scrollToRef(refFeatures)
         <Modal>
           <ConnectionConfirmationDialog
             title={
-              isMetaMask  && connectionState.connector == injectedConnector? "Confirm connection in MetaMask" : "Confirm connection in your wallet"
+              isMetaMask  && connectionState.connector == injectedConnector? "Confirm connection in MetaMask" : isTallyHo && connectionState.connector == injectedConnector ? "Confirm connection in Tally Ho" : "Confirm connection in your wallet"
             }
-            icon={isMetaMask   && connectionState.connector == injectedConnector ? <MetaMaskIcon /> : <Icon name="wallet" size="lg" />}
+            icon={isMetaMask   && connectionState.connector == injectedConnector ? <MetaMaskIcon /> : isTallyHo && connectionState.connector == injectedConnector ? <TallyHoIcon /> :  <Icon name="wallet" size="lg" />}
             onCancel={() => dispatch({ type: "cancel" })}
           >
             <Text sx={{ textAlign: "center" }}>
               Confirm the request that&apos;s just appeared.
               {isMetaMask   && connectionState.connector == injectedConnector ? (
                 <> If you can&apos;t see a request, open your MetaMask extension via your browser.</>
+              ) : isTallyHo && connectionState.connector == injectedConnector ? (
+                <> If you can&apos;t see a request, open your Tally extension via your browser.</>
               ) : (
                 <> If you can&apos;t see a request, you might have to open your wallet.</>
               )}
