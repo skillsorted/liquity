@@ -1,7 +1,6 @@
 import { Box, Card, Container, Link, Paragraph } from "theme-ui";
 
 import React from "react";
-import styles from "../styles.module.css";
 
 import { InfoMessage } from "../components/InfoMessage";
 import { Icon } from "../components/Icon"

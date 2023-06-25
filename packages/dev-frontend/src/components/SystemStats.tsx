@@ -31,11 +31,11 @@ const Balances: React.FC = () => {
 };
 
 const GitHubCommit: React.FC<{ children?: string }> = ({ children }) =>
-  children?.match(/[0-9a-f]{40}/) ? (
-    <Link  href={`https://github.com/liquity/dev/commit/${children}`} sx={{ color: "#362c63" }}>{children.substr(0, 7)}</Link>
+  children ?.match(/[0-9a-f]{40}/) ? (
+    <Link href={`https://github.com/liquity/dev/commit/${children}`} sx={{ color: "#362c63" }}>{children.substr(0, 7)}</Link>
   ) : (
-    <>unknown</>
-  );
+      <>unknown</>
+    );
 
 type SystemStatsProps = {
   variant?: string;
@@ -83,11 +83,11 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
     total.debt.nonZero && new Percent(lusdInStabilityPool.div(total.debt));
   const totalCollateralRatioPct = new Percent(total.collateralRatio(price));
   const borrowingFeePct = new Percent(borrowingRate);
-  const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate?.mul(100).prettify();
+  const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate ?.mul(100).prettify();
 
   return (
     <Card {...{ variant }}>
-        {showBalances && <Balances />}
+      {showBalances && <Balances />}
       <Heading>Liquity statistics</Heading>
 
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
@@ -123,7 +123,7 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
       {kickbackRatePct && <Statistic lexicon={l.KICKBACK_RATE}>{kickbackRatePct}%</Statistic>}
 
       <Box sx={{ mt: 3, opacity: 0.66 }}>
-        <Box sx={{ fontSize: 0}}>
+        <Box sx={{ fontSize: 0 }}>
           Contracts version: <GitHubCommit>{contractsVersion}</GitHubCommit>
         </Box>
         <Box sx={{ fontSize: 0 }}>Deployed: {deploymentDate.toLocaleString()}</Box>
@@ -132,21 +132,27 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
           <Link href={`https://github.com/skillsorted/liquity`} target="_blank" sx={{ color: "#362c63" }}> Github</Link>
         </Box>
         <Box sx={{ fontSize: 0 }}>
-          Contact Email: 
+          Contact Email:
           <Link href={`mailto:contact@freely.finance`} target="_blank" sx={{ color: "#362c63" }}> contact@freely.finance</Link>
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Discord:
           <Link href={`https://discord.gg/PrjhsnnT46`} target="_blank" sx={{ color: "#362c63" }}> Join channel</Link>
+          Frontend version:{" "}
+          {import.meta.env.DEV ? (
+            "development"
+          ) : (
+              <GitHubCommit>{import.meta.env.VITE_APP_VERSION}</GitHubCommit>
+            )}
         </Box>
         <Box sx={{ fontSize: 0 }}>
           Twitter:
           <Link href={`https://twitter.com/FreelyFinance`} target="_blank" sx={{ color: "#362c63" }}> @FreelyFinance</Link>
         </Box>
-        <Box sx={{ fontSize: 0}}>
-         <Statistic lexicon={l.THEME}>
-        <ThemeManager/>
-        </Statistic>
+        <Box sx={{ fontSize: 0 }}>
+          <Statistic lexicon={l.THEME}>
+            <ThemeManager />
+          </Statistic>
         </Box>
 
       </Box>

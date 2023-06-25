@@ -1,8 +1,6 @@
 import { Card, Heading, Box, Container, Link } from "theme-ui";
 
 import React from "react";
-import styles from "../styles.module.css";
-
 
 
 export const Stats: React.FC = () => (

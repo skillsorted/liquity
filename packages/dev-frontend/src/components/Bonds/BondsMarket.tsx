@@ -5,7 +5,7 @@ import { InfoMessage } from "../InfoMessage";
 import { Container } from "theme-ui";
 
 export const BondsMarket: React.FC = () => {
-  const { view, hasFoundContracts } = useBondMarketView();
+  const { hasFoundContracts } = useBondMarketView();
 
   if (!hasFoundContracts) {
     return (

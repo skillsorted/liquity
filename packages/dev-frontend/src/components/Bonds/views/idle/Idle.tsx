@@ -40,10 +40,6 @@ export const Idle: React.FC = () => {
   const handleSellBLusdPressed = () =>
     dispatchEvent("SWAP_PRESSED", { inputToken: BLusdAmmTokenIndex.BLUSD } as SwapPressedPayload);
 
-  const handleExplorePressed = () =>
-    dispatchEvent("SWAP_PRESSED", { inputToken: BLusdAmmTokenIndex.BLUSD } as SwapPressedPayload);
-
-
   return (
     <>
       <Flex variant="layout.actions" sx={{ mt: 4, mb: 3 }}>

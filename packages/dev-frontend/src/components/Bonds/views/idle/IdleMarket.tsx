@@ -1,22 +1,17 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState } from "react";
 
-import { Card, Button, Text, Box, Heading, Flex } from "theme-ui";
+import { Card, Button, Box, Heading, Flex } from "theme-ui";
 import { Icon } from "../../../Icon";
 import { Abbreviation } from "../../../Abbreviation";
 import { BondMarketList } from "./BondMarketList";
 import { PagePayload } from "../../context/transitions";
 
 import { useBondMarketView } from "../../context/BondMarketViewContext";
-import { number } from "prop-types";
-
-
-const MAINNET_CHAIN_ID = 1;
 
 export const IdleMarket: React.FC = () => {
 
 
   let {
-    bonds,
     dispatchEvent,
     totalSupply,
   } = useBondMarketView();
@@ -29,8 +24,8 @@ export const IdleMarket: React.FC = () => {
   // const hasBonds = bonds !== undefined && bonds.length > 0;
   // const [loading, setLoading] = useState(true);
 
-  const [reload, setReload] = useState({});
-  const forceReload = useCallback(() => setReload({}), []);
+  // const [setReload] = useState({});
+  // const forceReload = useCallback(() => setReload(), []);
   let pageSize = 10
   let supply = 0;
   if (totalSupply) {
@@ -61,14 +56,10 @@ export const IdleMarket: React.FC = () => {
   }
 
   const handleReload = () => {
-    // console.log("handleReload")
-    forceReload();
+    //forceReload();
     dispatchEvent("SWITCH_PAGE_PRESSED", { pageStartingIndex: (page * pageSize) + 1 } as PagePayload);
   }
 
-  // useEffect(() => {
-  //   forceReload();
-  // }, [forceReload, numberOfTroves]);
 
 
 

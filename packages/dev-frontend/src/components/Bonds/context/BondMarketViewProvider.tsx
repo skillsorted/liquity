@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { BondMarketViewContext } from "./BondMarketViewContext";
 
 import type {
@@ -6,14 +6,12 @@ import type {
     Bond,
     BondEvent,
     Payload,
-    PagePayload,
-    ManageLiquidityPayload
+    PagePayload
 } from "./transitions";
 
 import { Decimal } from "@liquity/lib-base";
 import { api, _getProtocolInfo } from "./api";
 import { useBondContracts } from "./useBondContracts";
-import { useWeb3React } from "@web3-react/core";
 
 // Refresh backend values every 30 seconds
 const SYNCHRONIZE_INTERVAL_MS = 30 * 1000;
@@ -22,7 +20,7 @@ export const EXAMPLE_NFT = "./bonds/egg-nft.png";
 
 export const BondMarketViewProvider: React.FC = props => {
   const { children } = props;
-  const [view, setView] = useState<BondView>("IDLE");
+  const [view] = useState<BondView>("IDLE");
   const viewRef = useRef<BondView>(view);
 
   const [totalSupply, setTotalSupply] = useState<Decimal>();
@@ -30,8 +28,6 @@ export const BondMarketViewProvider: React.FC = props => {
   const [bonds, setBonds] = useState<Bond[]>();
   const [isSynchronizing, setIsSynchronizing] = useState(true);
   const contracts = useBondContracts();
-  const { chainId } = useWeb3React();
-  const isMainnet = chainId === 1;
 
 
   useEffect(() => {

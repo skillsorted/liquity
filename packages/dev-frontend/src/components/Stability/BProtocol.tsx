@@ -1,9 +1,6 @@
 import React from "react";
 import { Card, Box, Heading, Flex, Link, } from "theme-ui";
 
-import { Link as LinkTo } from "../Link";
-import { Icon } from "../Icon";
-
 export const BProtocol: React.FC = () => {
 
     return (

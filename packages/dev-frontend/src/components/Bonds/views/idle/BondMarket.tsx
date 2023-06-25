@@ -1,8 +1,7 @@
-import { Card, Flex, Button, Image, ThemeUIStyleObject } from "theme-ui";
+import { Card, Flex, Image, ThemeUIStyleObject } from "theme-ui";
 import { EventType, HorizontalTimeline } from "../../../HorizontalTimeline";
 import { Record } from "../../Record";
-import { Actions } from "./actions/Actions";
-import { BLusdAmmTokenIndex, Bond as BondType, SwapPressedPayload } from "../../context/transitions";
+import { Bond as BondType } from "../../context/transitions";
 import { Label, SubLabel } from "../../../HorizontalTimeline";
 import * as l from "../../lexicon";
 import { useBondAddresses } from "../../context/BondAddressesContext";
@@ -130,7 +129,7 @@ export const BondMarket: React.FC<BondProps> = ({ bond, style }) => {
               {bond.status === "PENDING" && (
                 <Record
                   lexicon={l.MARKET_VALUE}
-                  value={bond?.marketValue?.prettify(2) ?? "0"}
+                  value={bond ?.marketValue ?.prettify(2) ?? "0"}
                   type="LUSD"
                 />
               )}

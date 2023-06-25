@@ -1,7 +1,4 @@
 import React from "react";
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
-import { Link } from "../../../Link";
-import { FilteredBondList } from "./FilteredBondList";
 import { Bond as BondType } from "../../context/transitions";
 
 import { useBondMarketView } from "../../context/BondMarketViewContext";
@@ -12,7 +9,6 @@ export const BondMarketList: React.FC = () => {
   const { bonds } = useBondMarketView();
   console.log("BondMarketList------" + bonds);
 
-  const { url, path } = useRouteMatch();
   return (
     <>
       {bonds && bonds.map((bond: BondType, idx: number) => {
