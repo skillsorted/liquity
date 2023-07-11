@@ -20,13 +20,19 @@ export const FreelyFaqs: React.FC = () => {
                 <div className="fr-view u-clearfix u-rich-text u-text u-text-2">
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
-                    Your high street bank might ask for that level of details, we don't! All you need is Ethereum Wallet with ETH to borrow LUSD. To earn, you need LUSD or LQTY.</span>
+                    Your high street bank might ask for that level of details, we don't! All you need is Ethereum Wallet with ETH to borrow LUSD. To earn, you need LUSD or LQTY. 
+                    </span>
                   </p>
                   <br/>
 
                   <p>
                     <span className="u-text-body-alt-color" style={{"fontSize": "1.125rem"}}>
                     Welcome to the Decentralized Finance (DeFi)!!</span>
+                  </p>
+
+                  <p>
+                    <span className="" style={{fontSize: "1.125rem", color:"#2eb6ea"}}>
+                       <a href="https://github.com/skillsorted/liquity/blob/master/disclaimer.md" target="_blank">Disclaimer</a></span>
                   </p>
                 </div>
               </div>
