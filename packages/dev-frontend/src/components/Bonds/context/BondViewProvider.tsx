@@ -2,18 +2,18 @@ import React, { useState, useCallback, useEffect, useRef, useMemo } from "react"
 import { BondViewContext, BondViewContextType } from "./BondViewContext";
 import type {
   Stats,
-    BondView,
-    BondEvent,
-    Payload,
-    Bond,
-    BondTransactionStatuses,
-    CreateBondPayload,
-    ProtocolInfo,
-    OptimisticBond,
-    SwapPayload,
-    ApprovePressedPayload,
-    ManageLiquidityPayload,
-    BLusdLpRewards
+  BondView,
+  BondEvent,
+  Payload,
+  Bond,
+  BondTransactionStatuses,
+  CreateBondPayload,
+  ProtocolInfo,
+  OptimisticBond,
+  SwapPayload,
+  ApprovePressedPayload,
+  ManageLiquidityPayload,
+  BLusdLpRewards
 } from "./transitions";
 import { BLusdAmmTokenIndex } from "./transitions";
 import { transitions } from "./transitions";
@@ -27,7 +27,7 @@ import { useChainId } from "wagmi";
 import { useBondAddresses } from "./BondAddressesContext";
 
 // Refresh backend values every 15 seconds
-const SYNCHRONIZE_INTERVAL_MS = 30 * 1000;
+const SYNCHRONIZE_INTERVAL_MS = 15 * 1000;
 
 const isValidEvent = (view: BondView, event: BondEvent): boolean => {
   return transitions[view][event] !== undefined;
@@ -485,10 +485,10 @@ export const BondViewProvider: React.FC<React.PropsWithChildren> = props => {
     async (inputToken: BLusdAmmTokenIndex, inputAmount: Decimal) =>
       contracts.bLusdAmm
         ? (isMainnet ? api.getExpectedSwapOutputMainnet : api.getExpectedSwapOutput)(
-          inputToken,
-          inputAmount,
-          contracts.bLusdAmm
-        )
+            inputToken,
+            inputAmount,
+            contracts.bLusdAmm
+          )
         : Decimal.ZERO,
     [contracts.bLusdAmm, isMainnet]
   );
@@ -591,7 +591,7 @@ export const BondViewProvider: React.FC<React.PropsWithChildren> = props => {
     [contracts.bLusdAmmZapper, contracts.bLusdAmm]
   );
 
-  const selectedBond = useMemo(() => bonds ?.find(bond => bond.id === selectedBondId), [
+  const selectedBond = useMemo(() => bonds?.find(bond => bond.id === selectedBondId), [
     bonds,
     selectedBondId
   ]);

@@ -30,9 +30,6 @@ import type { Addresses } from "./transitions";
 import { useChainId } from "wagmi";
 import { useBondAddresses } from "./BondAddressesContext";
 import type { CurveLiquidityGaugeV5 } from "@liquity/chicken-bonds/lusd/types/external/CurveLiquidityGaugeV5";
-import {
-  decimalify,
-} from "../utils"
 
 type BondsInformation = {
   protocolInfo: ProtocolInfo;
@@ -48,11 +45,6 @@ type BondsInformation = {
   lpRewards: BLusdLpRewards;
 };
 
-type BondsByIdInformation = {
-  bondsById: Bond[];
-  totalSupply: Decimal;
-};
-
 type BondContracts = {
   addresses: Addresses;
   lusdToken: LUSDToken | undefined;
@@ -64,7 +56,6 @@ type BondContracts = {
   bLusdGauge: CurveLiquidityGaugeV5 | undefined;
   hasFoundContracts: boolean;
   getLatestData: (account: string, api: BondsApi) => Promise<BondsInformation | undefined>;
-  getBondsById: (fromId: number, toId: number, api: BondsApi) => Promise<BondsByIdInformation | undefined>;
 };
 
 export const useBondContracts = (): BondContracts => {
@@ -206,47 +197,6 @@ export const useBondContracts = (): BondContracts => {
     [chickenBondManager, bondNft, bLusdToken, lusdToken, bLusdAmm, isMainnet, bLusdGauge]
   );
 
-  const getBondsById = useCallback(
-    async (fromId, toId, api: BondsApi) => {
-      if (
-        lusdToken === undefined ||
-        bondNft === undefined ||
-        chickenBondManager === undefined ||
-        bLusdToken === undefined ||
-        bLusdAmm === undefined
-      ) {
-        return;
-      }
-
-      const protocolInfo = await api.getProtocolInfo(
-        bLusdToken,
-        bLusdAmm,
-        chickenBondManager,
-        isMainnet,
-      );
-
-      const supply = (await bondNft.totalSupply());
-      const supplyNumber = supply.toNumber() * 1000000000000000000;
-
-      if (toId > supplyNumber) {
-        toId = supplyNumber
-      }
-
-      const bondsById = await api.getAllBonds(
-        fromId,
-        toId,
-        bondNft,
-        chickenBondManager,
-        protocolInfo,
-      );
-      return {
-        bondsById,
-        totalSupply: decimalify(supply).mul(1000000000000000000),
-      };
-    },
-    [chickenBondManager, bondNft, bLusdToken, lusdToken, bLusdAmm, isMainnet]
-  );
-
   return {
     addresses,
     lusdToken,
@@ -257,7 +207,6 @@ export const useBondContracts = (): BondContracts => {
     bLusdAmmZapper,
     bLusdGauge,
     getLatestData,
-    hasFoundContracts,
-    getBondsById
+    hasFoundContracts
   };
 };

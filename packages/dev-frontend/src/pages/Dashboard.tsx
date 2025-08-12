@@ -5,8 +5,6 @@ import { Stability } from "../components/Stability/Stability";
 import { SystemStats } from "../components/SystemStats";
 import { PriceManager } from "../components/PriceManager";
 import { Staking } from "../components/Staking/Staking";
-import { BProtocol } from "../components/Stability/BProtocol";
-
 import { BondsTable } from "../components/Bonds/BondsTable";
 
 export const Dashboard: React.FC = () => (
@@ -15,7 +13,6 @@ export const Dashboard: React.FC = () => (
       <BondsTable />
       <Trove />
       <Stability />
-      <BProtocol />
       <Staking />
     </Container>
 

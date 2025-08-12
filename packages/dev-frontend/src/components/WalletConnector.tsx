@@ -64,17 +64,20 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children }) =>
                       </div>
 
                       <div className="u-container-style u-repeater-item u-list-item">
-                        <div className=" hidden-sm u-container-layout u-similar-container u-container-layout-5">
+                        {/* <div className=" hidden-sm u-container-layout u-similar-container u-container-layout-5">
 
-                        </div>
+                        </div> */}
                         <div className=" u-container-layout  u-similar-container u-container-layout-5">
                           <Button className="u-align-cente" onClick={connectKit.show}>
-                            <Icon name="wallet" size="lg" />
-                            <Box sx={{ ml: 2 }}>Connect wallet</Box>
+                            <Icon name="wallet" size="2x" />
+                            <Box sx={{ ml: 2 }}>Connect to Liquity V1</Box>
                           </Button>
                         </div>
                         <div className=" u-container-layout u-similar-container u-container-layout-5">
-
+                          <Button className="u-align-cente" disabled onClick={connectKit.show}>
+                            <Icon name="wallet" size="2x" />
+                            <Box sx={{ ml: 2 }}>Connect to Liquity V2</Box>
+                          </Button>
                         </div>
                       </div>
 

@@ -20,7 +20,6 @@ type ClaimBondPressed = "CLAIM_BOND_PRESSED";
 type SwapPressed = "SWAP_PRESSED";
 type AddLiquidityPressed = "ADD_LIQUIDITY_PRESSED";
 type ManageLiquidityPressed = "MANAGE_LIQUIDITY_PRESSED";
-type SwitchPagePressed = "SWITCH_PAGE_PRESSED";
 
 /* On-chain events */
 type CreateBondConfirmed = "CREATE_BOND_CONFIRMED";
@@ -44,8 +43,7 @@ export type BondEvent =
   | CancelBondConfirmed
   | ClaimBondConfirmed
   | SwapConfirmed
-  | ManageLiquidityConfirmed
-  | SwitchPagePressed;
+  | ManageLiquidityConfirmed;
 
 type BondEventTransitions = Record<BondView, Partial<Record<BondEvent, BondView>>>;
 
@@ -101,8 +99,6 @@ export enum BLusdAmmTokenIndex {
 export type CreateBondPayload = { deposit: Decimal };
 
 export type SelectBondPayload = { bondId: string };
-
-export type PagePayload = { pageStartingIndex: number };
 
 export type SwapPressedPayload = {
   inputToken: BLusdAmmTokenIndex.BLUSD | BLusdAmmTokenIndex.LUSD;
@@ -180,8 +176,7 @@ export type Payload =
   | SwapPressedPayload
   | SwapPayload
   | ApprovePressedPayload
-  | ManageLiquidityPayload
-  | PagePayload;
+  | ManageLiquidityPayload;
 
 export type BondStatus = "NON_EXISTENT" | "PENDING" | "CANCELLED" | "CLAIMED";
 

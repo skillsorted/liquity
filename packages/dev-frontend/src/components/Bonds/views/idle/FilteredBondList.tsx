@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useBondView } from "../../context/BondViewContext";
-import type { Bond as BondType } from "../../context/transitions";
+import type { BondStatus, Bond as BondType } from "../../context/transitions";
 import { Bond } from "./Bond";
 import { OptimisticBond } from "./OptimisticBond";
 import { InfoBubble } from "../../../InfoBubble";
@@ -8,7 +8,7 @@ import { Box } from "theme-ui";
 
 type BondFilter = "pending" | "claimed" | "cancelled";
 
-const bondFilterToBondStatusMap: Record<BondFilter, String> = {
+const bondFilterToBondStatusMap: Record<BondFilter, BondStatus> = {
   pending: "PENDING",
   claimed: "CLAIMED",
   cancelled: "CANCELLED"

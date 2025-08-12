@@ -21,11 +21,9 @@ export const Record: React.FC<RecordType> = ({ lexicon, value, type, style }) =>
         {value ? (
           <Text sx={{ fontWeight: "400" }}>{value}</Text>
         ) : (
-            <Placeholder style={{ mx: "20%" }} />
-          )}
-        {/* {value && <Text sx={{ fontWeight: "light", opacity: 0.8 }}> &nbsp;{type}</Text>} */}
-      </Text>
-      <Text as="h5" sx={{ display: "flex", justifyContent: "center" }}>
+          <Placeholder style={{ mx: "20%" }} />
+        )}
+        &nbsp;
         {value && <Text sx={{ fontWeight: "light", opacity: 0.8 }}>{type}</Text>}
       </Text>
     </Flex>

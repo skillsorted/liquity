@@ -11,9 +11,9 @@ import {
 // import { splitSignature } from "ethers/lib/utils";
 import type {
   BLUSDToken,
-    BondNFT,
-    ChickenBondManager,
-    BLUSDLPZap
+  BondNFT,
+  ChickenBondManager,
+  BLUSDLPZap
 } from "@liquity/chicken-bonds/lusd/types";
 import {
   CurveCryptoSwap2ETH,
@@ -21,18 +21,15 @@ import {
 } from "@liquity/chicken-bonds/lusd/types/external";
 import type {
   BondCreatedEventObject,
-    BondCreatedEvent,
-    BondCancelledEventObject,
-    BondCancelledEvent,
-    BondClaimedEventObject,
-    BondClaimedEvent
+  BondCreatedEvent,
+  BondCancelledEventObject,
+  BondCancelledEvent,
+  BondClaimedEventObject,
+  BondClaimedEvent
 } from "@liquity/chicken-bonds/lusd/types/ChickenBondManager";
 import { Decimal } from "@liquity/lib-base";
 import type { LUSDToken } from "@liquity/lib-ethers/dist/types";
-
 import type { ProtocolInfo, Bond, BondStatus, Stats, Maybe, BLusdLpRewards } from "./transitions";
-
-
 import {
   numberify,
   decimalify,
@@ -58,10 +55,10 @@ import {
 import mainnet from "@liquity/chicken-bonds/lusd/addresses/mainnet.json";
 import type {
   CurveLiquidityGaugeV5,
-    DepositEvent,
-    DepositEventObject,
-    WithdrawEvent,
-    WithdrawEventObject
+  DepositEvent,
+  DepositEventObject,
+  WithdrawEvent,
+  WithdrawEventObject
 } from "@liquity/chicken-bonds/lusd/types/external/CurveLiquidityGaugeV5";
 
 const BOND_STATUS: BondStatus[] = ["NON_EXISTENT", "PENDING", "CANCELLED", "CLAIMED"];
@@ -178,11 +175,11 @@ const cacheCurveLpApy = async (): Promise<void> => {
       await window.fetch("https://api.curve.fi/api/getFactoryAPYs?version=crypto")
     ).json()) as CurvePoolDetails;
 
-    const poolData = curvePoolDataResponse.data ?.poolData.find(pool => pool.id === CURVE_POOL_ID);
-    const rewardsApr = poolData ?.gaugeRewards.reduce((total, current) => total + current.apy, 0);
-    const baseApr = curvePoolDetailsResponse ?.data ?.poolDetails ?.find(
+    const poolData = curvePoolDataResponse.data?.poolData.find(pool => pool.id === CURVE_POOL_ID);
+    const rewardsApr = poolData?.gaugeRewards.reduce((total, current) => total + current.apy, 0);
+    const baseApr = curvePoolDetailsResponse?.data?.poolDetails?.find(
       pool => pool.poolAddress === BLUSD_LUSD_3CRV_POOL_ADDRESS
-    ) ?.apy;
+    )?.apy;
 
     if (rewardsApr === undefined && baseApr === undefined) return;
 
@@ -204,16 +201,16 @@ const cacheYearnVaultApys = async (): Promise<void> => {
     ).json()) as YearnVault[];
 
     const lusd3CrvVault = yearnResponse.find(
-      vault => vault ?.token ?.address === LUSD_3CRV_POOL_ADDRESS
+      vault => vault?.token?.address === LUSD_3CRV_POOL_ADDRESS
     );
 
     const stabilityPoolVault = yearnResponse.find(
-      vault => vault ?.token ?.address === LUSD_TOKEN_ADDRESS
+      vault => vault?.token?.address === LUSD_TOKEN_ADDRESS
     );
 
     if (
-      lusd3CrvVault ?.apy ?.net_apy === undefined ||
-        stabilityPoolVault ?.apy ?.net_apy === undefined
+      lusd3CrvVault?.apy?.net_apy === undefined ||
+      stabilityPoolVault?.apy?.net_apy === undefined
     ) {
       return;
     }
@@ -225,157 +222,6 @@ const cacheYearnVaultApys = async (): Promise<void> => {
     console.error(error);
   }
 };
-
-const getAllBonds = async (
-  fromId: number,
-  toId: number,
-  bondNft: BondNFT,
-  chickenBondManager: ChickenBondManager,
-  protocolInfo: ProtocolInfo
-
-): Promise<Bond[]> => {
-  try {
-    const {
-      marketPrice,
-      alphaAccrualFactor,
-      marketPricePremium,
-      claimBondFee,
-      floorPrice,
-      controllerTargetAge,
-      averageBondAge
-    } = protocolInfo;
-    let bondIds: number[] = []
-
-    for (var i = fromId; i <= toId; i++) {
-      bondIds.push(i);
-    }
-
-    const bondRequests = {
-      deposits: bondIds.map(bondId => bondNft.getBondAmount(bondId)),
-      accrueds: bondIds.map(bondId => chickenBondManager.calcAccruedBLUSD(bondId)),
-      startTimes: bondIds.map(bondId => bondNft.getBondStartTime(bondId)),
-      endTimes: bondIds.map(bondId => bondNft.getBondEndTime(bondId)),
-      statuses: bondIds.map(bondId => bondNft.getBondStatus(bondId)),
-      tokenUris: bondIds.map(bondId => bondNft.tokenURI(bondId))
-    };
-
-    const bondDeposits = await Promise.all(bondRequests.deposits);
-    const bondAccrueds = await Promise.all(bondRequests.accrueds);
-    const bondStartTimes = await Promise.all(bondRequests.startTimes);
-    const bondEndTimes = await Promise.all(bondRequests.endTimes);
-    const bondStatuses = await Promise.all(bondRequests.statuses);
-    const bondTokenUris = await Promise.all(bondRequests.tokenUris);
-
-    const bonds = bondIds
-      .reduce<Bond[]>((accumulator, _, idx) => {
-        const id = bondIds[idx].toString();
-        const deposit = decimalify(bondDeposits[idx]);
-        const accrued = decimalify(bondAccrueds[idx]);
-        const startTime = milliseconds(numberify(bondStartTimes[idx]));
-        const endTime = milliseconds(numberify(bondEndTimes[idx]));
-        const status = BOND_STATUS[bondStatuses[idx]];
-        const tokenUri = getTokenUri(bondTokenUris[idx]);
-        const bondAgeInDays = getBondAgeInDays(startTime);
-        const rebondPeriodInDays = getRebondPeriodInDays(
-          alphaAccrualFactor,
-          marketPricePremium,
-          claimBondFee
-        );
-        const bondAgeInSeconds = Decimal.from(Date.now() - startTime).div(1000);
-        const remainingRebondDays = getRemainingRebondOrBreakEvenDays(
-          bondAgeInSeconds,
-          controllerTargetAge,
-          averageBondAge,
-          rebondPeriodInDays
-        );
-
-        const breakEvenPeriodInDays = getBreakEvenPeriodInDays(
-          alphaAccrualFactor,
-          marketPricePremium,
-          claimBondFee
-        );
-        const remainingBreakEvenDays = getRemainingRebondOrBreakEvenDays(
-          bondAgeInSeconds,
-          controllerTargetAge,
-          averageBondAge,
-          breakEvenPeriodInDays
-        );
-        const depositMinusClaimBondFee = Decimal.ONE.sub(claimBondFee).mul(deposit);
-        const rebondAccrual =
-          rebondPeriodInDays === Decimal.INFINITY
-            ? Decimal.INFINITY
-            : getFutureBLusdAccrualFactor(floorPrice, rebondPeriodInDays, alphaAccrualFactor).mul(
-              depositMinusClaimBondFee
-            );
-
-        const breakEvenAccrual =
-          breakEvenPeriodInDays === Decimal.INFINITY
-            ? Decimal.INFINITY
-            : getFutureBLusdAccrualFactor(floorPrice, breakEvenPeriodInDays, alphaAccrualFactor).mul(
-              depositMinusClaimBondFee
-            );
-
-        const breakEvenTime =
-          breakEvenPeriodInDays === Decimal.INFINITY
-            ? UNKNOWN_DATE
-            : getRebondOrBreakEvenTimeWithControllerAdjustment(
-              bondAgeInSeconds,
-              controllerTargetAge,
-              averageBondAge,
-              breakEvenPeriodInDays
-            );
-        const rebondTime =
-          rebondPeriodInDays === Decimal.INFINITY
-            ? UNKNOWN_DATE
-            : getRebondOrBreakEvenTimeWithControllerAdjustment(
-              bondAgeInSeconds,
-              controllerTargetAge,
-              averageBondAge,
-              rebondPeriodInDays
-            );
-        const marketValue = decimalify(bondAccrueds[idx]).mul(marketPrice);
-
-        // Accrued bLUSD is 0 for cancelled/claimed bonds
-        const claimNowReturn = accrued.isZero ? 0 : getReturn(accrued, deposit, marketPrice);
-        const rebondReturn = accrued.isZero ? 0 : getReturn(rebondAccrual, deposit, marketPrice);
-        const rebondRoi = rebondReturn / toFloat(deposit);
-        const rebondApr = rebondRoi * (365 / (bondAgeInDays + remainingRebondDays));
-
-        return [
-          ...accumulator,
-          {
-            id,
-            deposit,
-            accrued,
-            startTime,
-            endTime,
-            status,
-            tokenUri,
-            breakEvenAccrual,
-            rebondAccrual,
-            breakEvenTime,
-            rebondTime,
-            marketValue,
-            rebondReturn,
-            claimNowReturn,
-            rebondRoi,
-            rebondApr,
-            bondAgeInDays,
-            remainingRebondDays,
-            remainingBreakEvenDays
-          }
-        ];
-      }, [])
-      .sort((a, b) => (a.id > b.id ? 1 : 0));
-
-    return bonds;
-
-
-  } catch (error: unknown) {
-    console.error("getAllBonds exception", error);
-  }
-  return [];
-}
 
 const getAccountBonds = async (
   account: string,
@@ -401,6 +247,7 @@ const getAccountBonds = async (
     );
 
     const bondIds = await Promise.all(bondIdRequests);
+
     const bondRequests = {
       deposits: bondIds.map(bondId => bondNft.getBondAmount(bondId)),
       accrueds: bondIds.map(bondId => chickenBondManager.calcAccruedBLUSD(bondId)),
@@ -459,35 +306,35 @@ const getAccountBonds = async (
           rebondPeriodInDays === Decimal.INFINITY
             ? Decimal.INFINITY
             : getFutureBLusdAccrualFactor(floorPrice, rebondPeriodInDays, alphaAccrualFactor).mul(
-              depositMinusClaimBondFee
-            );
+                depositMinusClaimBondFee
+              );
 
         const breakEvenAccrual =
           breakEvenPeriodInDays === Decimal.INFINITY
             ? Decimal.INFINITY
             : getFutureBLusdAccrualFactor(floorPrice, breakEvenPeriodInDays, alphaAccrualFactor).mul(
-              depositMinusClaimBondFee
-            );
+                depositMinusClaimBondFee
+              );
 
         const breakEvenTime =
           breakEvenPeriodInDays === Decimal.INFINITY
             ? UNKNOWN_DATE
             : getRebondOrBreakEvenTimeWithControllerAdjustment(
-              bondAgeInSeconds,
-              controllerTargetAge,
-              averageBondAge,
-              breakEvenPeriodInDays
-            );
+                bondAgeInSeconds,
+                controllerTargetAge,
+                averageBondAge,
+                breakEvenPeriodInDays
+              );
 
         const rebondTime =
           rebondPeriodInDays === Decimal.INFINITY
             ? UNKNOWN_DATE
             : getRebondOrBreakEvenTimeWithControllerAdjustment(
-              bondAgeInSeconds,
-              controllerTargetAge,
-              averageBondAge,
-              rebondPeriodInDays
-            );
+                bondAgeInSeconds,
+                controllerTargetAge,
+                averageBondAge,
+                rebondPeriodInDays
+              );
 
         const marketValue = decimalify(bondAccrueds[idx]).mul(marketPrice);
 
@@ -664,8 +511,8 @@ const getProtocolInfo = async (
 
   const cachedApysRequests =
     cachedApys.lusd3Crv === undefined ||
-      cachedApys.stabilityPool === undefined ||
-      cachedApys.bLusdLusd3Crv === undefined
+    cachedApys.stabilityPool === undefined ||
+    cachedApys.bLusdLusd3Crv === undefined
       ? [cacheYearnVaultApys(), cacheCurveLpApy()]
       : null;
 
@@ -676,12 +523,12 @@ const getProtocolInfo = async (
   const floorPriceWithoutPendingHarvests = bLusdSupply.isZero
     ? Decimal.ONE
     : getFloorPrice(
-      bammLusdDebt,
-      protocolLusdInCurve,
-      treasury.pending,
-      treasury.permanent,
-      bLusdSupply
-    );
+        bammLusdDebt,
+        protocolLusdInCurve,
+        treasury.pending,
+        treasury.permanent,
+        bLusdSupply
+      );
 
   const averageBondAge = getAverageBondAgeInSeconds(totalWeightedStartTimes, treasury.pending);
 
@@ -866,12 +713,12 @@ const createBond = async (
 
   console.log(
     "CREATE BOND",
-    receipt ?.events,
-    receipt ?.events ?.map(c => c.event),
-    receipt ?.events ?.find(e => e.event === "BondCreated")
+    receipt?.events,
+    receipt?.events?.map(c => c.event),
+    receipt?.events?.find(e => e.event === "BondCreated")
   );
 
-  const createdEvent = receipt ?.events ?.find(
+  const createdEvent = receipt?.events?.find(
     e => e.event === "BondCreated"
   ) as Maybe<BondCreatedEvent>;
 
@@ -896,7 +743,7 @@ const createBondWithPermit = async (
     throw new Error("createBondWithPermit() failed: a dependency is null");
   }
 
-  const TEN_MINUTES_IN_SECONDS = 30 * 10;
+  const TEN_MINUTES_IN_SECONDS = 60 * 10;
   const spender = chickenBondManager.address;
   const deadline = Math.round(Date.now() / 1000) + TEN_MINUTES_IN_SECONDS;
   const nonce = (await lusdToken.nonces(owner)).toNumber();
@@ -945,11 +792,11 @@ const createBondWithPermit = async (
 
   console.log(
     "CREATE BOND",
-    receipt ?.events,
-    receipt ?.events ?.map(c => c.event),
-    receipt ?.events ?.find(e => e.event === "BondCreated")
+    receipt?.events,
+    receipt?.events?.map(c => c.event),
+    receipt?.events?.find(e => e.event === "BondCreated")
   );
-  const createdEvent = receipt ?.events ?.find(
+  const createdEvent = receipt?.events?.find(
     e => e.event === "BondCreated"
   ) as Maybe<BondCreatedEvent>;
 
@@ -985,7 +832,7 @@ const cancelBond = async (
     })
   ).wait();
 
-  const cancelledEvent = receipt ?.events ?.find(
+  const cancelledEvent = receipt?.events?.find(
     e => e.event === "BondCancelled"
   ) as Maybe<BondCancelledEvent>;
 
@@ -1018,7 +865,7 @@ const claimBond = async (
       })
     ).wait();
 
-    const bondClaimedEvent = receipt.events ?.find(
+    const bondClaimedEvent = receipt.events?.find(
       e => e.event === "BondClaimed"
     ) as Maybe<BondClaimedEvent>;
 
@@ -1177,7 +1024,7 @@ const swapTokens = async (
     )
   ).wait();
 
-  const exchangeEvent = receipt ?.events ?.find(
+  const exchangeEvent = receipt?.events?.find(
     e => e.event === "TokenExchange"
   ) as Maybe<TokenExchangeEvent>;
 
@@ -1442,7 +1289,7 @@ const stakeLiquidity = async (
     await bLusdGauge.connect(signer)["deposit(uint256)"](stakeAmount.hex)
   ).wait();
 
-  const depositEvent = receipt ?.events ?.find(e => e ?.event === "Deposit") as Maybe<DepositEvent>;
+  const depositEvent = receipt?.events?.find(e => e?.event === "Deposit") as Maybe<DepositEvent>;
 
   if (depositEvent === undefined) {
     throw new Error("stakeLiquidity() failed: couldn't find Withdraw event");
@@ -1465,7 +1312,7 @@ const unstakeLiquidity = async (
     await bLusdGauge.connect(signer)["withdraw(uint256,bool)"](unstakeAmount.hex, true)
   ).wait();
 
-  const withdrawEvent = receipt ?.events ?.find(e => e ?.event === "Withdraw") as Maybe<WithdrawEvent>;
+  const withdrawEvent = receipt?.events?.find(e => e?.event === "Withdraw") as Maybe<WithdrawEvent>;
 
   if (withdrawEvent === undefined) {
     throw new Error("unstakeLiquidity() failed: couldn't find Withdraw event");
@@ -1539,7 +1386,6 @@ export const api = {
   getExpectedWithdrawal,
   removeLiquidity,
   removeLiquidityOneCoin,
-  getAllBonds,
   stakeLiquidity,
   unstakeLiquidity,
   getLpRewards,

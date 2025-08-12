@@ -8,13 +8,11 @@ import { InfoIcon } from "../../../InfoIcon";
 import { BLusdAmmTokenIndex, SwapPressedPayload } from "../../context/transitions";
 import { useLiquity } from "../../../../hooks/LiquityContext";
 import { useBondAddresses } from "../../context/BondAddressesContext";
-import { useHistory } from "react-router-dom";
-
 
 export const Idle: React.FC = () => {
   const { liquity } = useLiquity();
   const { LUSD_OVERRIDE_ADDRESS } = useBondAddresses();
-  const history = useHistory();
+
   const { dispatchEvent, bonds, getLusdFromFaucet, lusdBalance, hasLoaded } = useBondView();
   const [chain, setChain] = useState<number>();
 
@@ -30,7 +28,7 @@ export const Idle: React.FC = () => {
 
   const hasBonds = bonds !== undefined && bonds.length > 0;
 
-  const showLusdFaucet = LUSD_OVERRIDE_ADDRESS !== null && lusdBalance ?.eq(0);
+  const showLusdFaucet = LUSD_OVERRIDE_ADDRESS !== null && lusdBalance?.eq(0);
 
   const handleManageLiquidityPressed = () => dispatchEvent("MANAGE_LIQUIDITY_PRESSED");
 
@@ -66,11 +64,6 @@ export const Idle: React.FC = () => {
             Create another bond
           </Button>
         )}
-
-        <Button variant="primary" onClick={() => history.push('/bonds/explore')}>
-          Explore Bonds
-        </Button>
-
       </Flex>
 
       {!hasBonds && (
