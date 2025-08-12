@@ -7,9 +7,9 @@ import { FreelyFeatures } from "../components/FreelyFeatures";
 import { FreelyFooter } from "../components/FreelyFooter";
 import { FreelyFaqs } from "./FreelyFaqs";
 
-type WalletConnectorProps = {
+type WalletConnectorProps = React.PropsWithChildren<{
   loader?: React.ReactNode;
-};
+}>;
 
 const scrollToRef = (ref: any) => window.scrollTo(0, ref.current.offsetTop)
 

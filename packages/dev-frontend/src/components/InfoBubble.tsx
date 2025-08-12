@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "theme-ui";
 
 import { Icon } from "./Icon";
 
-export const ErrorDescription: React.FC<React.PropsWithChildren> = ({ children }) => (
+export const InfoBubble: React.FC<React.PropsWithChildren> = ({ children }) => (
   <Box
     sx={{
       display: "flex",
@@ -14,13 +14,13 @@ export const ErrorDescription: React.FC<React.PropsWithChildren> = ({ children }
 
       border: 1,
       borderRadius: "8px",
-      borderColor: "danger",
+      borderColor: "accent",
       boxShadow: 2,
-      bg: "rgba(220, 44, 16, 0.05)"
+      bg: "rgba(46, 182, 234, 0.05)"
     }}
   >
     <Flex sx={{ alignItems: "center" }}>
-      <Icon name="exclamation-triangle" size="lg" />
+      <Icon name="info-circle" size="lg" />
       <Text sx={{ ml: 2 }}>{children}</Text>
     </Flex>
   </Box>

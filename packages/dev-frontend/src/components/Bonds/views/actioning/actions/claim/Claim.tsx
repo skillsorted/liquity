@@ -1,6 +1,6 @@
 import React from "react";
-import { Flex, Button, Text, Spinner } from "theme-ui";
-import { ActionDescription } from "../../../../../ActionDescription";
+import { Flex, Button, Spinner } from "theme-ui";
+import { ActionDescription, Amount } from "../../../../../ActionDescription";
 import { useBondView } from "../../../../context/BondViewContext";
 
 export const Claim: React.FC = () => {
@@ -21,9 +21,8 @@ export const Claim: React.FC = () => {
   return (
     <>
       <ActionDescription>
-        You will receive <Text sx={{ fontWeight: "bold" }}>{bond.accrued.prettify(2)} bLUSD</Text>{" "}
-        and forgo your bonded{" "}
-        <Text sx={{ fontWeight: "bold" }}>{bond.deposit.prettify(2)} LUSD</Text>
+        You will receive <Amount>{bond.accrued.prettify(2)} bLUSD</Amount> and forgo your bonded{" "}
+        <Amount>{bond.deposit.prettify(2)} LUSD</Amount>
       </ActionDescription>
 
       <Flex variant="layout.actions">
@@ -32,7 +31,7 @@ export const Claim: React.FC = () => {
         </Button>
         <Button variant="primary" onClick={handleConfirmPressed} disabled={isProcessingTransaction}>
           {!isProcessingTransaction && <>Confirm</>}
-          {isProcessingTransaction && <Spinner size="28px" sx={{ color: "white" }} />}
+          {isProcessingTransaction && <Spinner size={28} sx={{ color: "white" }} />}
         </Button>
       </Flex>
     </>

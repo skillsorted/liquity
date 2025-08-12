@@ -4,7 +4,7 @@ Gateway to interest-free loans using decentralized borrowing protocol Liquity.
 
 # Liquity: Decentralized Borrowing Protocol
 
-<a href="https://www.defisafety.com/pqrs/376"><img src="https://defi-safety.s3.amazonaws.com/Liquity_Badge_78e39d44ca.png" alt="DeFiSafetyBadge" align="right" style="width:228px;height:76px;"></a>
+[<img alt="DeFiSafety Badge" width="96px" align="right" src="images/defisafety-badge.png" />](https://www.defisafety.com/app/pqrs/376)
 
 ![Tests](https://github.com/liquity/dev/workflows/CI/badge.svg) [![Frontend status](https://img.shields.io/uptimerobot/status/m784948796-056b56fd51c67d682c11bb24?label=Testnet&logo=nginx&logoColor=white)](https://devui.liquity.org) ![uptime](https://img.shields.io/uptimerobot/ratio/7/m784948796-056b56fd51c67d682c11bb24) [![Discord](https://img.shields.io/discord/700620821198143498?label=join%20chat&logo=discord&logoColor=white)](https://discord.gg/2up5U32) [![Docker Pulls](https://img.shields.io/docker/pulls/liquity/dev-frontend?label=dev-frontend%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/liquity/dev-frontend) [![codecov](https://codecov.io/gh/liquity/dev/branch/add_codecov/graph/badge.svg)](https://codecov.io/gh/liquity/dev)
 
@@ -1431,7 +1431,7 @@ In addition, some package scripts require Docker to be installed (Docker Desktop
 You'll need to install the following:
 
 - [Git](https://help.github.com/en/github/getting-started-with-github/set-up-git) (of course)
-- [Node v12.x](https://nodejs.org/dist/latest-v12.x/)
+- [Node v16.x](https://nodejs.org/dist/latest-v16.x/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
@@ -1742,6 +1742,8 @@ It’s theoretically possible to increase the number of the troves that need to 
 In case of a redemption, the “last” trove affected by the transaction may end up being only partially redeemed from, which means that its ICR will change so that it needs to be reinserted at a different place in the sorted trove list (note that this is not the case for partial liquidations in recovery mode, which preserve the ICR). A special ICR hint therefore needs to be provided by the transaction sender for that matter, which may become incorrect if another transaction changes the order before the redemption is processed. The protocol gracefully handles this by terminating the redemption sequence at the last fully redeemed trove (see [here](https://github.com/liquity/dev#hints-for-redeemcollateral)).
 
 An attacker trying to DoS redemptions could be bypassed by redeeming an amount that exactly corresponds to the debt of the affected trove(s).
+
+The attack can be aggravated if a big trove is placed first in the queue, so that any incoming redemption is smaller than its debt, as no LUSD would be redeemed if the hint for that trove fails. But that attack would be very expensive and quite risky (risk of being redeemed if the strategy fails and of being liquidated as it may have a low CR).
 
 Finally, this DoS could be avoided if the initial transaction avoids the public gas auction entirely and is sent direct-to-miner, via (for example) Flashbots.
 

@@ -35,10 +35,10 @@ const modalStyleDark = {
   overlay: { zIndex: 2 }
 };
 
-type ModalProps = {
+type ModalProps = React.PropsWithChildren<{
   onDismiss: () => void;
   style?: React.CSSProperties;
-};
+}>;
 
 export const ReactModal: React.FC<ModalProps> = ({ children, onDismiss, style }) => {
   const handleDismiss = () => onDismiss();
